@@ -68,7 +68,8 @@ body {
   font-size: 18px;
 }
 
-.submit-button:hover {
+.submit-button:hover,
+.submit-button:focus {
   background-color: rgb(30, 30, 30);
 }
 
@@ -85,4 +86,27 @@ a:hover {
 
 .center {
   text-align: center;
+}
+
+@media only screen and (max-width: 480px) {
+  s form {
+    width: 100vw;
+  }
+
+  .card {
+    justify-content: end;
+    border-radius: 0;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .login-item {
+    width: 95%;
+    margin-bottom: 5px;
+    font-size: 18px;
+  }
+
+  .center {
+    margin: 10px 0;
+  }
 }

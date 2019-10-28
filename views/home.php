@@ -25,8 +25,6 @@
             provident ullam quaerat ut voluptatum dolor maiores debitis quas, molestias velit ad?
         </div>
     </div>
-
-
 </body>
 
 </html>

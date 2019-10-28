@@ -1,6 +1,15 @@
 <?php
 
-$action = $_GET['action'];
+$action = '';
+
+if (!empty($_POST['action'])) {
+    $action = $_POST['action'];
+} else if (!empty($_GET['action'])) {
+    $action = $_GET['action'];
+} else {
+    $action = 'home';
+}
+
 // $action = '';
 
 switch ($action) {
@@ -14,6 +23,10 @@ switch ($action) {
         break;
     case 'signUp':
         include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/signUp.php');
+        die();
+        break;
+    case 'loginValidation':
+        require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/loginValidation.php');
         die();
         break;
 }
