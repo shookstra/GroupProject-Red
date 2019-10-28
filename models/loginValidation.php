@@ -18,7 +18,7 @@ if ($email === null || $email === "") {
     array_push($errors, "Email cannot be empty");
 } else if (preg_match) { }
 
-if (empty($password === null || $password === "")) {
+if ($password === null || $password === "") {
     array_push($errors, "Password cannot be empty");
 }
 
