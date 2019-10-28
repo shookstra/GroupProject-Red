@@ -2,7 +2,6 @@
 
 require_once 'database.php';
 
-
 class user_db {
 
     //gets all the users
@@ -108,6 +107,23 @@ class user_db {
 
         return $roleType['role'];
     }
+    //gets user email
+    public static function get_email($email) {
+        $db = Database::getDB();
+
+        $query = 'SELECT email FROM users where email = :email';
+        $statement = $db->prepare($query);
+        $statement->bindValue(':email', $email);
+        $statement->execute();
+        $row = $statement->fetch();
+        $valid = true;
+        if (strtolower($row['email']) === strtolower($email)) {
+            $valid = false;
+        }
+
+        $statement->closeCursor();
+        return $valid;
+    }
 
     //This is to add a new user
     public static function add_user($firstName, $lastName, $email, $phone, $role, $password) {
@@ -130,15 +146,17 @@ class user_db {
         $statement->execute();
         $statement->closeCursor();
     }
+
     //delete user from database
-    public static function deleteUser($userID) {
+    public static function deleteUser($email) {
         $db = Database::getDB();
 
-        $query = ' DELETE from users where userID = :userID';
+        $query = ' DELETE from users where email = :email';
 
         $statement = $db->prepare($query);
         $statement->bindValue(':userID', $userID);
         $statement->execute();
         $statement->closeCursor();
     }
+
 }
