@@ -2,8 +2,6 @@
 
 require_once 'database.php';
 
-//require_once 'users_db.php';
-//require_once 'theUsers.php';
 
 class user_db {
 
@@ -132,5 +130,15 @@ class user_db {
         $statement->execute();
         $statement->closeCursor();
     }
+    //delete user from database
+    public static function deleteUser($userID) {
+        $db = Database::getDB();
 
+        $query = ' DELETE from users where userID = :userID';
+
+        $statement = $db->prepare($query);
+        $statement->bindValue(':userID', $userID);
+        $statement->execute();
+        $statement->closeCursor();
+    }
 }
