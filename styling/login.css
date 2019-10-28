@@ -18,6 +18,7 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh;
+  box-sizing: border-box;
 }
 
 .card {
@@ -31,6 +32,7 @@ body {
   align-items: center;
   justify-content: center;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
 }
 
 .card-title {
@@ -54,11 +56,20 @@ body {
   margin-top: 5px;
   border-radius: 6px;
   padding: 10px;
-  /* background-color: ; */
+}
+
+.submit-input:focus {
+  border: 1px solid rgb(44, 115, 182);
+  padding-top: 8px;
+}
+
+input[type="email"] {
+  border: none;
+  outline: none;
 }
 
 .submit-button {
-  margin-top: 50px;
+  margin-top: 20px;
   border: none;
   border-radius: 6px;
   padding: 10px;
@@ -88,8 +99,15 @@ a:hover {
   text-align: center;
 }
 
+.error {
+  background-color: rgba(255, 131, 131, 0.5);
+  color: rgba(70, 70, 70);
+  border-radius: 6px;
+  padding: 10px;
+}
+
 @media only screen and (max-width: 480px) {
-  s form {
+  form {
     width: 100vw;
   }
 

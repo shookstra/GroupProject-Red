@@ -4,7 +4,6 @@
         </div>
         <ul class="nav-links">
             <li><a href="index.php?action=home">Home</a></li>
-            <li><a href="#">Link 2</a></li>
             <li><a href="index.php?action=signUp">Sign Up</a></li>
             <li><a href="index.php?action=login">Login</a></li>
         </ul>
