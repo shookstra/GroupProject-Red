@@ -15,3 +15,4 @@
         </div>
     </nav>
     <script src="<?php $_SERVER['DOCUMENT_ROOT'] ?> /GroupProject/app.js"></script>
+    <script src="<?php $_SERVER['DOCUMENT_ROOT'] ?> /GroupProject/main2.js"></script>
