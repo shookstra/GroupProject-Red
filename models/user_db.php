@@ -191,7 +191,7 @@ class user_db {
         $query = ' DELETE from users where email = :email';
 
         $statement = $db->prepare($query);
-        $statement->bindValue(':userID', $userID);
+        $statement->bindValue(':email', $email);
         $statement->execute();
         $statement->closeCursor();
     }
