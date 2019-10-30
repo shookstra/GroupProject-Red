@@ -1,39 +1,75 @@
-/*$title . ' ' . $day_num;*/
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
 
 table {
   margin: auto;
   border-spacing: 0;
-  border-style: solid;
-  border-color: black;
+  background-color: rgb(245, 245, 245);
+  border-radius: 6px;
+  padding: 10px;
+  /* border-style: solid;
+  border-color: black; */
 }
 
 td,
 th {
-  padding: 10px;
-  border: 1px solid #888;
+  padding: 2px;
+  /* border: 1px solid rgb(211, 211, 211); */
 }
 
-.day_num {
+.day_num button {
   background-color: #c22;
   font-weight: bold;
 }
 
-.buttons {
-  border: 1px;
-  width: 100px;
-  padding: 2px 8px;
-}
-.buttons:hover {
-  border: 1px;
-  background: #c22;
-  padding: 5px 10px;
+.day_num button:hover {
+  background-color: #ccc;
+  color: black;
+  border: 2px solid #c22;
   font-weight: bold;
+}
+
+button {
+  padding: 15px;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: #ccc;
+  transition: 200ms;
+  height: 50px;
+  width: 50px;
+}
+
+button:hover,
+button:focus {
+  cursor: pointer;
+  background-color: rgb(44, 115, 182);
+  color: white;
+}
+
+.buttons {
+  font-size: 14px;
+  width: 100px;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  transition: 200ms;
+  background-color: #eee;
+}
+
+.buttons:hover {
+  cursor: pointer;
+  background-color: rgb(44, 115, 182);
+  color: white;
 }
 
 #inps {
   padding-top: 5px;
   align-items: center;
-  margin: auto;
+  margin: 5px auto;
 }
 
 #login input,
@@ -57,9 +93,6 @@ textarea {
   padding: 10px 10px 10px 10px;
 }
 
-#nav_form {
-}
-
 .modal {
   display: none;
   position: fixed;
@@ -77,9 +110,10 @@ textarea {
   margin: 20% auto;
   padding: 20px;
   width: 70%;
-  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0.17);
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 0px 20px 0 rgba(0, 0, 0, 0.2);
   animation-name: modalopen;
   animation-duration: 1s;
+  border-radius: 6px;
 }
 
 .closeBtn {

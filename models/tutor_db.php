@@ -41,8 +41,8 @@ class tutor_db {
     }
 
 //this will return tutor and subjects. this still need work and needs to be tested
-    function getSubjects($tutorID) {
-        global $db;
+   public static function getSubjects($tutorID) {
+          $db = Database::getDB();
 
         $query = 'SELECT tutor.fName, turor.lName, subject.Name, tutor.city'
                 . 'FROM tutor JOIN tutorsubject ON tutor.tutorID = tutorsubject.tutorID'
@@ -52,10 +52,32 @@ class tutor_db {
         $statement->bindValue(':tutorID', $tutorID);
         $statement->execute();
         $results = $statement->fetch();
-       // $subjectName = $results['firstName'] . ' ' . $results['lastName'];
+        // $subjectName = $results['firstName'] . ' ' . $results['lastName'];
         $statement->closeCursor();
 
         return $results;
+    }
+
+    //add a tutor
+    public static function add_Tutor($firstName, $lastName,$email,  $phone, $city) {
+        $db = Database::getDB();
+
+        $query = 'INSERT into tutor (fName, lName,email, pjone, city)
+         VALUES
+         (:fName, :lName, :email, :phone :city)';
+
+
+        $statement = $db->prepare($query);
+        //bind the values
+        $statement->bindValue(':fName', $firstName);
+        $statement->bindValue(':lName', $lastName);
+        $statement->bindValue(':email', $email);
+        $statement->bindValue(':phone', $phone);
+        $statement->bindValue(':city', $city);
+
+
+        $statement->execute();
+        $statement->closeCursor();
     }
 
 }
