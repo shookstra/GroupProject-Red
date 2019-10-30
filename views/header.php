@@ -1,6 +1,6 @@
     <nav>
         <div class="logo">
-            <h3>LOGO</h3>
+            <h3>TUTOR SCHEDULING</h3>
         </div>
         <ul class="nav-links">
             <li><a href="index.php?action=home">Home</a></li>
