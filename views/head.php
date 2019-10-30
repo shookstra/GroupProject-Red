@@ -7,5 +7,4 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Tutor Program</title>
     <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']; ?> /GroupProject/styling/styling.css">
-    <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']; ?> /GroupProject/styling/calendarStyle.css">
 </head>

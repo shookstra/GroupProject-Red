@@ -18,15 +18,17 @@
                     <label for="email">Email</label><input type="text" name="email" class="submit-input">
                 </div>
                 <div class="login-item">
-                    <label for="password">Password</label><input type="text" name="password" class="submit-input">
+                    <label for="password">Password</label><input type="password" name="password" class="submit-input">
                 </div>
-                <?php if (empty($error)) { ?>
-                    <div class="login-item">
-                        <p>ERROR HERE</p>
+                <?php if (!empty($errors)) { ?>
+                    <div class="login-item error">
+                        <?php foreach ($_POST['errors'] as $error) {
+                                echo '<p>' . $error . '</p>';
+                            } ?>
                     </div>
                 <?php } ?>
                 <div class="login-item">
-                    <input type="hidden" name="action" id="action" value="login">
+                    <input type="hidden" name="action" id="action" value="loginValidation">
                     <input type="submit" value="Login" name="submit" class="submit-button">
                 </div>
                 <div class="login-item">
