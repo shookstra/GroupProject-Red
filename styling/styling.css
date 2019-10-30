@@ -160,6 +160,11 @@ nav ul {
   .wrapper {
     width: 100%;
   }
+
+  .fa-chalkboard-teacher,
+  .fas {
+    display: none;
+  }
 }
 
 .nav-active {
