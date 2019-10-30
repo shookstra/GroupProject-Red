@@ -18,6 +18,7 @@
 
 			<?php
 			if (isset($_POST['next'])) {
+                                
 				$month = $_POST['month'] + 1;
 				$year = $_POST['year'];
 				if ($month > 12) {
@@ -25,6 +26,7 @@
 					$year++;
 				}
 			} else if (isset($_POST['prev'])) {
+                                
 				$month = $_POST['month'] - 1;
 				$year = $_POST['year'];
 				if ($month < 1) {
@@ -144,7 +146,7 @@
 
 
 
-		<form name="nav_form" method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>">
+		<form name="nav_form" method="POST" action="action">
 			<div id="inps">
 				<input type="Submit" name="prev" value="<- Previous" class="buttons" />
 				<input type="Submit" name="next" value="Next ->" class="buttons" />

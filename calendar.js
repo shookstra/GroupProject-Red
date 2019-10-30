@@ -1,4 +1,3 @@
-
 var daySelect = document.querySelectorAll('.modalBtn');// gets modalBtn select for open
 //var daySelect = document.getElementById('modalBtn');
 var closeBtn = document.querySelectorAll('.closeBtn');// gets closeBtn select for close
@@ -39,11 +38,10 @@ function closeModal(){
 
 //function to close modal
 function outsideClick(e){
-    if(e.target === modal){
+    if(e.target == modal){
 
     modal.style.display = 'none';
     }
     
 }
-
 

@@ -31,6 +31,19 @@ switch ($action) {
         break;
     case 'calendar':
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/calendar.php');
+        
+        die();
+        break;
+    case 'Next ->':
+        require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/calendar.php');
+            $month++;
+        include '/groupproject/views/calendar.php';
+        die();
+        break;
+    case '<- Previous':
+        require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/calendar.php');
+            $month--;
+        include '/groupproject/views/calendar.php';
         die();
         break;
 }
