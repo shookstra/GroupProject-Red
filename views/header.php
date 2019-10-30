@@ -1,6 +1,7 @@
     <nav>
         <div class="logo">
-            <h3>LOGO</h3>
+            <i class="fas fa-chalkboard-teacher"></i>
+            <h3>TUTOR SCHEDULING</h3>
         </div>
         <ul class="nav-links">
             <li><a href="index.php?action=home">Home</a></li>

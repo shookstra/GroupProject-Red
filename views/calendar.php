@@ -50,6 +50,7 @@
 
 			$day_of_week = date('D', $first_day);   //A textual representation of a day, three letters:	Mon through Sun
 
+
 			switch ($day_of_week)    //If the first day of a month is Sunday we need 0 blank box. If its Monday we need 1 blank box and if its Saturday we need 6 blank boxes
 			{
 				case "Sun":
@@ -88,6 +89,8 @@
 
 			$day_count = 1;
 
+
+
 			while ($blank > 0)         //Print the blank boxes before the first day of each month
 			{
 				echo "<td> </td>";
@@ -96,7 +99,9 @@
 			}
 
 			$day_num = 1;
-			$replyClick = "reply_click()";
+
+
+
 
 			while ($day_num <= $days_in_month) {
 				if ($day_num == $today['mday'] && $thismonth == $month && $thisyear == $year) //if day_num is the current day (and month-year)
@@ -109,7 +114,32 @@
 					$id = ' class = "modalBtn" '; // sets the modalBtn id for the JS
 				}
 
-				echo "<td $class><button $id name = $title$day_num id=$title$day_num><center> $day_num </center></button></td>";  //Print day's number, sets the class for the modal and also sets a name for the button for use in the modal
+				switch ($day_count) // changes the designation of a number for a 3 character string for each day
+				{
+					case 1:
+						$day = 'Sun';
+						break;
+					case 2:
+						$day = 'Mon';
+						break;
+					case 3:
+						$day = 'Tue';
+						break;
+					case 4:
+						$day = 'Wed';
+						break;
+					case 5:
+						$day = 'Thu';
+						break;
+					case 6:
+						$day = 'Fri';
+						break;
+					case 7:
+						$day = 'Sat';
+						break;
+				}
+
+				echo "<td $class name = $day><button $id name = $day$title$day_num >$day_num</button></td>";  //Print day's number, sets the class for the modal and also sets a name for the button for use in the modal
 
 				$day_num++;
 				$day_count++;
@@ -135,9 +165,7 @@
 
 		</table>
 
-
-
-		<form name="nav_form" method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>">
+		<form name="nav_form" method="POST" action="index.php?action=add">
 			<div id="inps">
 				<input type="Submit" name="prev" value="<- Previous" class="buttons" />
 				<input type="Submit" name="next" value="Next ->" class="buttons" />
@@ -146,28 +174,22 @@
 			<input type="hidden" name="month" value="<?php echo $month ?>" />
 			<input type="hidden" name="year" value="<?php echo $year ?>" />
 		</form>
-		<p>&#11036; - Today's date</p>
+		<div class="showDate">
+			<div class="todayDate"></div>
+			<p>- Today's date</p>
+		</div>
+
 	</div>
+
 
 	<div id="simpleModal" class="modal">
 		<div class="modal-content">
 			<span class="closeBtn">&times;</span>
-			<h1>Log In</h1>
+			<div id="jsname"></div>
+			<p><?php echo $email; ?>, choose the time and tutor for your session?</p><br>
 			<div id="login">
-				<form action="index.php" method="post">
-					<input type="hidden" name="action" value="loggingIn">
-
-					<label>User Name: </label>
-					<input type="text" name="userName" value="">
-					<label>Password: </label>
-					<input type="text" name="userPWord" value="">
-
+				<h1>Test modal</h1>
 			</div>
-			<div id="buttons">
-				<label>&nbsp</label>
-				<input type="submit" value="Login">
-			</div>
-			</form>
 		</div>
 	</div>
 

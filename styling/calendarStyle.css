@@ -17,18 +17,21 @@ table {
 td,
 th {
   padding: 2px;
+  text-align: center;
   /* border: 1px solid rgb(211, 211, 211); */
 }
 
 .day_num button {
-  background-color: #c22;
+  background-color: rgba(44, 115, 182, 0.5);
   font-weight: bold;
+  transition: none;
+  border-radius: 6px;
 }
 
 .day_num button:hover {
   background-color: #ccc;
   color: black;
-  border: 2px solid #c22;
+  border: 2px solid rgba(44, 115, 182, 0.5);
   font-weight: bold;
 }
 
@@ -41,6 +44,7 @@ button {
   transition: 200ms;
   height: 50px;
   width: 50px;
+  border-radius: 6px;
 }
 
 button:hover,
@@ -84,13 +88,11 @@ textarea {
   align-items: center;
   justify-content: center;
   margin: 10px auto;
-  background-color: #fdfefe;
   width: 80%;
   min-width: 700px;
   max-width: 960px;
   color: #000000;
   overflow: auto;
-  padding: 10px 10px 10px 10px;
 }
 
 .modal {
@@ -127,6 +129,21 @@ textarea {
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+
+.showDate {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px;
+}
+
+.todayDate {
+  background-color: rgba(44, 115, 182, 0.5);
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  border-radius: 6px;
 }
 
 @keyframes modalopen {
