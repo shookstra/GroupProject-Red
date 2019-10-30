@@ -137,7 +137,7 @@
 
 
 
-		<form name="nav_form" method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>">
+		<form name="nav_form" method="POST" action="index.php?action=add">
 			<div id="inps">
 				<input type="Submit" name="prev" value="<- Previous" class="buttons" />
 				<input type="Submit" name="next" value="Next ->" class="buttons" />
