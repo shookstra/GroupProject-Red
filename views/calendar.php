@@ -50,6 +50,7 @@
 
 			$day_of_week = date('D', $first_day);   //A textual representation of a day, three letters:	Mon through Sun
 
+
 			switch($day_of_week)    //If the first day of a month is Sunday we need 0 blank box. If its Monday we need 1 blank box and if its Saturday we need 6 blank boxes
 			{                       
 				case "Sun": $blank = 0; break;
@@ -73,16 +74,22 @@
 				 </tr>";  
 
 			$day_count = 1;     
+                        
+                        
 
 			while( $blank > 0 )         //Print the blank boxes before the first day of each month
 			{
 				echo "<td> </td>";
 				$blank = $blank - 1;
 				$day_count++;
+                                
+                                
 			}
 
-			$day_num = 1;     
-                        $replyClick = "reply_click()";
+			$day_num = 1;    
+                        
+                        
+                        
                         
 			while( $day_num <= $days_in_month )   
 			{
@@ -97,8 +104,19 @@
 					$class = ''; 
                                         $id = ' class = "modalBtn" '; // sets the modalBtn id for the JS
 				}
+                                
+                                switch($day_count)// changes the designation of a number for a 3 character string for each day
+                                        {
+                                            case 1: $day = 'Sun'; break;
+                                            case 2: $day = 'Mon'; break;
+                                            case 3: $day = 'Tue'; break;
+                                            case 4: $day = 'Wed'; break;
+                                            case 5: $day = 'Thu'; break;
+                                            case 6: $day = 'Fri'; break;
+                                            case 7: $day = 'Sat'; break;
+                                        }
 				
-				echo "<td $class><button $id name = $title$day_num onClick= $replyClick><center> $day_num </center></button></td>";  //Print day's number, sets the class for the modal and also sets a name for the button for use in the modal
+				echo "<td $class name = $day><button $id name = $day$title$day_num >$day_num</button></td>";  //Print day's number, sets the class for the modal and also sets a name for the button for use in the modal
 				
                                 $day_num++;                     
 				$day_count++;
@@ -106,7 +124,9 @@
 				if ($day_count > 7)         //Change row
 				{
 					echo "<tr> </tr>";
-					$day_count = 1;         
+					$day_count = 1;
+                                        
+                                        
 				}
                         }
                         
@@ -143,23 +163,12 @@
         <div id="simpleModal" class="modal">
         <div class="modal-content">
             <span class="closeBtn">&times;</span>
-            <h1>Log In</h1>
+            <div id = "jsname"></div>
+            <p><?php echo $email; ?>, choose the time and tutor for your session?</p><br>
             <div id="login">
-                <form action="index.php" method="post">
-                    <input type="hidden" name="action" value="loggingIn">
-
-                    <label>User Name: </label>
-                    <input type="text" name="userName" value="">
-                    <label>Password: </label>
-                    <input type="text" name="userPWord" value="">
-
-            </div>       
-                    <div id="buttons">
-                        <label>&nbsp</label>
-                        <input type="submit" value="Login">
-
-                    </div>
-                </form>
+                <h1>Test modal</h1>
+                   
+            </div>
         </div>
         </div>
 	
