@@ -1,5 +1,6 @@
     <nav>
         <div class="logo">
+            <i class="fas fa-chalkboard-teacher"></i>
             <h3>TUTOR SCHEDULING</h3>
         </div>
         <ul class="nav-links">

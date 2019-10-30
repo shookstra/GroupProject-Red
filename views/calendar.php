@@ -51,15 +51,29 @@
 			$day_of_week = date('D', $first_day);   //A textual representation of a day, three letters:	Mon through Sun
 
 
-			switch($day_of_week)    //If the first day of a month is Sunday we need 0 blank box. If its Monday we need 1 blank box and if its Saturday we need 6 blank boxes
-			{                       
-				case "Sun": $blank = 0; break;
-				case "Mon": $blank = 1; break;
-				case "Tue": $blank = 2; break;
-				case "Wed": $blank = 3; break;
-				case "Thu": $blank = 4; break;
-				case "Fri": $blank = 5; break;
-				case "Sat": $blank = 6; break;
+			switch ($day_of_week)    //If the first day of a month is Sunday we need 0 blank box. If its Monday we need 1 blank box and if its Saturday we need 6 blank boxes
+			{
+				case "Sun":
+					$blank = 0;
+					break;
+				case "Mon":
+					$blank = 1;
+					break;
+				case "Tue":
+					$blank = 2;
+					break;
+				case "Wed":
+					$blank = 3;
+					break;
+				case "Thu":
+					$blank = 4;
+					break;
+				case "Fri":
+					$blank = 5;
+					break;
+				case "Sat":
+					$blank = 6;
+					break;
 			}
 
 			echo "<tr> <th colspan=60 > $title $year </th> </tr>";  //Print the current month-year (table's title)
@@ -73,26 +87,23 @@
 					<td>Sat</td> 
 				 </tr>";
 
-			$day_count = 1;     
-                        
-                        
+			$day_count = 1;
+
+
 
 			while ($blank > 0)         //Print the blank boxes before the first day of each month
 			{
 				echo "<td> </td>";
 				$blank = $blank - 1;
 				$day_count++;
-                                
-                                
 			}
 
-			$day_num = 1;    
-                        
-                        
-                        
-                        
-			while( $day_num <= $days_in_month )   
-			{
+			$day_num = 1;
+
+
+
+
+			while ($day_num <= $days_in_month) {
 				if ($day_num == $today['mday'] && $thismonth == $month && $thisyear == $year) //if day_num is the current day (and month-year)
 				{
 					$class = ' class = "day_num" ';  //Mark this day - we need to fill this box with red color (using CSS)
@@ -102,29 +113,41 @@
 					$class = '';
 					$id = ' class = "modalBtn" '; // sets the modalBtn id for the JS
 				}
-                                
-                                switch($day_count)// changes the designation of a number for a 3 character string for each day
-                                        {
-                                            case 1: $day = 'Sun'; break;
-                                            case 2: $day = 'Mon'; break;
-                                            case 3: $day = 'Tue'; break;
-                                            case 4: $day = 'Wed'; break;
-                                            case 5: $day = 'Thu'; break;
-                                            case 6: $day = 'Fri'; break;
-                                            case 7: $day = 'Sat'; break;
-                                        }
-				
+
+				switch ($day_count) // changes the designation of a number for a 3 character string for each day
+				{
+					case 1:
+						$day = 'Sun';
+						break;
+					case 2:
+						$day = 'Mon';
+						break;
+					case 3:
+						$day = 'Tue';
+						break;
+					case 4:
+						$day = 'Wed';
+						break;
+					case 5:
+						$day = 'Thu';
+						break;
+					case 6:
+						$day = 'Fri';
+						break;
+					case 7:
+						$day = 'Sat';
+						break;
+				}
+
 				echo "<td $class name = $day><button $id name = $day$title$day_num >$day_num</button></td>";  //Print day's number, sets the class for the modal and also sets a name for the button for use in the modal
-				
-                                $day_num++;                     
+
+				$day_num++;
 				$day_count++;
 
 				if ($day_count > 7)         //Change row
 				{
 					echo "<tr> </tr>";
 					$day_count = 1;
-                                        
-                                        
 				}
 			}
 
@@ -141,8 +164,6 @@
 			?>
 
 		</table>
-
-
 
 		<form name="nav_form" method="POST" action="index.php?action=add">
 			<div id="inps">
@@ -161,18 +182,18 @@
 	</div>
 
 
-        <div id="simpleModal" class="modal">
-            <div class="modal-content">
-                <span class="closeBtn">&times;</span>
-                <div id = "jsname"></div>
-                    <p><?php echo $email; ?>, choose the time and tutor for your session?</p><br>
-                        <div id="login">
-                        <h1>Test modal</h1>
-                   
-                        </div>
-            </div>
-        </div>
-	
-        <script src="calendar.js"></script>
-	</body>
+	<div id="simpleModal" class="modal">
+		<div class="modal-content">
+			<span class="closeBtn">&times;</span>
+			<div id="jsname"></div>
+			<p><?php echo $email; ?>, choose the time and tutor for your session?</p><br>
+			<div id="login">
+				<h1>Test modal</h1>
+			</div>
+		</div>
+	</div>
+
+	<script src="calendar.js"></script>
+</body>
+
 </html>
