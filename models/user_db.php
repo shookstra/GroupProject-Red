@@ -2,8 +2,7 @@
 
 require_once 'database.php';
 
-class user_db
-{
+class user_db {
 
     //gets all the users
     public static function select_all()
@@ -168,7 +167,7 @@ class user_db
 
         $query = 'INSERT into users (fName, lName, email, phone, role,  password)
          VALUES
-         (:fName, :lName, :email, :phone, :role, :password,)';
+         (:fName, :lName, :email, :phone, :role, :password)';
 
 
         $statement = $db->prepare($query);
@@ -192,7 +191,7 @@ class user_db
         $query = ' DELETE from users where email = :email';
 
         $statement = $db->prepare($query);
-        $statement->bindValue(':userID', $userID);
+        $statement->bindValue(':email', $email);
         $statement->execute();
         $statement->closeCursor();
     }
