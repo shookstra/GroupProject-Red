@@ -15,7 +15,7 @@
             <div class="card">
                 <h1 class="card-title">Sign In</h1>
                 <div class="login-item">
-                    <label for="email">Email</label><input type="text" name="email" class="submit-input">
+                    <label for="email">Email</label><input type="email" name="email" class="submit-input">
                 </div>
                 <div class="login-item">
                     <label for="password">Password</label><input type="password" name="password" class="submit-input">
