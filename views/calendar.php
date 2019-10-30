@@ -146,7 +146,11 @@
 			<input type="hidden" name="month" value="<?php echo $month ?>" />
 			<input type="hidden" name="year" value="<?php echo $year ?>" />
 		</form>
-		<p>&#11036; - Today's date</p>
+		<div class="showDate">
+			<div class="todayDate"></div>
+			<p>- Today's date</p>
+		</div>
+
 	</div>
 
 	<div id="simpleModal" class="modal">
