@@ -7,4 +7,5 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Tutor Program</title>
     <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']; ?> /GroupProject/styling/styling.css">
+    <script src="https://kit.fontawesome.com/7d78b719fc.js" crossorigin="anonymous"></script>
 </head>
