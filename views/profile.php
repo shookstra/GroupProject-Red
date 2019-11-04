@@ -2,31 +2,55 @@
 <html lang="en">
 
 
-<?php include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/head.php') ?>
+    <?php include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/head.php') ?>
 
-<body>
-    <?php include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/header.php'); ?>
+    <body>
+        <?php include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/header.php'); ?>
 
-    <div class="wrapper">
-        <div class="card">
-            <h1>Content</h1>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Commodi fugiat fuga, tempora, asperiores totam quis
-                voluptatum quidem molestias numquam amet quae facere minima eaque nisi est vero soluta eveniet quas.
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi expedita unde quod ipsam exercitationem
-                recusandae voluptates in! Quibusdam cum impedit laudantium consectetur, non architecto nulla expedita voluptatibus, beatae mollitia tempora.
-            </p>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi expedita unde quod ipsam exercitationem
-                recusandae voluptates in! Quibusdam cum impedit laudantium consectetur, non architecto nulla expedita voluptatibus, beatae mollitia tempora.
-            </p>
+        <div class="wrapper">
+            <div class="card">
+                <h1>Scheduled Appointments</h1>
+
+                <table class="display" style="width: 800px;">
+                    <tr>
+                        <th>Tutor Name</th>
+                        <th>Subject</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Details</th>
+
+                    </tr>
+                    <?php foreach ($stuApps as $sa) : ?>
+                        <tr>
+                            <td><?php echo $sa->getTutorID(); ?></td>
+                            <td><?php echo $sa->getSubID(); ?></td>
+                            <td><?php echo $sa->getAppDate(); ?></td>
+                            <td><?php echo $sa->getAppTime(); ?></td>
+                            <td><form action="index.php" method="POST">
+                                    <input type="hidden" name="userID"
+                                           value="<?php echo htmlspecialchars($sa->getUserID()); ?>"> 
+                                    <input  type="submit" value="More Details">
+                                    <input type="hidden" name="action" value="moreDetails">
+                                </form>
+                            </td>
+
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+
+
+
+            </div>
+            <div class="sideContent">
+                <h3>Profile Information</h3>
+                <p><strong><?php echo htmlspecialchars($$user->getUserID()); ?></strong></p>
+                <p><strong><?php echo htmlspecialchars($$user->getFName()); ?></strong></p>
+                <p><strong><?php echo htmlspecialchars($$user->getLName()); ?></strong></p>
+                <p><strong><?php echo htmlspecialchars($$user->getEmail()); ?></strong></p>
+            </div>
         </div>
-        <div class="sideContent">
-            <h3>Side Content</h3>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam magnam quod tenetur magni quia illo fugit, illum necessitatibus
-            provident ullam quaerat ut voluptatum dolor maiores debitis quas, molestias velit ad?
-        </div>
-    </div>
 
 
-</body>
+    </body>
 
 </html>

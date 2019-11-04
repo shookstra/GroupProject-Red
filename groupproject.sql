@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 04, 2019 at 09:30 PM
+-- Generation Time: Nov 04, 2019 at 08:43 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `group_project`
+-- Database: `groupproject`
 --
 
 -- --------------------------------------------------------
@@ -115,10 +115,7 @@ CREATE TABLE `users` (
 -- Indexes for table `appointment`
 --
 ALTER TABLE `appointment`
-  ADD PRIMARY KEY (`appID`),
-  ADD KEY `FK_Subjects_subID` (`subID`),
-  ADD KEY `FK_Users_userID` (`userID`),
-  ADD KEY `FK_Tutor_tutorID` (`tutorID`);
+  ADD PRIMARY KEY (`appID`);
 
 --
 -- Indexes for table `subjects`
@@ -136,16 +133,13 @@ ALTER TABLE `tutor`
 -- Indexes for table `tutorsubject`
 --
 ALTER TABLE `tutorsubject`
-  ADD PRIMARY KEY (`tsID`),
-  ADD KEY `FK_Subject_subID` (`subID`),
-  ADD KEY `FK_tutors_tutorID` (`tutorID`);
+  ADD PRIMARY KEY (`tsID`);
 
 --
 -- Indexes for table `tutor_availability`
 --
 ALTER TABLE `tutor_availability`
-  ADD PRIMARY KEY (`taID`),
-  ADD KEY `FK_tutorTbl_tutorID` (`tutorID`);
+  ADD PRIMARY KEY (`taID`);
 
 --
 -- Indexes for table `users`
@@ -186,31 +180,6 @@ ALTER TABLE `tutor_availability`
 --
 ALTER TABLE `users`
   MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `appointment`
---
-ALTER TABLE `appointment`
-  ADD CONSTRAINT `FK_Subjects_subID` FOREIGN KEY (`subID`) REFERENCES `subjects` (`subID`),
-  ADD CONSTRAINT `FK_Tutor_tutorID` FOREIGN KEY (`tutorID`) REFERENCES `tutor` (`tutorID`),
-  ADD CONSTRAINT `FK_Users_userID` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`);
-
---
--- Constraints for table `tutorsubject`
---
-ALTER TABLE `tutorsubject`
-  ADD CONSTRAINT `FK_Subject_subID` FOREIGN KEY (`subID`) REFERENCES `subjects` (`subID`),
-  ADD CONSTRAINT `FK_tutors_tutorID` FOREIGN KEY (`tutorID`) REFERENCES `tutor` (`tutorID`);
-
---
--- Constraints for table `tutor_availability`
---
-ALTER TABLE `tutor_availability`
-  ADD CONSTRAINT `FK_tutorTbl_tutorID` FOREIGN KEY (`tutorID`) REFERENCES `tutor` (`tutorID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

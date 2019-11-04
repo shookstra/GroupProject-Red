@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+    
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,6 +19,7 @@
 
 			<?php
 			if (isset($_POST['next'])) {
+                               
 				$month = $_POST['month'] + 1;
 				$year = $_POST['year'];
 				if ($month > 12) {
@@ -25,6 +27,7 @@
 					$year++;
 				}
 			} else if (isset($_POST['prev'])) {
+                                
 				$month = $_POST['month'] - 1;
 				$year = $_POST['year'];
 				if ($month < 1) {
@@ -35,7 +38,8 @@
 				$month = date("m");  //current month    Numeric representation of a month, with leading zeros:	01 through 12
 				$year = date("Y");   //current year  	A full numeric representation of a year, 4 digits	Examples: 1999 or 2003
 			}
-
+                        
+                        date_default_timezone_set('America/Chicago');
 			$date = time();
 			$today = getdate();
 
@@ -50,7 +54,8 @@
 
 			$day_of_week = date('D', $first_day);   //A textual representation of a day, three letters:	Mon through Sun
 
-
+                        
+                         
 			switch ($day_of_week)    //If the first day of a month is Sunday we need 0 blank box. If its Monday we need 1 blank box and if its Saturday we need 6 blank boxes
 			{
 				case "Sun":
@@ -165,7 +170,9 @@
 
 		</table>
 
-		<form name="nav_form" method="POST" action="index.php?action=add">
+
+               
+                <form name="nav_form" method="POST" action="/groupproject/views/calendar.php">
 			<div id="inps">
 				<input type="Submit" name="prev" value="<- Previous" class="buttons" />
 				<input type="Submit" name="next" value="Next ->" class="buttons" />
@@ -185,15 +192,34 @@
 	<div id="simpleModal" class="modal">
 		<div class="modal-content">
 			<span class="closeBtn">&times;</span>
+                        <form action="index.php" method="post">
+                            <select autofocus>
+                            <?php foreach ($subjects as $s) : ?>
+                                <option value="<?php echo htmlspecialchars($s->getSubID()); ?>" name = $day><?php echo htmlspecialchars($s->getSubName()); ?></option>
+                            <?php endforeach; ?>
+                            </select>
+                        </form>
 			<div id="jsname"></div>
-			<p><?php echo $email; ?>, choose the time and tutor for your session?</p><br>
+			<p>choose the time and tutor for your session</p><br>
+                        <?php foreach ($tutor_available as $t) : ?>
+                            <div id="<?php echo $t->getSubject(); ?>">
+                                <ul>
+                                    <li><?php echo ($t->getFName() . " " . $t->getLName()); ?></li>
+                                    <li><?php echo $t->getStart(); ?></li>
+                                    <li><?php echo $t-getEnd(); ?></li>
+                                    <li><?php echo $t->getCity(); ?></li>
+                                </ul>
+                            </div>
+                            
 			<div id="login">
 				<h1>Test modal</h1>
 			</div>
 		</div>
 	</div>
-
+			
 	<script src="calendar.js"></script>
 </body>
 
 </html>
+
+
