@@ -79,5 +79,26 @@ class tutor_db {
         $statement->execute();
         $statement->closeCursor();
     }
+    
+    public static function get_tutor_by_availability($day) {
+        $db = Database::getDB();
+        $query = 'select tutor.tutorID, tutor.fName, tutor.lName, subject.subject, tutor_availabilty.start, tutor_availabilty.end, tutor_availabilty.day
+                  from subjects join tutorsubject on subjects.subID = tutorsubject.subID 
+			  join tutor on tutorsubject.tutorID = tutor.tutorID
+			  join tutor_availabilty on tutor.tutorID = tutor_availabilty.tutorID
+                  where tutor_availabilty.day = :day';
+
+        $statement = $db->prepare($query);
+        $statement->bindValue(':day', $day);
+        $statement->execute();
+        $rows = $statement->fetchAll();
+
+        foreach ($rows as $value) {
+            $tutor_available[$value['tutorID']] = new tutor_availablity($value['tutorID'], $value['fName'], $value['lName'], $value['subject'], $value['start'], $value['end'], $value['day']);
+        }
+
+        $statement->closeCursor();
+        return $tutor_available;
+    }
 
 }

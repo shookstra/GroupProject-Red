@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+    
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -191,8 +192,15 @@
 	<div id="simpleModal" class="modal">
 		<div class="modal-content">
 			<span class="closeBtn">&times;</span>
+                        <form action="index.php" method="post">
+                            <select autofocus>
+                            <?php foreach ($subjects as $s) : ?>
+                                <option value="<?php echo htmlspecialchars($s->getSubID()); ?>" name = $day><?php echo htmlspecialchars($s->getSubName()); ?></option>
+                            <?php endforeach; ?>
+                            </select>
+                        </form>
 			<div id="jsname"></div>
-			<p><?php echo $email; ?>, choose the time and tutor for your session?</p><br>
+			<p>choose the time and tutor for your session</p><br>
 			<div id="login">
 				<h1>Test modal</h1>
 			</div>
@@ -203,3 +211,5 @@
 </body>
 
 </html>
+
+
