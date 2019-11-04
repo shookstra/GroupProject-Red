@@ -56,15 +56,15 @@ body {
   margin-top: 5px;
   border-radius: 6px;
   padding: 10px;
+  border: 2px solid transparent;
+  box-sizing: border-box;
 }
 
 .submit-input:focus {
-  border: 1px solid rgb(44, 115, 182);
-  padding-top: 8px;
+  border: 2px solid rgb(44, 115, 182);
 }
 
 input[type="email"] {
-  border: none;
   outline: none;
 }
 

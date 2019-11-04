@@ -6,8 +6,12 @@
         <ul class="nav-links">
             <li><a href="index.php?action=home">Home</a></li>
             <li><a href="index.php?action=calendar">Calendar</a></li>
-            <li><a href="index.php?action=signUp">Sign Up</a></li>
-            <li><a href="index.php?action=login">Login</a></li>
+            <?php if (empty($_SESSION['user'])) { ?>
+                <li><a href="index.php?action=signUp">Sign Up</a></li>
+                <li><a href="index.php?action=login">Login</a></li>
+            <?php } else { ?>
+                <li><a href="index.php?action=logout">Logout</a></li>
+            <?php } ?>
         </ul>
 
         <div class="burger">

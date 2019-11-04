@@ -20,9 +20,9 @@
                 <div class="login-item">
                     <label for="password">Password</label><input type="password" name="password" class="submit-input">
                 </div>
-                <?php if (!empty($errors)) { ?>
+                <?php if (!empty($loginErrors)) { ?>
                     <div class="login-item error">
-                        <?php foreach ($_POST['errors'] as $error) {
+                        <?php foreach ($loginErrors as $error) {
                                 echo '<p>' . $error . '</p>';
                             } ?>
                     </div>
