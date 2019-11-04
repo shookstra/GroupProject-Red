@@ -45,4 +45,15 @@ switch ($action) {
         include '';
         die();
         break;
+    case 'profile':
+        $email = $_SESSION['email'];
+        $role = user_db::get_roleType($email);
+        $_SESSION['role'] = $role;
+        $user = user_db::get_specificUser($email);
+        $stuApps = appointment_db::get_student_Appointments($userID);
+        //tutor app call may not go here ?
+        $tuterApps = appointment_db::get_tutor_Appointments($tutorID);
+        include('view/profile.php');
+        die();
+        break;
 }
