@@ -31,19 +31,30 @@ switch ($action) {
         break;
     case 'calendar':
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/calendar.php');
-        
+
         die();
         break;
     case 'Next ->':
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/calendar.php');
-            $month++;
+        $month++;
         include '/groupproject/views/calendar.php';
         die();
         break;
     case '<- Previous':
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/calendar.php');
-            $month--;
+        $month--;
         include '/groupproject/views/calendar.php';
+        die();
+        break;
+    case 'profile':
+        $email = $_SESSION['email'];
+        $role = user_db::get_roleType($email);
+        $_SESSION['role'] = $role;
+        $user = user_db::get_specificUser($email);
+        $stuApps = appointment_db::get_student_Appointments($userID);
+        //tutor app call may not go here ?
+        $tuterApps = appointment_db::get_tutor_Appointments($tutorID);
+        include('view/profile.php');
         die();
         break;
 }
