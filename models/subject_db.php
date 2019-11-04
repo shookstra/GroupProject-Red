@@ -14,7 +14,7 @@ class subject_db {
         $subjects = [];
 
         foreach ($rows as $value) {
-            $subjects[$value['subID']] = new subject($value['subID'], $value['$subName']);
+            $subjects[$value['subID']] = new subject($value['subID'], $value['subName']);
         }
         $statement->closeCursor();
 
