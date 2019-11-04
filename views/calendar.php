@@ -195,7 +195,7 @@
                         <form action="index.php" method="post">
                             <select autofocus>
                             <?php foreach ($subjects as $s) : ?>
-                                <option value="<?php echo htmlspecialchars($s->getSubID()); ?>" name = $day><?php echo htmlspecialchars($s->getSubName()); ?></option>
+                                <option id="<?php echo htmlspecialchars($s->getSubID()); ?>" value="<?php echo htmlspecialchars($s->getSubID()); ?>"><?php echo htmlspecialchars($s->getSubName()); ?></option>
                             <?php endforeach; ?>
                             </select>
                         </form>
