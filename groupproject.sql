@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 28, 2019 at 07:29 PM
+-- Generation Time: Nov 04, 2019 at 08:43 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `group_project`
+-- Database: `groupproject`
 --
 
 -- --------------------------------------------------------
@@ -80,6 +80,20 @@ CREATE TABLE `tutorsubject` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tutor_availability`
+--
+
+CREATE TABLE `tutor_availability` (
+  `taID` int(11) NOT NULL,
+  `tutorID` int(11) NOT NULL,
+  `day` varchar(3) NOT NULL,
+  `start` int(11) NOT NULL,
+  `end` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -122,6 +136,12 @@ ALTER TABLE `tutorsubject`
   ADD PRIMARY KEY (`tsID`);
 
 --
+-- Indexes for table `tutor_availability`
+--
+ALTER TABLE `tutor_availability`
+  ADD PRIMARY KEY (`taID`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -148,6 +168,12 @@ ALTER TABLE `subjects`
 --
 ALTER TABLE `tutorsubject`
   MODIFY `tsID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tutor_availability`
+--
+ALTER TABLE `tutor_availability`
+  MODIFY `taID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`

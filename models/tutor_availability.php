@@ -1,18 +1,18 @@
 <?php
 
 
-class tutor_availablity {
+class tutor_availability {
     
     private $tutorID, $fName, $lName, $subject, $start, $end, $day;
     function __construct($tutorID, $fName, $lName, $subject, $start, $end, $day) {
         
         $this->tutorID= $tutorID;
-        $this->fName = $storeIDNum;
-        $this->lName = $invoiceDate;
-        $this->subject = $invoiceTotal;
-        $this->start = $userName;
-	$this->end = $invoiceTotal;
-        $this->day = $userName;
+        $this->fName = $fName;
+        $this->lName = $lName;
+        $this->subject = $subject;
+        $this->start = $start;
+	$this->end = $end;
+        $this->day = $day;
         
         
         
