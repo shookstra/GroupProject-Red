@@ -1,32 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
-
-
-<?php include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/head.php') ?>
-
+<html>
+<head>
+</head>
 <body>
-    <?php include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/header.php'); ?>
 
-    <div class="wrapper">
-        <div class="card">
-            <h1>Content</h1>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Commodi fugiat fuga, tempora, asperiores totam quis
-                voluptatum quidem molestias numquam amet quae facere minima eaque nisi est vero soluta eveniet quas.
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi expedita unde quod ipsam exercitationem
-                recusandae voluptates in! Quibusdam cum impedit laudantium consectetur, non architecto nulla expedita voluptatibus, beatae mollitia tempora.
-            </p>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi expedita unde quod ipsam exercitationem
-                recusandae voluptates in! Quibusdam cum impedit laudantium consectetur, non architecto nulla expedita voluptatibus, beatae mollitia tempora.
-            </p>
-        </div>
-        <div class="sideContent">
-            <h3>Side Content</h3>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam magnam quod tenetur magni quia illo fugit, illum necessitatibus
-            provident ullam quaerat ut voluptatum dolor maiores debitis quas, molestias velit ad?
-        </div>
-    </div>
+<?php
+$q = intval($_GET['q']);//variable from the drop down menu
 
+$con = mysqli_connect('localhost','root','','group_project');//connection to db, copy what is in database.php
+if (!$con) {
+    die('Could not connect: ' . mysqli_error($con));
+}
 
+mysqli_select_db($con,"group_project");//where the db name goes
+$sql="select tutor.tutorID, tutor.fName, tutor.lName, tutor_availability.start, tutor_availability.end, tutor_availability.day
+                  from subjects join tutorsubject on subjects.subID = tutorsubject.subID 
+			  join tutor on tutorsubject.tutorID = tutor.tutorID
+			  join tutor_availability on tutor.tutorID = tutor_availability.tutorID where subjects.subID ='".$q."'";//query for the db
+$result = mysqli_query($con,$sql);
+
+echo "<table>
+<tr>
+<th>Firstname</th>
+<th>Lastname</th>
+<th>Day</th>
+<th>Start</th>
+<th>End</th>
+</tr>";
+while($row = mysqli_fetch_array($result)) {
+    echo "<tr>";
+    echo "<td>" . $row['fName'] . "</td>";
+    echo "<td>" . $row['lName'] . "</td>";
+    echo "<td>" . $row['day'] . "</td>";
+    echo "<td>" . $row['start'] . "</td>";
+    echo "<td>" . $row['end'] . "</td>";
+    echo "</tr>";
+}
+echo "</table>";
+mysqli_close($con);
+?>
+   
 </body>
-
 </html>

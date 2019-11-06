@@ -193,23 +193,16 @@
 		<div class="modal-content">
 			<span class="closeBtn">&times;</span>
                         <form action="index.php" method="post">
-                            <select autofocus>
+                            <select id="jsname" day="" onchange="showUser(this.value)" autofocus>
+                                <option value="">Select a subject:</option>
                             <?php foreach ($subjects as $s) : ?>
-                                <option value="<?php echo htmlspecialchars($s->getSubID()); ?>" name = $day><?php echo htmlspecialchars($s->getSubName()); ?></option>
+                                <option value="<?php echo htmlspecialchars($s->getSubID()); ?>" value="<?php echo htmlspecialchars($s->getSubID()); ?>"><?php echo htmlspecialchars($s->getSubName()); ?></option>
                             <?php endforeach; ?>
                             </select>
                         </form>
-			<div id="jsname"></div>
-			<p>choose the time and tutor for your session</p><br>
-                        <?php foreach ($tutor_available as $t) : ?>
-                            <div id="<?php echo $t->getSubject(); ?>">
-                                <ul>
-                                    <li><?php echo ($t->getFName() . " " . $t->getLName()); ?></li>
-                                    <li><?php echo $t->getStart(); ?></li>
-                                    <li><?php echo $t-getEnd(); ?></li>
-                                    <li><?php echo $t->getCity(); ?></li>
-                                </ul>
-                            </div>
+                        
+			<div id="txtHint"><b>choose the time and tutor for your session</b></div>
+			
                             
 			<div id="login">
 				<h1>Test modal</h1>
@@ -221,5 +214,3 @@
 </body>
 
 </html>
-
-

@@ -104,7 +104,7 @@ class tutor_db {
 
     public static function get_tutors_by_availability() {
         $db = Database::getDB();
-        $query = 'select tutor.tutorID, tutor.fName, tutor.lName, subjects.subject, tutor_availability.start, tutor_availabilty.end, tutor_availabilty.day
+        $query = 'select tutor.tutorID, tutor.fName, tutor.lName, tutor_availability.start, tutor_availability.end, tutor_availability.day
                   from subjects join tutorsubject on subjects.subID = tutorsubject.subID 
 			  join tutor on tutorsubject.tutorID = tutor.tutorID
 			  join tutor_availability on tutor.tutorID = tutor_availability.tutorID';
@@ -116,7 +116,7 @@ class tutor_db {
         $tutor_available = [];
 
         foreach ($rows as $value) {
-            $tutor_available[$value['tutorID']] = new tutor_availability($value['tutorID'], $value['fName'], $value['lName'], $value['subject'], $value['start'], $value['end'], $value['day']);
+            $tutor_available[$value['tutorID']] = new tutor_availability($value['tutorID'], $value['fName'], $value['lName'], $value['start'], $value['end'], $value['day']);
         }
 
         $statement->closeCursor();
