@@ -5,12 +5,35 @@
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/head.php') ?>
 
 <body>
-    <?php include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/header.php'); ?>
+    <?php include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/header.php');
+    include('views/sideBar.php'); ?>
 
     <div class="wrapper">
         <div class="card">
-            <h1>Content</h1>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Commodi fugiat fuga, tempora, asperiores totam quis
+            <h1>Hi, <?php echo $_SESSION['user']->getFName(); ?></h1>
+            <p id="test">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Commodi fugiat fuga, tempora, asperiores totam quis
+                voluptatum quidem molestias numquam amet quae facere minima eaque nisi est vero soluta eveniet quas.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi expedita unde quod ipsam exercitationem
+                recusandae voluptates in! Quibusdam cum impedit laudantium consectetur, non architecto nulla expedita voluptatibus, beatae mollitia tempora.
+            </p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi expedita unde quod ipsam exercitationem
+                recusandae voluptates in! Quibusdam cum impedit laudantium consectetur, non architecto nulla expedita voluptatibus, beatae mollitia tempora.
+            </p>
+        </div>
+        <div class="card">
+            <h1>Hi, <?php echo $_SESSION['user']->getFName(); ?></h1>
+            <p id="test">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Commodi fugiat fuga, tempora, asperiores totam quis
+                voluptatum quidem molestias numquam amet quae facere minima eaque nisi est vero soluta eveniet quas.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi expedita unde quod ipsam exercitationem
+                recusandae voluptates in! Quibusdam cum impedit laudantium consectetur, non architecto nulla expedita voluptatibus, beatae mollitia tempora.
+            </p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi expedita unde quod ipsam exercitationem
+                recusandae voluptates in! Quibusdam cum impedit laudantium consectetur, non architecto nulla expedita voluptatibus, beatae mollitia tempora.
+            </p>
+        </div>
+        <div class="card">
+            <h1>Hi, <?php echo $_SESSION['user']->getFName(); ?></h1>
+            <p id="test">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Commodi fugiat fuga, tempora, asperiores totam quis
                 voluptatum quidem molestias numquam amet quae facere minima eaque nisi est vero soluta eveniet quas.
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi expedita unde quod ipsam exercitationem
                 recusandae voluptates in! Quibusdam cum impedit laudantium consectetur, non architecto nulla expedita voluptatibus, beatae mollitia tempora.
@@ -25,6 +48,7 @@
             provident ullam quaerat ut voluptatum dolor maiores debitis quas, molestias velit ad?
         </div>
     </div>
+    <script src="scripts\sidebar.js"></script>
 </body>
 
 </html>

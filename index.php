@@ -1,6 +1,7 @@
 <?php
 
 require_once('models/user.php');
+require_once('models/user_db.php');
 
 session_start();
 
@@ -32,10 +33,12 @@ switch ($action) {
         break;
     case 'loginValidation':
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/loginValidation.php');
+        $_SESSION['user'] = user_db::get_specificUser($email);
         die();
         break;
     case 'registrationValidation':
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/registrationValidation.php');
+        $_SESSION['user'] = user_db::get_specificUser($email);
         die();
         break;
     case 'calendar':
@@ -45,12 +48,12 @@ switch ($action) {
         die();
         break;
     case '':
-        
+
         include '';
         die();
         break;
     case '':
-        
+
         include '';
         die();
         break;
