@@ -3,13 +3,12 @@
 
 class tutor_availability {
     
-    private $tutorID, $fName, $lName, $subject, $start, $end, $day;
-    function __construct($tutorID, $fName, $lName, $subject, $start, $end, $day) {
+    private $tutorID, $fName, $lName, $start, $end, $day;
+    function __construct($tutorID, $fName, $lName, $start, $end, $day) {
         
         $this->tutorID= $tutorID;
         $this->fName = $fName;
         $this->lName = $lName;
-        $this->subject = $subject;
         $this->start = $start;
 	$this->end = $end;
         $this->day = $day;
@@ -27,10 +26,6 @@ class tutor_availability {
 
     function getLName() {
         return $this->lName;
-    }
-
-    function getSubject() {
-        return $this->subject;
     }
 
     function getStart() {
@@ -55,10 +50,6 @@ class tutor_availability {
 
     function setLName($lName) {
         $this->lName = $lName;
-    }
-
-    function setSubject($subject) {
-        $this->subject = $subject;
     }
 
     function setStart($start) {
