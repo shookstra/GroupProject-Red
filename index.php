@@ -1,5 +1,9 @@
 <?php
 
+require_once('models/user.php');
+
+session_start();
+
 $action = '';
 
 if (!empty($_POST['action'])) {
@@ -9,6 +13,7 @@ if (!empty($_POST['action'])) {
 } else {
     $action = 'home';
 }
+
 
 // $action = '';
 
@@ -27,6 +32,10 @@ switch ($action) {
         break;
     case 'loginValidation':
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/loginValidation.php');
+        die();
+        break;
+    case 'registrationValidation':
+        require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/registrationValidation.php');
         die();
         break;
     case 'calendar':
@@ -54,6 +63,11 @@ switch ($action) {
         //tutor app call may not go here ?
         $tuterApps = appointment_db::get_tutor_Appointments($tutorID);
         include('view/profile.php');
+        die();
+        break;
+    case 'logout':
+        session_destroy();
+        header('Location: index.php?action=home');
         die();
         break;
 }

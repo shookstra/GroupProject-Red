@@ -34,8 +34,8 @@ if (!empty($errors)) {
         array_push($loginErrors, "Incorrect Credentials.");
         include('views/login.php');
     } else {
-        echo $login;
-        $_SESSION['username'] = $login;
+        $user = user_db::get_specificUser($login);
+        $_SESSION['user'] = $user;
         header("Location: index.php?action=home");
     }
 }
