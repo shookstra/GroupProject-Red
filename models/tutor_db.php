@@ -41,8 +41,8 @@ class tutor_db {
     }
 
 //this will return tutor and subjects. this still need work and needs to be tested
-   public static function getSubjects($tutorID) {
-          $db = Database::getDB();
+    public static function getSubjects($tutorID) {
+        $db = Database::getDB();
 
         $query = 'SELECT tutor.fName, turor.lName, subject.Name, tutor.city'
                 . 'FROM tutor JOIN tutorsubject ON tutor.tutorID = tutorsubject.tutorID'
@@ -59,7 +59,7 @@ class tutor_db {
     }
 
     //add a tutor
-    public static function add_Tutor($firstName, $lastName,$email,  $phone, $city) {
+    public static function add_Tutor($firstName, $lastName, $email, $phone, $city) {
         $db = Database::getDB();
 
         $query = 'INSERT into tutor (fName, lName,email, pjone, city)
@@ -79,7 +79,7 @@ class tutor_db {
         $statement->execute();
         $statement->closeCursor();
     }
-    
+
     public static function get_tutor_by_availability($day) {
         $db = Database::getDB();
         $query = 'select tutor.tutorID, tutor.fName, tutor.lName, subject.subject, tutor_availabilty.start, tutor_availabilty.end, tutor_availabilty.day
@@ -93,7 +93,7 @@ class tutor_db {
         $statement->execute();
         $rows = $statement->fetchAll();
         $tutor_available = [];
-        
+
         foreach ($rows as $value) {
             $tutor_available[$value['tutorID']] = new tutor_availability($value['tutorID'], $value['fName'], $value['lName'], $value['subject'], $value['start'], $value['end'], $value['day']);
         }
@@ -101,7 +101,7 @@ class tutor_db {
         $statement->closeCursor();
         return $tutor_available;
     }
-    
+
     public static function get_tutors_by_availability() {
         $db = Database::getDB();
         $query = 'select tutor.tutorID, tutor.fName, tutor.lName, subjects.subject, tutor_availability.start, tutor_availabilty.end, tutor_availabilty.day
@@ -114,13 +114,47 @@ class tutor_db {
         $statement->execute();
         $rows = $statement->fetchAll();
         $tutor_available = [];
-        
+
         foreach ($rows as $value) {
             $tutor_available[$value['tutorID']] = new tutor_availability($value['tutorID'], $value['fName'], $value['lName'], $value['subject'], $value['start'], $value['end'], $value['day']);
         }
 
         $statement->closeCursor();
         return $tutor_available;
+    }
+
+// delete tutor from tutor table
+    public static function deleteTutor($tutorID) {
+        $db = Database::getDB();
+
+        $query = ' DELETE from tutor where tutorID = :tutorID';
+
+        $statement = $db->prepare($query);
+        $statement->bindValue(':tutorID', $tutorID);
+        $statement->execute();
+        $statement->closeCursor();
+    }
+// delete tutor from tutor_availability table
+    public static function deleteTutor_Availability($tutorID) {
+        $db = Database::getDB();
+
+        $query = ' DELETE from tutor_availability where tutorID = :tutorID';
+
+        $statement = $db->prepare($query);
+        $statement->bindValue(':tutorID', $tutorID);
+        $statement->execute();
+        $statement->closeCursor();
+    }
+// delete tutor from tutorsubject table
+    public static function delete_Tutor_Availability($tutorID) {
+        $db = Database::getDB();
+
+        $query = ' DELETE from tutorsubject where tutorID = :tutorID';
+
+        $statement = $db->prepare($query);
+        $statement->bindValue(':tutorID', $tutorID);
+        $statement->execute();
+        $statement->closeCursor();
     }
 
 }
