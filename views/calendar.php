@@ -192,11 +192,11 @@
 	<div id="simpleModal" class="modal">
 		<div class="modal-content">
 			<span class="closeBtn">&times;</span>
-                        <form action="index.php" method="post">
+                        <form action="index.php?action=calendar" method="post">
                             <select id="jsname" day="" onchange="showUser(this.value)" autofocus>
                                 <option value="">Select a subject:</option>
                             <?php foreach ($subjects as $s) : ?>
-                                <option value="<?php echo htmlspecialchars($s->getSubID()); ?>" value="<?php echo htmlspecialchars($s->getSubID()); ?>"><?php echo htmlspecialchars($s->getSubName()); ?></option>
+                                <option value="<?php echo htmlspecialchars($s->getSubID()); ?>" ><?php echo htmlspecialchars($s->getSubName()); ?></option>
                             <?php endforeach; ?>
                             </select>
                         </form>

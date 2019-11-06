@@ -24,7 +24,7 @@ function openModal(e){
     //var name = daySelect.getAttribute('name');
     //var name = e.srcElement.attributes;
     console.log(name);
-    namedate.setAttribute("day", name);
+    //namedate.setAttribute("day", name);
     //namedate.innerHTML = name;
     modal.style.display = 'block';
 }
