@@ -48,7 +48,6 @@
             provident ullam quaerat ut voluptatum dolor maiores debitis quas, molestias velit ad?
         </div>
     </div>
-    <script src="scripts\sidebar.js"></script>
 </body>
 
 </html>
