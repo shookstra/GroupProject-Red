@@ -5,6 +5,7 @@
 <body>
 
 <?php
+
 $q = intval($_GET['q']);//variable from the drop down menu
 
 $con = mysqli_connect('localhost','root','','group_project');//connection to db, copy what is in database.php
@@ -30,12 +31,17 @@ while($row = mysqli_fetch_array($result)) {
 	$end_time = $row['end'];
 	$start_time = $row['start'];
 	$num_sessions = ($end_time - $start_time)*2 - 1;
-	
+       
     echo "<tr>";
     echo "<td>" . $row['fName'] . "</td>";
     echo "<td>" . $row['lName'] . "</td>";
 	for($i = 0; $i <= $num_sessions; $i++){
-		echo "<td>" . ($row['start'] + (.5*$i)) . "</td>";
+                $times = ($start_time + (.5*$i));
+                if($times >= 13){
+		echo "<td>" . ($times - 12) . "</td>";
+                } else {
+                    echo "<td>" . $times . "</td>";
+                }
 	}
         $end_time = 0;
         $start_time = 0;
