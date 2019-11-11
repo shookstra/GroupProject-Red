@@ -117,10 +117,11 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_selection.php');
 				{
 					$class = ' class = "day_num" ';  //Mark this day - we need to fill this box with red color (using CSS)
 					$id = ' class = "modalBtn" '; // sets the modalBtn id for the JS
+                                        $setDay = 'setDay()';
 
 				} else {
 					$class = '';
-                                        
+                                        $setDay = 'setDay()';
 					$id = ' class = "modalBtn" '; // sets the modalBtn id for the JS
 				}
 
@@ -149,7 +150,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_selection.php');
 						break;
 				}
 
-				echo "<td $class id = $day$day_num><button $id  name = $day$title$day_num >$day_num</button></td>";  //Print day's number, sets the class for the modal and also sets a name for the button for use in the modal
+				echo "<td $class id = $day$day_num><button $id  name = $day,$title,$day_num >$day_num</button></td>";  //Print day's number, sets the class for the modal and also sets a name for the button for use in the modal
 
 				$day_num++;
 				$day_count++;
@@ -195,25 +196,24 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_selection.php');
 
 
 	<div id="simpleModal" class="modal">
+            
 		<div class="modal-content">
-			<span class="closeBtn">&times;</span>
-                        <div id="subject_dopdown">Subjects</div>
+                    
+                    <span class="closeBtn">&times;</span>
+                    <div id="jsname"></div>
                         <form action="index.php" method="post">
-                            <select id="jsname" onchange="showUser(this.value)" autofocus>
+                            <select id="test" onchange="showUser(this.value)" autofocus>
                                 <option value="">Select a subject:</option>
                             <?php foreach ($subjects as $s) : ?>
-                                <option value="<?php echo htmlspecialchars($s->getSubID()); ?>" ><?php echo htmlspecialchars($s->getSubName()); ?></option>
+                                <option value="<?php echo htmlspecialchars($s->getSubID() . "," . $s->getSubName()); ?>"><?php echo htmlspecialchars($s->getSubName()); ?></option>
                             <?php endforeach; ?>
                             </select>
                         </form>
                         
-			<div id="txtHint"><b>choose the time and tutor for your session</b></div>
+			<div id="tutor_schedule"><b>choose the time and tutor for your session</b></div>
 			
-                            
-			<div id="login">
-				<h1>Test modal</h1>
-			</div>
-		</div>
+                    
+                </div>
 	</div>
 			
 	<script src="<?php $_SERVER['DOCUMENT_ROOT'] ?> /GroupProject/calendar.js"></script>
