@@ -15,16 +15,20 @@ if (!empty($_POST['action'])) {
     $action = $_POST['action'];
 } else if (!empty($_GET['action'])) {
     $action = $_GET['action'];
-} else {
-    $action = 'home';
+} else if (empty($_SESSION['user'])) {
+    $action = 'signUp';
 }
-
-
-// $action = '';
 
 switch ($action) {
     case 'home':
-        include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/home.php');
+        if (empty($_SESSION['user'])) {
+            $registrationErrors = [];
+            array_push($registrationErrors, "You need to sign in to access scheduling");
+            include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/signUp.php');
+        } else {
+            $stuApps = appointment_db::get_student_Appointments($_SESSION['user']->getUserID());
+            include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/home.php');
+        }
         die();
         break;
     case 'login':
@@ -46,31 +50,18 @@ switch ($action) {
         die();
         break;
     case 'calendar':
-        
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_selection.php');
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/calendar.php');
-
         die();
         break;
     case '':
-
-        include '';
-        die();
-        break;
-    case '':
-
         include '';
         die();
         break;
     case 'profile':
-        $email = $_SESSION['email'];
-        $role = user_db::get_roleType($email);
-        $_SESSION['role'] = $role;
-        $user = user_db::get_specificUser($email);
-        $stuApps = appointment_db::get_student_Appointments($userID);
-        //tutor app call may not go here ?
-        $tuterApps = appointment_db::get_tutor_Appointments($tutorID);
-        include('view/profile.php');
+        // tutor app call may not go here ?
+        //$tutorApps = appointment_db::get_tutor_Appointments($tutorID);
+        include('views/profile.php');
         die();
         break;
     case 'logout':

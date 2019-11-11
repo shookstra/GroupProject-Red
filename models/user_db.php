@@ -2,7 +2,8 @@
 
 require_once 'database.php';
 
-class user_db {
+class user_db
+{
 
     //gets all the users
     public static function select_all()
@@ -169,7 +170,7 @@ class user_db {
          VALUES
          (:fName, :lName, :email, :phone, :role, :password)';
 
-        $role = Student;
+        $role = 'Student';
         $statement = $db->prepare($query);
         //bind the values
         $statement->bindValue(':fName', $firstName);
