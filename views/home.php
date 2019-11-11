@@ -10,6 +10,7 @@
 
     <div class="wrapper">
         <div class="card">
+            <a href="index.php?action=profile">Profile</a>
             <h1>Hi, <?php echo $_SESSION['user']->getFName(); ?></h1>
             <p id="test">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Commodi fugiat fuga, tempora, asperiores totam quis
                 voluptatum quidem molestias numquam amet quae facere minima eaque nisi est vero soluta eveniet quas.

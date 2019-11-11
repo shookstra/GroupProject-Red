@@ -1,11 +1,17 @@
 <div class="sidebar">
     <button onclick="myClick()">
-        <div class="sidebar-item"><i class="fas fa-home" alt="home"></i>Home</div>
+        <a href="index.php">
+            <div class="sidebar-item"><i class="fas fa-home" alt="home"></i>Home</div>
+        </a>
     </button>
     <button>
-        <div class="sidebar-item"><i class="far fa-calendar-times"></i>Calendar</div>
+        <a href="#">
+            <div class="sidebar-item"><i class="far fa-calendar-times"></i>Calendar</div>
+        </a>
     </button>
     <button>
-        <div class="sidebar-item"><i class="fas fa-user-circle"></i>Profile</div>
+        <a href="#">
+            <div class="sidebar-item"><i class="fas fa-user-circle"></i>Profile</div>
+        </a>
     </button>
 </div>

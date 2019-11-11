@@ -2,10 +2,12 @@
 
 require_once 'database.php';
 
-class appointment_db {
+class appointment_db
+{
 
-//gets all appointments and oderers it my most recent date and earliest time ot latest time. 
-    public static function select_all_appointments() {
+    //gets all appointments and oderers it my most recent date and earliest time ot latest time. 
+    public static function select_all_appointments()
+    {
         $db = Database::getDB();
 
         $queryUsers = 'SELECT * FROM appointment ORDER BY appDate DESC, appTime ASC  ';
@@ -22,8 +24,9 @@ class appointment_db {
         return $appointment;
     }
 
-//get appointment for specific student
-    public static function get_student_Appointments($userID) {
+    //get appointment for specific student
+    public static function get_student_Appointments($userID)
+    {
         $db = Database::getDB();
 
         $query = 'SELECT * from appointment where userID = :userID ORDER BY appDate DESC, appTime ASC ';
@@ -31,17 +34,19 @@ class appointment_db {
         $statement->bindValue(':userID', $userID);
         $statement->execute();
         $row = $statement->fetchAll();
+        $appointments = [];
 
         foreach ($row as $value) {
-            $appointment[$value['appID']] = new appointment($value['appID'], $value['subID'], $value['userID'], $value['tutorID'], $value['appDate'], $value['appTime'], $value['details'], $value['meetType']);
+            $appointments[$value['appID']] = new appointment($value['appID'], $value['subID'], $value['userID'], $value['tutorID'], $value['appDate'], $value['appTime'], $value['details'], $value['meetType']);
         }
 
         $statement->closeCursor();
-        return $appointment;
+        return $appointments;
     }
 
-//get appointment for specific tutor
-    public static function get_tutor_Appointments($tutorID) {
+    //get appointment for specific tutor
+    public static function get_tutor_Appointments($tutorID)
+    {
         $db = Database::getDB();
 
         $query = 'SELECT * from appointment where tutorID = :tutorID ORDER BY appDate DESC, appTime ASC ';
@@ -58,7 +63,8 @@ class appointment_db {
         return $appointment;
     }
 
-    public static function get_Appointment_Detail($appID) {
+    public static function get_Appointment_Detail($appID)
+    {
         $db = Database::getDB();
 
         $query = 'SELECT * from appointment where appID = :appID ';
@@ -75,8 +81,9 @@ class appointment_db {
         return $appointment;
     }
 
-// add an appointment to the database
-    public static function add_Appointment($subID, $userID, $tutorID, $appDate, $appTime, $details, $meetType) {
+    // add an appointment to the database
+    public static function add_Appointment($subID, $userID, $tutorID, $appDate, $appTime, $details, $meetType)
+    {
         $db = Database::getDB();
 
         $query = 'INSERT into appointment (subID, userID, tutorID, appDate, appTime, details, $meetType)
@@ -98,8 +105,9 @@ class appointment_db {
         $statement->closeCursor();
     }
 
-//delete appointment
-    public static function deleteUser($appID) {
+    //delete appointment
+    public static function deleteUser($appID)
+    {
         $db = Database::getDB();
 
         $query = ' DELETE from appointment where appID = :appID';
@@ -109,5 +117,4 @@ class appointment_db {
         $statement->execute();
         $statement->closeCursor();
     }
-
 }
