@@ -7,7 +7,7 @@ class subject_db {
     public static function select_all() {
         $db = Database::getDB();
 
-        $queryUsers = 'SELECT * FROM subjects ORDER BY subName ASC';
+        $queryUsers = 'SELECT * FROM subjects';
         $statement = $db->prepare($queryUsers);
         $statement->execute();
         $rows = $statement->fetchAll();

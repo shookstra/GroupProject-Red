@@ -24,9 +24,12 @@ function openModal(e){
     //var name = daySelect.getAttribute('name');
     //var name = e.srcElement.attributes;
     console.log(name);
-    namedate.setAttribute("day", name);
+    //namedate.setAttribute("day", name);
     //namedate.innerHTML = name;
     modal.style.display = 'block';
+    e.preventDefault();
+    
+    
 }
 
 //function to close modal
@@ -46,11 +49,14 @@ function outsideClick(e){
     
 }
 
+
 function showUser(str) {
+    
     if (str == "") {
         document.getElementById("txtHint").innerHTML = "";//this is where it prints to
         return;
     } else {
+        
         if (window.XMLHttpRequest) {
             // code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
@@ -59,8 +65,10 @@ function showUser(str) {
             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
         xmlhttp.onreadystatechange = function() {
+
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById("txtHint").innerHTML = this.responseText;
+                
             }
         };
         xmlhttp.open("GET","views/schedule.php?q="+str,true);//url string that is used to set up the query/getuser.php is the name of the php file that the information is printed from/will need to change to a POST instead of a get

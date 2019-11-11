@@ -5,6 +5,7 @@
 <body>
 
 <?php
+
 $q = intval($_GET['q']);//variable from the drop down menu
 
 $con = mysqli_connect('localhost','root','','group_project');//connection to db, copy what is in database.php
@@ -19,26 +20,40 @@ $sql="select tutor.tutorID, tutor.fName, tutor.lName, tutor_availability.start, 
 			  join tutor_availability on tutor.tutorID = tutor_availability.tutorID where subjects.subID ='".$q."'";//query for the db
 $result = mysqli_query($con,$sql);
 
+echo "<p>Each session will be 30 min</p>";
 echo "<table>
 <tr>
 <th>Firstname</th>
 <th>Lastname</th>
-<th>Day</th>
-<th>Start</th>
-<th>End</th>
+
 </tr>";
 while($row = mysqli_fetch_array($result)) {
+	$end_time = $row['end'];
+	$start_time = $row['start'];
+	$num_sessions = ($end_time - $start_time)*2 - 1;
+       
     echo "<tr>";
     echo "<td>" . $row['fName'] . "</td>";
     echo "<td>" . $row['lName'] . "</td>";
-    echo "<td>" . $row['day'] . "</td>";
-    echo "<td>" . $row['start'] . "</td>";
-    echo "<td>" . $row['end'] . "</td>";
+	for($i = 0; $i <= $num_sessions; $i++){
+                $times = ($start_time + (.5*$i));
+                if($times >= 13){
+		echo "<td>" . ($times - 12) . "</td>";
+                } else {
+                    echo "<td>" . $times . "</td>";
+                }
+	}
+        $end_time = 0;
+        $start_time = 0;
+        $num_sessions = 0;
+    
     echo "</tr>";
 }
 echo "</table>";
 mysqli_close($con);
 ?>
+</body>
+</html>
    
 </body>
 </html>
