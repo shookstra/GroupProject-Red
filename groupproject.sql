@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 04, 2019 at 09:30 PM
+-- Generation Time: Nov 11, 2019 at 08:43 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `group_project`
+-- Database: `groupproject`
 --
 
 -- --------------------------------------------------------
@@ -61,9 +61,17 @@ CREATE TABLE `tutor` (
   `lName` varchar(255) DEFAULT NULL,
   `fName` varchar(255) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
-  `phone` varchar(10) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
   `city` varchar(75) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tutor`
+--
+
+INSERT INTO `tutor` (`tutorID`, `lName`, `fName`, `email`, `phone`, `city`) VALUES
+(4, 'Manson', 'Charles', 'CharlesManson@cult.com', '4026666666', 'Lincoln'),
+(6, 'Robertson', 'Turor', 'tRob@tutor.com', '3108746589', 'Lincoln');
 
 -- --------------------------------------------------------
 
@@ -106,6 +114,18 @@ CREATE TABLE `users` (
   `role` varchar(30) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`userID`, `lName`, `fName`, `email`, `phone`, `role`, `password`) VALUES
+(1, 'Jahnke', 'Kurtis', 'kjahnke@scc.edu', '4029876543', 'Student', '$2y$11$ASPrtZlsM1pdDDy98KWzeOZ4pAXHrLzBuTaO2n0v4XV5Cf0in3g9u'),
+(2, 'Tester', 'Joe', 'JoeTester@test.com', '3217894563', 'Student', '$2y$11$UTxIUlD.LOSO0kGyuDqbA.JJf2XpfzDrau0fNqH3Y.AraNuTpw/tW'),
+(3, 'Hugandkiss', 'Amanda', 'Amanda@gavytrain.org', '6517861230', 'Admin', '$2y$11$m1Jf6MRPOly/PsKp5SDm6u6GEiFpcLpTdmzEuzQ8IG58Cg74No3wO'),
+(4, 'Manson', 'Charles', 'CharlesManson@cult.com', '4026666666', 'Tutor', '$2y$11$n8/NAHU4L9gMYM3LmQFk8.hpNZcd1L4.CzrZgrpQcTMa/0pkU4ylW'),
+(5, 'Jackson', 'Michael', 'Jackson@hehe.com', '3102569874', 'Student', '$2y$11$3aMcOlDzpNFE8uKd3/oBVOrGucTMDv1.VMellb8IwEqU36w4ue3fS'),
+(6, 'Robertson', 'Turor', 'tRob@tutor.com', '3108746589', 'Tutor', '$2y$11$pyErNSk1Rff.QMv9kwuX/./vj4ltzsjHidl5IaizRXRoo6jV9Iw5K');
 
 --
 -- Indexes for dumped tables
@@ -185,7 +205,7 @@ ALTER TABLE `tutor_availability`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
