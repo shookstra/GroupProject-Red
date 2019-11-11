@@ -5,7 +5,8 @@
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/head.php') ?>
 
 <body>
-    <?php include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/header.php'); ?>
+    <?php include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/header.php');
+    include('views/sideBar.php'); ?>
 
     <div class="wrapper">
         <div style="flex: 4">

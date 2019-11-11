@@ -23,6 +23,7 @@ switch ($action) {
             array_push($registrationErrors, "You need to sign in to access scheduling");
             include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/signUp.php');
         } else {
+            $stuApps = appointment_db::get_student_Appointments($_SESSION['user']->getUserID());
             include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/home.php');
         }
         die();
@@ -46,18 +47,15 @@ switch ($action) {
         die();
         break;
     case 'calendar':
-        
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_selection.php');
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/calendar.php');
         die();
         break;
     case '':
-
         include '';
         die();
         break;
     case 'profile':
-        $stuApps = appointment_db::get_student_Appointments($_SESSION['user']->getUserID());
         // tutor app call may not go here ?
         //$tutorApps = appointment_db::get_tutor_Appointments($tutorID);
         include('views/profile.php');
