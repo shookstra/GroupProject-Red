@@ -29,7 +29,7 @@ class appointment_db
     {
         $db = Database::getDB();
 
-        $query = 'SELECT appointment.appDate, appointment.appTime, subjects.subName, users.fName, users.lName, tutor.fNAme, tutor.lName, appointment.details, appointment.meetType
+        $query = 'SELECT appointment.appID, subjects.subID, users.userID, tutor.tutorID, appointment.appDate, appointment.appTime, subjects.subName, users.fName, users.lName, tutor.fNAme, tutor.lName, appointment.details, appointment.meetType
                 from appointment
                 JOIN users on appointment.userID = users.userID
                 JOIN tutor ON tutor.tutorID = appointment.tutorID
@@ -56,13 +56,13 @@ class appointment_db
     {
         $db = Database::getDB();
 
-        $query = 'SELECT appointment.appDate, appointment.appTime, subjects.subName, user.fName, user.lName, tutor.fNAme, tutor.lName, appointment.details, appointment.meetType'
-            . 'from appointment'
-            . 'JOIN users on appointment.userID = users.userID'
-            . 'JOIN tutor ON tutor.tutorID = appointment.tutorID'
-            . 'JOIN subjects ON subjects.subID = appointment.subID'
-            . 'where tutorID = :tutorID'
-            . 'ORDER BY appDate DESC, appTime ASC';
+        $query = 'SELECT appointment.appID, subjects.subID, users.userID, tutor.tutorID, appointment.appDate, appointment.appTime, subjects.subName, users.fName, users.lName, tutor.fNAme, tutor.lName, appointment.details, appointment.meetType
+            from appointment
+            JOIN users on appointment.userID = users.userID
+            JOIN tutor ON tutor.tutorID = appointment.tutorID
+            JOIN subjects ON subjects.subID = appointment.subID
+            where tutorID = :tutorID
+            ORDER BY appDate DESC, appTime ASC';
 
         $statement = $db->prepare($query);
         $statement->bindValue(':tutorID', $tutorID);
@@ -81,13 +81,13 @@ class appointment_db
     {
         $db = Database::getDB();
 
-        $query = 'SELECT appointment.appDate, appointment.appTime, subjects.subName, user.fName, user.lName, tutor.fNAme, tutor.lName, appointment.details, appointment.meetType'
-            . 'from appointment'
-            . 'JOIN users ON appointment.userID = users.userID'
-            . 'JOIN tutor ON tutor.tutorID = appointment.tutorID'
-            . 'JOIN subjects ON subjects.subID = appointment.subID'
-            . 'where appID = :appID'
-            . 'ORDER BY appDate DESC, appTime ASC';;
+        $query = 'SELECT appointment.appID, subjects.subID, users.userID, tutor.tutorID, appointment.appDate, appointment.appTime, subjects.subName, users.fName, users.lName, tutor.fNAme, tutor.lName, appointment.details, appointment.meetType
+            from appointment
+            JOIN users ON appointment.userID = users.userID
+            JOIN tutor ON tutor.tutorID = appointment.tutorID
+            JOIN subjects ON subjects.subID = appointment.subID
+            where appID = :appID
+            ORDER BY appDate DESC, appTime ASC';
         $statement = $db->prepare($query);
         $statement->bindValue(':appID', $appID);
         $statement->execute();
