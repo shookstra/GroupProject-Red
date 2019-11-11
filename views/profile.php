@@ -2,55 +2,43 @@
 <html lang="en">
 
 
-    <?php include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/head.php') ?>
+<?php include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/head.php') ?>
 
-    <body>
-        <?php include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/header.php'); ?>
+<body>
+    <?php include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/header.php');
+    include('views/sideBar.php'); ?>
 
-        <div class="wrapper">
-            <div class="card">
-                <h1>Scheduled Appointments</h1>
+    <div class="wrapper">
+        <div style="flex: 4">
+            <h2>Hi, <?php echo $_SESSION['user']->getFName() . ' ' . $_SESSION['user']->getLName(); ?></h2>
+            <button id="myBtn">Open Modal</button>
+            <div class="modal" id="myModal">
+                <div class="modal-content">
+                    <form action="">
+                        <label for="fName">First Name: </label>
+                        <input type="text" name="fName" value="<?php echo $_SESSION['user']->getFName(); ?>">
 
-                <table class="display" style="width: 800px;">
-                    <tr>
-                        <th>Tutor Name</th>
-                        <th>Subject</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Details</th>
+                        <label for="lName">Last Name: </label>
+                        <input type="text" name="lName" value="<?php echo $_SESSION['user']->getLName(); ?>">
 
-                    </tr>
-                    <?php foreach ($stuApps as $sa) : ?>
-                        <tr>
-                            <td><?php echo $sa->getTutorID(); ?></td>
-                            <td><?php echo $sa->getSubID(); ?></td>
-                            <td><?php echo $sa->getAppDate(); ?></td>
-                            <td><?php echo $sa->getAppTime(); ?></td>
-                            <td><form action="index.php" method="POST">
-                                    <input type="hidden" name="userID"
-                                           value="<?php echo htmlspecialchars($sa->getUserID()); ?>"> 
-                                    <input  type="submit" value="More Details">
-                                    <input type="hidden" name="action" value="moreDetails">
-                                </form>
-                            </td>
-
-                        </tr>
-                    <?php endforeach; ?>
-                </table>
-
-
-
-            </div>
-            <div class="sideContent">
-                <h3>Profile Information</h3>
-                <p><strong><?php echo htmlspecialchars($$user->getUserID()); ?></strong></p>
-                <p><strong><?php echo htmlspecialchars($$user->getFName()); ?></strong></p>
-                <p><strong><?php echo htmlspecialchars($$user->getLName()); ?></strong></p>
-                <p><strong><?php echo htmlspecialchars($$user->getEmail()); ?></strong></p>
+                        <label for="email">Email: </label>
+                        <input type="text" name="email" value="<?php echo $_SESSION['user']->getEmail(); ?>">
+                    </form>
+                </div>
             </div>
         </div>
 
+        <div class="sideContent">
+            <h3 style="font-weight: bold">Profile Information</h3>
+            <p><?php echo htmlspecialchars('User ID: ' . $_SESSION['user']->getUserID()); ?></p>
+            <p><?php echo htmlspecialchars('First Name: ' . $_SESSION['user']->getFName()); ?></p>
+            <p><?php echo htmlspecialchars('Last Name: ' . $_SESSION['user']->getLName()); ?></p>
+            <p><?php echo htmlspecialchars('Email: ' . $_SESSION['user']->getEmail()); ?></p>
+        </div>
+    </div>
 
-    </body>
+
+    <script src="scripts/profileModal.js"></script>
+</body>
 
 </html>

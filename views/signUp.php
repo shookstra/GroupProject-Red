@@ -55,9 +55,12 @@
                 <input type="submit" value="Create Account" name="submit" class="submit-button">
             </div>
             <div class="login-item">
+                <a href="index.php?action=login" class="center">Already Have an Account?</a>
                 <a href="index.php?action=home" class="center">← Go Back</a>
             </div>
         </form>
+    </div>
+
 </body>
 
 </html>
