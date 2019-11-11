@@ -26,13 +26,13 @@ class appointment_db {
     public static function get_student_Appointments($userID) {
         $db = Database::getDB();
 
-        $query = 'SELECT appointment.appDate, appointment.appTime, subjects.subName, user.fName, user.lName, tutor.fNAme, tutor.lName, appointment.details, appointment.meetType'
-                . 'from appointment'
-                . 'JOIN users on appointment.userID = users.userID'
-                . 'JOIN tutor ON tutor.tutorID = appointment.tutorID'
-                . 'JOIN subjects ON subjects.subID = appointment.subID'
-                . 'where userID = :userID'
-                . 'ORDER BY appDate DESC, appTime ASC';
+        $query = 'SELECT appointment.appDate, appointment.appTime, subjects.subName, user.fName, user.lName, tutor.fNAme, tutor.lName, appointment.details, appointment.meetType
+              from appointment
+                JOIN users on appointment.userID = users.userID
+                JOIN tutor ON tutor.tutorID = appointment.tutorID
+                JOIN subjects ON subjects.subID = appointment.subID
+                where userID = :userID
+                ORDER BY appDate DESC, appTime ASC';
         
         $statement = $db->prepare($query);
         $statement->bindValue(':userID', $userID);

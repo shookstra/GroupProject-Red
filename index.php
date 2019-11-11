@@ -2,6 +2,10 @@
 
 require_once('models/user.php');
 require_once('models/user_db.php');
+require_once('models/appointment.php');
+require_once('models/appointment_db.php');
+require_once('models/tutor.php');
+require_once('models/tutor_db.php');
 
 session_start();
 

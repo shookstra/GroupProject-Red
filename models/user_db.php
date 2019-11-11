@@ -120,11 +120,11 @@ class user_db {
         $row = $statement->fetchAll();
 
         foreach ($row as $value) {
-            $user = new user($value['userID'], $value['lName'], $value['fName'], $value['email'], $value['phone'], $value['role'], $value['password']);
+            $users = new user($value['userID'], $value['lName'], $value['fName'], $value['email'], $value['phone'], $value['role'], $value['password']);
         }
 
         $statement->closeCursor();
-        return $user;
+        return $users;
     }
 
     //this gets the users role type which determines the experience of the website
