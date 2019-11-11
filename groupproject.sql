@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2019 at 08:43 PM
+-- Generation Time: Nov 11, 2019 at 09:42 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -39,6 +39,15 @@ CREATE TABLE `appointment` (
   `meetType` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `appointment`
+--
+
+INSERT INTO `appointment` (`appID`, `subID`, `userID`, `tutorID`, `appDate`, `appTime`, `details`, `meetType`) VALUES
+(1, 7, 1, 4, '2019-11-12', '11:30:00', 'Need a computer', 'In Person'),
+(2, 1, 3, 4, '2019-11-13', '00:13:00', 'Need calculator', 'In person'),
+(3, 2, 1, 6, '2019-11-15', '00:10:00', 'Bring beer', 'Web');
+
 -- --------------------------------------------------------
 
 --
@@ -49,6 +58,16 @@ CREATE TABLE `subjects` (
   `subID` int(11) NOT NULL,
   `subName` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `subjects`
+--
+
+INSERT INTO `subjects` (`subID`, `subName`) VALUES
+(1, 'Math'),
+(2, 'Reading'),
+(5, 'C#'),
+(7, 'ASP.NET');
 
 -- --------------------------------------------------------
 
@@ -85,6 +104,16 @@ CREATE TABLE `tutorsubject` (
   `tutorID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tutorsubject`
+--
+
+INSERT INTO `tutorsubject` (`tsID`, `subID`, `tutorID`) VALUES
+(1, 1, 4),
+(2, 7, 4),
+(3, 2, 6),
+(4, 5, 6);
+
 -- --------------------------------------------------------
 
 --
@@ -98,6 +127,16 @@ CREATE TABLE `tutor_availability` (
   `start` int(11) NOT NULL,
   `end` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tutor_availability`
+--
+
+INSERT INTO `tutor_availability` (`taID`, `tutorID`, `day`, `start`, `end`) VALUES
+(1, 4, 'Mon', 1130, 1200),
+(2, 4, 'Tue', 1200, 1230),
+(3, 6, 'Wed', 1300, 1400),
+(4, 6, 'Fri', 1000, 1100);
 
 -- --------------------------------------------------------
 
@@ -181,25 +220,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `appID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `appID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
-  MODIFY `subID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `subID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tutorsubject`
 --
 ALTER TABLE `tutorsubject`
-  MODIFY `tsID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `tsID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tutor_availability`
 --
 ALTER TABLE `tutor_availability`
-  MODIFY `taID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `taID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
