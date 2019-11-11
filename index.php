@@ -46,6 +46,7 @@ switch ($action) {
         die();
         break;
     case 'calendar':
+        
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_selection.php');
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/calendar.php');
         die();

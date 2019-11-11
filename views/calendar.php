@@ -9,6 +9,10 @@
 	<title>Document</title>
 	<link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']; ?> /GroupProject/styling/calendarStyle.css">
 </head>
+<?php
+include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_selection.php');
+?>
+
 
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/head.php') ?>
 
@@ -116,6 +120,7 @@
 
 				} else {
 					$class = '';
+                                        
 					$id = ' class = "modalBtn" '; // sets the modalBtn id for the JS
 				}
 
@@ -144,7 +149,7 @@
 						break;
 				}
 
-				echo "<td $class name = $day><button $id name = $day$title$day_num >$day_num</button></td>";  //Print day's number, sets the class for the modal and also sets a name for the button for use in the modal
+				echo "<td $class id = $day$day_num><button $id  name = $day$title$day_num >$day_num</button></td>";  //Print day's number, sets the class for the modal and also sets a name for the button for use in the modal
 
 				$day_num++;
 				$day_count++;
@@ -174,8 +179,8 @@
                
                 <form name="nav_form" method="POST" action="/groupproject/views/calendar.php">
 			<div id="inps">
-				<input type="Submit" name="prev" value="<- Previous" class="buttons" />
-				<input type="Submit" name="next" value="Next ->" class="buttons" />
+				<input type="Submit" name="prev" value="<- Previous" class="buttons" onClick="window.location.reload()"/>
+				<input type="Submit" name="next" value="Next ->" class="buttons" onClick="window.location.reload()"/>
 			</div>
 
 			<input type="hidden" name="month" value="<?php echo $month ?>" />
@@ -192,11 +197,12 @@
 	<div id="simpleModal" class="modal">
 		<div class="modal-content">
 			<span class="closeBtn">&times;</span>
+                        <div id="subject_dopdown">Subjects</div>
                         <form action="index.php" method="post">
-                            <select id="jsname" day="" onchange="showUser(this.value)" autofocus>
+                            <select id="jsname" onchange="showUser(this.value)" autofocus>
                                 <option value="">Select a subject:</option>
                             <?php foreach ($subjects as $s) : ?>
-                                <option value="<?php echo htmlspecialchars($s->getSubID()); ?>" value="<?php echo htmlspecialchars($s->getSubID()); ?>"><?php echo htmlspecialchars($s->getSubName()); ?></option>
+                                <option value="<?php echo htmlspecialchars($s->getSubID()); ?>" ><?php echo htmlspecialchars($s->getSubName()); ?></option>
                             <?php endforeach; ?>
                             </select>
                         </form>
@@ -210,7 +216,7 @@
 		</div>
 	</div>
 			
-	<script src="calendar.js"></script>
+	<script src="<?php $_SERVER['DOCUMENT_ROOT'] ?> /GroupProject/calendar.js"></script>
 </body>
 
 </html>

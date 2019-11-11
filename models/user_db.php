@@ -170,6 +170,7 @@ class user_db
          VALUES
          (:fName, :lName, :email, :phone, :role, :password)';
 
+        $role = Student;
         $statement = $db->prepare($query);
         //bind the values
         $statement->bindValue(':fName', $firstName);
