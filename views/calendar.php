@@ -119,11 +119,11 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_selection.php');
 				{
 					$class = ' class = "day_num" ';  //Mark this day - we need to fill this box with red color (using CSS)
 					$id = ' class = "modalBtn" '; // sets the modalBtn id for the JS
-                                        $setDay = 'setDay()';
+                                       
 
 				} else {
 					$class = '';
-                                        $setDay = 'setDay()';
+                                       
 					$id = ' class = "modalBtn" '; // sets the modalBtn id for the JS
 				}
 

@@ -55,7 +55,7 @@ function outsideClick(e){
 
 function showUser(str) {
     var testDay = document.getElementById("jsname").innerHTML;
-    alert("testDay");
+ 
     if (str == "") {
         document.getElementById("tutor_schedule").innerHTML = "";//this is where it prints to
         return;
@@ -82,7 +82,7 @@ function showUser(str) {
 
 function showAppointment(btn){
     var testDay = document.getElementById("jsname").innerHTML;
-    alert("testDay");
+    
     if (btn == "") {
         document.getElementById("tutor_schedule").innerHTML = "";//this is where it prints to
         return;
