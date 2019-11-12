@@ -15,10 +15,10 @@
             <div class="card">
                 <h1 class="card-title">Sign In</h1>
                 <div class="login-item">
-                    <label for="email">Email</label><input type="email" name="email" class="submit-input">
+                    <label for="email">Email</label><input type="email" name="email" class="submit-input" placeholder="Email Address">
                 </div>
                 <div class="login-item">
-                    <label for="password">Password</label><input type="password" name="password" class="submit-input">
+                    <label for="password">Password</label><input type="password" name="password" class="submit-input" placeholder="Password">
                 </div>
                 <?php if (!empty($loginErrors)) { ?>
                     <div class="login-item error">
@@ -32,6 +32,7 @@
                     <input type="submit" value="Login" name="submit" class="submit-button">
                 </div>
                 <div class="login-item">
+                    <a href="index.php?action=signUp" class="center">Need an Account?</a>
                     <a href="index.php?action=home" class="center">← Go Back</a>
                 </div>
             </div>

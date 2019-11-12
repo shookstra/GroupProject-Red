@@ -24,8 +24,13 @@ function openModal(e){
     //var name = daySelect.getAttribute('name');
     //var name = e.srcElement.attributes;
     console.log(name);
+    //namedate.setAttribute("day", name);
     namedate.innerHTML = name;
     modal.style.display = 'block';
+    e.preventDefault();
+    
+    
+    
 }
 
 //function to close modal
@@ -41,7 +46,68 @@ function outsideClick(e){
     if(e.target == modal){
 
     modal.style.display = 'none';
+    
     }
     
+}
+
+
+
+function showUser(str) {
+    var testDay = document.getElementById("jsname").innerHTML;
+    alert("testDay");
+    if (str == "") {
+        document.getElementById("tutor_schedule").innerHTML = "";//this is where it prints to
+        return;
+    } else {
+        
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("tutor_schedule").innerHTML = this.responseText;
+                
+            }
+        };
+        xmlhttp.open("GET","views/schedule.php?q="+str+"&test="+testDay,true);//url string that is used to set up the query/getuser.php is the name of the php file that the information is printed from/will need to change to a POST instead of a get
+        xmlhttp.send();
+    }
+}
+
+function showAppointment(btn){
+    var testDay = document.getElementById("jsname").innerHTML;
+    alert("testDay");
+    if (btn == "") {
+        document.getElementById("tutor_schedule").innerHTML = "";//this is where it prints to
+        return;
+    } else {
+        
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("tutor_schedule").innerHTML = this.responseText;
+                
+            }
+        };
+        xmlhttp.open("GET","models/accept_appointment.php?btn="+btn+"&test="+testDay, true);//url string that is used to set up the query/getuser.php is the name of the php file that the information is printed from/will need to change to a POST instead of a get
+        xmlhttp.send();
+    }
+}
+
+function setday(){
+    var sendDay = e.srcElement.getAttribute('name');
 }
 

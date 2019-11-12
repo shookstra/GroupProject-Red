@@ -154,3 +154,11 @@ textarea {
     opacity: 1;
   }
 }
+
+close_for_accept {
+    display: block;
+}
+
+accept {
+    display: none;
+}

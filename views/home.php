@@ -5,19 +5,25 @@
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/head.php') ?>
 
 <body>
-    <?php include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/header.php'); ?>
+    <?php include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/header.php');
+    include('views/sideBar.php'); ?>
 
     <div class="wrapper">
-        <div class="card">
-            <h1>Content</h1>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Commodi fugiat fuga, tempora, asperiores totam quis
-                voluptatum quidem molestias numquam amet quae facere minima eaque nisi est vero soluta eveniet quas.
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi expedita unde quod ipsam exercitationem
-                recusandae voluptates in! Quibusdam cum impedit laudantium consectetur, non architecto nulla expedita voluptatibus, beatae mollitia tempora.
-            </p>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi expedita unde quod ipsam exercitationem
-                recusandae voluptates in! Quibusdam cum impedit laudantium consectetur, non architecto nulla expedita voluptatibus, beatae mollitia tempora.
-            </p>
+        <?php //var_dump($stuApps); 
+        ?>
+        <div class="appointments">
+            <h1 class="title">Hi, <?php echo $_SESSION['user']->getFName() . ' here are your appointments.'; ?></h1>
+            <?php foreach ($stuApps as $appointment) : ?>
+                <div class="appointment">
+                    <p><?php echo 'Appointment ID: ' . $appointment->getAppID(); ?></p>
+                    <p><?php echo 'Subject ID: ' . $appointment->getSubID(); ?></p>
+                    <p><?php echo 'With Tutor: ' . $appointment->getTutorID(); ?></p>
+                    <p><?php echo 'on: ' . $appointment->getAppDate(); ?></p>
+                    <p><?php echo 'at: ' . $appointment->getAppTime(); ?></p>
+                    <p><?php echo 'Details: ' . $appointment->getDetails(); ?></p>
+                    <p><?php echo 'Meeting Type: ' . $appointment->getMeetType(); ?></p>
+                </div>
+            <?php endforeach ?>
         </div>
         <div class="sideContent">
             <h3>Side Content</h3>

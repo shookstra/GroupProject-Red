@@ -2,7 +2,8 @@
 
 require_once 'database.php';
 
-class user_db {
+class user_db
+{
 
     //gets all the users
     public static function select_all()
@@ -120,11 +121,11 @@ class user_db {
         $row = $statement->fetchAll();
 
         foreach ($row as $value) {
-            $user = new user($value['userID'], $value['lName'], $value['fName'], $value['email'], $value['phone'], $value['role'], $value['password']);
+            $users = new user($value['userID'], $value['lName'], $value['fName'], $value['email'], $value['phone'], $value['role'], $value['password']);
         }
 
         $statement->closeCursor();
-        return $user;
+        return $users;
     }
 
     //this gets the users role type which determines the experience of the website
@@ -169,7 +170,7 @@ class user_db {
          VALUES
          (:fName, :lName, :email, :phone, :role, :password)';
 
-
+        $role = 'Student';
         $statement = $db->prepare($query);
         //bind the values
         $statement->bindValue(':fName', $firstName);
