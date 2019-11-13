@@ -40,24 +40,6 @@ class tutor_db {
         return $tutors;
     }
 
-    //this will return tutor and subjects. this still need work and needs to be tested
-    public static function getSubjects($tutorID) {
-        $db = Database::getDB();
-
-        $query = 'SELECT tutor.fName, turor.lName, subject.Name, tutor.city'
-                . 'FROM tutor JOIN tutorsubject ON tutor.tutorID = tutorsubject.tutorID'
-                . ' join  subjects on subjects.subID = tutorsubject.subID';
-
-        $statement = $db->prepare($query);
-        $statement->bindValue(':tutorID', $tutorID);
-        $statement->execute();
-        $results = $statement->fetch();
-        // $subjectName = $results['firstName'] . ' ' . $results['lastName'];
-        $statement->closeCursor();
-
-        return $results;
-    }
-
     //add a tutor
     public static function add_Tutor($firstName, $lastName, $email, $phone, $city) {
         $db = Database::getDB();
@@ -117,7 +99,7 @@ class tutor_db {
 
         return $tutor;
     }
-
+    //joins the tutor_availability table
     public static function get_tutors_by_availability() {
         $db = Database::getDB();
         $query = 'select tutor.tutorID, tutor.fName, tutor.lName, tutor_availability.start, tutor_availability.end, tutor_availability.day
