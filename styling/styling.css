@@ -103,6 +103,21 @@ nav ul {
   box-shadow: 0px 0px 5px 0 rgba(0, 0, 0, 0.3);
 }
 
+.sideContent a {
+  color: black;
+  text-decoration: none;
+  transition: color 200ms ease-in;
+}
+
+.sideContent a:hover,
+.sideContent a:focus {
+  color: rgb(44, 115, 182);
+}
+
+.sideContent ul {
+  list-style: none;
+}
+
 .fa-chalkboard-teacher {
   margin-right: 10px;
   transform: scale(1.5, 1.5);

@@ -10,7 +10,7 @@ class tutor_db
     {
         $db = Database::getDB();
 
-        $queryUsers = 'SELECT * FROM tutors ';
+        $queryUsers = 'SELECT * FROM tutor ';
         $statement = $db->prepare($queryUsers);
         $statement->execute();
         $rows = $statement->fetchAll();
