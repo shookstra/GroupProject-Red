@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/head.php') ?>
 
 <body>
@@ -35,7 +32,7 @@
                 <?php foreach ($tutors as $tutor) : ?>
                     <?php echo '<li><a href="index.php?action=viewTutorProfile&tutorID=' . $tutor->getTutorID() . '">' .
                             htmlspecialchars(
-                                $tutor->getTutorID() . ' ' .
+                                $tutor->getTutorID() . '. ' .
                                     $tutor->getFname() . ' ' .
                                     $tutor->getLname()
                             ) . '</a></li>';

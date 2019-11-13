@@ -8,6 +8,7 @@ require_once('models/tutor.php');
 require_once('models/tutor_db.php');
 require_once('models/subject_db.php');
 require_once('models/subject.php');
+require_once('models/tutor_availability.php');
 
 session_start();
 
@@ -61,6 +62,12 @@ switch ($action) {
         $appointmentID = filter_input(INPUT_POST, "appointmentID");
         echo 'EDIT APPOINTMENT: ' . $appointmentID;
         // include '';
+        die();
+        break;
+    case 'viewTutorProfile':
+        $tutor = tutor_db::get_tutor_by_id(filter_input(INPUT_GET, 'tutorID'));
+        $availability = tutor_db::get_tutor_availablity_by_ID($tutor->getTutorID());
+        include 'views/tutorProfile.php';
         die();
         break;
     case 'profile':
