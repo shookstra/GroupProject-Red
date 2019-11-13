@@ -2,9 +2,11 @@
 
 require_once 'database.php';
 
-class subject_db {
+class subject_db
+{
 
-    public static function select_all() {
+    public static function select_all()
+    {
         $db = Database::getDB();
 
         $queryUsers = 'SELECT * FROM subjects';
@@ -21,8 +23,27 @@ class subject_db {
         return $subjects;
     }
 
-// add an subject to the database
-    public static function add_Subject($subID, $subName) {
+    public static function select_subject_by_ID($subjectID)
+    {
+        $db = Database::getDB();
+
+        $querySubjects = 'SELECT * FROM subjects WHERE subID = :subjectID';
+        $statement = $db->prepare($querySubjects);
+        $statement->bindValue(':subjectID', $subjectID);
+        $statement->execute();
+        $rows = $statement->fetchAll();
+
+        foreach ($rows as $value) {
+            $subject = new subject($value['subID'], $value['subName']);
+        }
+        $statement->closeCursor();
+
+        return $subject;
+    }
+
+    // add an subject to the database
+    public static function add_Subject($subID, $subName)
+    {
         $db = Database::getDB();
 
         $query = 'INSERT into subjects (subID, subName)
@@ -39,8 +60,9 @@ class subject_db {
         $statement->execute();
         $statement->closeCursor();
     }
-//delete subject from database
-    public static function deleteSubject($subID) {
+    //delete subject from database
+    public static function deleteSubject($subID)
+    {
         $db = Database::getDB();
 
         $query = ' DELETE from subjects where subID = :subID';
@@ -50,5 +72,4 @@ class subject_db {
         $statement->execute();
         $statement->closeCursor();
     }
-
 }

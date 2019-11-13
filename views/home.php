@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/head.php') ?>
 
 <body>
@@ -9,19 +8,19 @@
     include('views/sideBar.php'); ?>
 
     <div class="wrapper">
-        <?php //var_dump($stuApps); 
-        ?>
         <div class="appointments">
-            <h1 class="title">Hi, <?php echo $_SESSION['user']->getFName() . ' here are your appointments.'; ?></h1>
+            <h1 class="title">Hi, <?php echo $_SESSION['user']->getFName() . ' here are your scheduled appointments.'; ?></h1>
             <?php foreach ($stuApps as $appointment) : ?>
+                <?php $tutor = tutor_db::get_tutor_by_id($appointment->getTutorID()); ?>
+                <?php $subject = subject_db::select_subject_by_ID($appointment->getSubID()); ?>
                 <div class="appointment">
-                    <p><?php echo 'Appointment ID: ' . $appointment->getAppID(); ?></p>
-                    <p><?php echo 'Subject ID: ' . $appointment->getSubID(); ?></p>
-                    <p><?php echo 'With Tutor: ' . $appointment->getTutorID(); ?></p>
-                    <p><?php echo 'on: ' . $appointment->getAppDate(); ?></p>
-                    <p><?php echo 'at: ' . $appointment->getAppTime(); ?></p>
-                    <p><?php echo 'Details: ' . $appointment->getDetails(); ?></p>
-                    <p><?php echo 'Meeting Type: ' . $appointment->getMeetType(); ?></p>
+                    <p><?php echo htmlspecialchars('Appointment ID: ' . $appointment->getAppID()); ?></p>
+                    <p><?php echo htmlspecialchars('Subject: ' . $subject->getSubName()); ?></p>
+                    <p><?php echo htmlspecialchars('With: ' . $tutor->getFName() . ' ' . $tutor->getLName()); ?></p>
+                    <p><?php echo htmlspecialchars('on: ' . $appointment->getAppDate()); ?></p>
+                    <p><?php echo htmlspecialchars('at: ' . $appointment->getAppTime()); ?></p>
+                    <p><?php echo htmlspecialchars('Details: ' . $appointment->getDetails()); ?></p>
+                    <p><?php echo htmlspecialchars('Meeting Type: ' . $appointment->getMeetType()); ?></p>
                 </div>
             <?php endforeach ?>
         </div>
