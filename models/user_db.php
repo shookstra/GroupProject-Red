@@ -203,7 +203,8 @@ class user_db {
         $statement->closeCursor();
     }
 
-    public static function demoteUser($userName, $role) {
+    //tutor
+    public static function demote_Tutor($userName, $role) {
         $db = Database::getDB();
 
         $query = $query = 'UPDATE users
@@ -218,5 +219,4 @@ class user_db {
         $statement->execute();
         $statement->closeCursor();
     }
-
 }
