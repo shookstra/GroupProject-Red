@@ -1,6 +1,7 @@
 <?php
 
-class tutor {
+class tutor
+{
 
     private $tutorID;
     private $lName;
@@ -8,8 +9,9 @@ class tutor {
     private $email;
     private $phone;
     private $city;
-    
-    function __construct($tutorID, $lName, $fName, $email, $phone, $city) {
+
+    function __construct($tutorID, $lName, $fName, $email, $phone, $city)
+    {
         $this->tutorID = $tutorID;
         $this->lName = $lName;
         $this->fName = $fName;
@@ -17,55 +19,64 @@ class tutor {
         $this->phone = $phone;
         $this->city = $city;
     }
-    
-    function getTutorID() {
+
+    function getTutorID()
+    {
         return $this->tutorID;
     }
 
-    function getLName() {
+    function getLName()
+    {
         return $this->lName;
     }
 
-    function getFName() {
+    function getFName()
+    {
         return $this->fName;
     }
 
-    function getEmail() {
+    function getEmail()
+    {
         return $this->email;
     }
 
-    function getPhone() {
+    function getPhone()
+    {
         return $this->phone;
     }
 
-    function getCity() {
+    function getCity()
+    {
         return $this->city;
     }
 
-    function setTutorID($tutorID) {
+    function setTutorID($tutorID)
+    {
         $this->tutorID = $tutorID;
     }
 
-    function setLName($lName) {
+    function setLName($lName)
+    {
         $this->lName = $lName;
     }
 
-    function setFName($fName) {
+    function setFName($fName)
+    {
         $this->fName = $fName;
     }
 
-    function setEmail($email) {
+    function setEmail($email)
+    {
         $this->email = $email;
     }
 
-    function setPhone($phone) {
+    function setPhone($phone)
+    {
         $this->phone = $phone;
     }
 
-    function setCity($city) {
+    function setCity($city)
+    {
         $this->city = $city;
     }
 }
-    
-    
-    

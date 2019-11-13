@@ -6,6 +6,8 @@ require_once('models/appointment.php');
 require_once('models/appointment_db.php');
 require_once('models/tutor.php');
 require_once('models/tutor_db.php');
+require_once('models/subject_db.php');
+require_once('models/subject.php');
 
 session_start();
 
@@ -16,7 +18,7 @@ if (!empty($_POST['action'])) {
 } else if (!empty($_GET['action'])) {
     $action = $_GET['action'];
 } else if (empty($_SESSION['user'])) {
-    $action = 'signUp';
+    $action = 'login';
 }
 
 switch ($action) {
@@ -24,7 +26,7 @@ switch ($action) {
         if (empty($_SESSION['user'])) {
             $registrationErrors = [];
             array_push($registrationErrors, "You need to sign in to access scheduling");
-            include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/signUp.php');
+            include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/login.php');
         } else {
             $stuApps = appointment_db::get_student_Appointments($_SESSION['user']->getUserID());
             include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/home.php');

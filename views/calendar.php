@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Document</title>
 	<link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']; ?> /GroupProject/styling/calendarStyle.css">
+	<link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']; ?> /GroupProject/styling/styling.css">
 </head>
 <?php
 include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_selection.php');
@@ -17,13 +18,14 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_selection.php');
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/head.php') ?>
 
 <body>
-	<?php include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/header.php'); ?>
+	<?php include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/header.php');
+	include('views/sideBar.php'); ?>
 	<div id="tbl">
 		<table>
 
 			<?php
 			if (isset($_POST['next'])) {
-                               
+
 				$month = $_POST['month'] + 1;
 				$year = $_POST['year'];
 				if ($month > 12) {
@@ -31,7 +33,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_selection.php');
 					$year++;
 				}
 			} else if (isset($_POST['prev'])) {
-                                
+
 				$month = $_POST['month'] - 1;
 				$year = $_POST['year'];
 				if ($month < 1) {
@@ -42,8 +44,8 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_selection.php');
 				$month = date("m");  //current month    Numeric representation of a month, with leading zeros:	01 through 12
 				$year = date("Y");   //current year  	A full numeric representation of a year, 4 digits	Examples: 1999 or 2003
 			}
-                        
-                        date_default_timezone_set('America/Chicago');
+
+			date_default_timezone_set('America/Chicago');
 			$date = time();
 			$today = getdate();
 
@@ -58,8 +60,8 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_selection.php');
 
 			$day_of_week = date('D', $first_day);   //A textual representation of a day, three letters:	Mon through Sun
 
-                        
-                         
+
+
 			switch ($day_of_week)    //If the first day of a month is Sunday we need 0 blank box. If its Monday we need 1 blank box and if its Saturday we need 6 blank boxes
 			{
 				case "Sun":
@@ -117,10 +119,11 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_selection.php');
 				{
 					$class = ' class = "day_num" ';  //Mark this day - we need to fill this box with red color (using CSS)
 					$id = ' class = "modalBtn" '; // sets the modalBtn id for the JS
+                                       
 
 				} else {
 					$class = '';
-                                        
+                                       
 					$id = ' class = "modalBtn" '; // sets the modalBtn id for the JS
 				}
 
@@ -149,7 +152,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_selection.php');
 						break;
 				}
 
-				echo "<td $class id = $day$day_num><button $id  name = $day$title$day_num >$day_num</button></td>";  //Print day's number, sets the class for the modal and also sets a name for the button for use in the modal
+				echo "<td $class id = $day$day_num><button $id  name = $day,$title,$day_num >$day_num</button></td>";  //Print day's number, sets the class for the modal and also sets a name for the button for use in the modal
 
 				$day_num++;
 				$day_count++;
@@ -176,11 +179,11 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_selection.php');
 		</table>
 
 
-               
-                <form name="nav_form" method="POST" action="/groupproject/views/calendar.php">
+
+		<form name="nav_form" method="POST" action="/groupproject/views/calendar.php">
 			<div id="inps">
-				<input type="Submit" name="prev" value="<- Previous" class="buttons" onClick="window.location.reload()"/>
-				<input type="Submit" name="next" value="Next ->" class="buttons" onClick="window.location.reload()"/>
+				<input type="Submit" name="prev" value="<- Previous" class="buttons" onClick="window.location.reload()" />
+				<input type="Submit" name="next" value="Next ->" class="buttons" onClick="window.location.reload()" />
 			</div>
 
 			<input type="hidden" name="month" value="<?php echo $month ?>" />
@@ -195,27 +198,26 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_selection.php');
 
 
 	<div id="simpleModal" class="modal">
+            
 		<div class="modal-content">
-			<span class="closeBtn">&times;</span>
-                        <div id="subject_dopdown">Subjects</div>
+                    
+                    <span class="closeBtn">&times;</span>
+                    <div id="jsname"></div>
                         <form action="index.php" method="post">
-                            <select id="jsname" onchange="showUser(this.value)" autofocus>
+                            <select id="test" onchange="showUser(this.value)" autofocus>
                                 <option value="">Select a subject:</option>
                             <?php foreach ($subjects as $s) : ?>
-                                <option value="<?php echo htmlspecialchars($s->getSubID()); ?>" ><?php echo htmlspecialchars($s->getSubName()); ?></option>
+                                <option value="<?php echo htmlspecialchars($s->getSubID() . "," . $s->getSubName()); ?>"><?php echo htmlspecialchars($s->getSubName()); ?></option>
                             <?php endforeach; ?>
                             </select>
                         </form>
                         
-			<div id="txtHint"><b>choose the time and tutor for your session</b></div>
+			<div id="tutor_schedule"><b>choose the time and tutor for your session</b></div>
 			
-                            
-			<div id="login">
-				<h1>Test modal</h1>
-			</div>
-		</div>
+                    
+                </div>
 	</div>
-			
+
 	<script src="<?php $_SERVER['DOCUMENT_ROOT'] ?> /GroupProject/calendar.js"></script>
 </body>
 
