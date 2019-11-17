@@ -200,14 +200,15 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_selection.php');
 	<div id="simpleModal" class="modal">
             
 		<div class="modal-content">
-                    
+                    <h1 class="title">Hi, <?php echo $_SESSION['user']->getFName(); ?></h1>
                     <span class="closeBtn">&times;</span>
                     <div id="jsname"></div>
+
                         <form action="index.php" method="post">
                             <select id="test" onchange="showUser(this.value)" autofocus>
                                 <option value="">Select a subject:</option>
                             <?php foreach ($subjects as $s) : ?>
-                                <option value="<?php echo htmlspecialchars($s->getSubID() . "," . $s->getSubName()); ?>"><?php echo htmlspecialchars($s->getSubName()); ?></option>
+                                <option value="<?php echo htmlspecialchars($s->getSubID()) . "," . $_SESSION['user']->getUserID(); ?>"><?php echo htmlspecialchars($s->getSubName()); ?></option>
                             <?php endforeach; ?>
                             </select>
                         </form>

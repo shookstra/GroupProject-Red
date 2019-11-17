@@ -54,10 +54,6 @@ switch ($action) {
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/calendar.php');
         die();
         break;
-    case '':
-        include '';
-        die();
-        break;
     case 'profile':
         // tutor app call may not go here ?
         //$tutorApps = appointment_db::get_tutor_Appointments($tutorID);

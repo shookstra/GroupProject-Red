@@ -1,6 +1,6 @@
 <?php
 class Database {
-    private static $dsn = 'mysql:host=localhost;dbname=groupproject';
+    private static $dsn = 'mysql:host=localhost;dbname=group_project';
     private static $username = 'root';
     private static $password = '';
     private static $db;
@@ -14,7 +14,7 @@ class Database {
                 self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (Exception $e) {
                 $error_message = $e->getMessage();
-                include('model/database_error.php');
+                include('models/database_error.php');
                 exit();
             }
         }
