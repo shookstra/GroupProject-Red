@@ -4,10 +4,12 @@ class Database {
     private static $username = 'root';
     private static $password = '';
     private static $db;
-    
-    private function __construct() {}
-    
-    public static function getDB() {
+
+    private function __construct()
+    { }
+
+    public static function getDB()
+    {
         if (!isset(self::$db)) {
             try {
                 self::$db = new PDO(self::$dsn, self::$username, self::$password);
@@ -20,6 +22,4 @@ class Database {
         }
         return self::$db;
     }
-
 }
-?>

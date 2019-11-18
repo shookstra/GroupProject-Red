@@ -29,8 +29,6 @@ function openModal(e){
     modal.style.display = 'block';
     e.preventDefault();
     
-    
-    
 }
 
 //function to close modal
@@ -53,6 +51,7 @@ function outsideClick(e){
 
 function showUser(str) {
     var testDay = document.getElementById("jsname").innerHTML;
+    
     if (str == "") {
         document.getElementById("tutor_schedule").innerHTML = "";//this is where it prints to
         return;

@@ -17,6 +17,71 @@
    $appoint_info_date = $appoint_info[4];
    $appoint_info_time = $appoint_info[5];
    $appoint_info_fName = $appoint_info[6];
+   $appoint_info_year = $appoint_info[7];
+   
+   switch($appoint_info_date_month) {
+       case 'January':
+           $appointment_month = 1;
+           die();
+           break;
+       
+       case "February":
+           $appointment_month = 2;
+           die();
+           break;
+       
+       case 'March':
+           $appointment_month = 3;
+           die();
+           break;
+       
+       case 'April':
+           $appointment_month = 4;
+           die();
+           break;
+       
+       case 'May':
+           $appointment_month = 5;
+           die();
+           break;
+       
+       case 'June':
+           $appointment_month = 6;
+           die();
+           break;
+       
+       case 'July':
+           $appointment_month = 7;
+           die();
+           break;
+       
+       case "August":
+           $appointment_month = 8;
+           die();
+           break;
+       
+       case 'September':
+           $appointment_month = 9;
+           die();
+           break;
+       
+       case 'October':
+           $appointment_month = 10;
+           die();
+           break;
+       
+       case 'November':
+           $appointment_month = 11;
+           die();
+           break;
+       
+       case 'December':
+           $appointment_month = 12;
+           die();
+           break;
+       
+
+   }
    
    echo "<ul>";
     echo "<li>Appointment Month: ". $appoint_info_date_month ."</li>";
@@ -28,7 +93,7 @@
     echo "<li>User ID: " . $appoint_info_userID . "</li><br>"; 
     echo "</ul>";
     
-    echo "<button type='submit' value=" . $appoint_info_subID . "," . $appoint_info_userID . "," . $appoint_info_tutorID . "," . $appoint_info_date_month . $appoint_info_date . "," . $appoint_info_time . "," . $details . "," . $meetType . " onclick='submit_appointment(this.value)' >Accept</button>"
+    echo "<button type='submit' value=" . $appoint_info_subID . "," . $appoint_info_userID . "," . $appoint_info_tutorID . "," .$appoint_info_year . $appointment_month . $appoint_info_date . "," . $appoint_info_time . "," . $details . "," . $meetType . " onclick='submit_appointment(this.value)' >Accept</button>"
 ?>
 </body>
 </html>

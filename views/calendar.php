@@ -119,11 +119,11 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_selection.php');
 				{
 					$class = ' class = "day_num" ';  //Mark this day - we need to fill this box with red color (using CSS)
 					$id = ' class = "modalBtn" '; // sets the modalBtn id for the JS
-                                        $setDay = 'setDay()';
+                                       
 
 				} else {
 					$class = '';
-                                        $setDay = 'setDay()';
+                                       
 					$id = ' class = "modalBtn" '; // sets the modalBtn id for the JS
 				}
 
@@ -151,8 +151,16 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_selection.php');
 						$day = 'Sat';
 						break;
 				}
+                                
+                                if($day_num <= $today['mday'] && $thismonth == $month && $thisyear == $year) {
+                                    
+                                    echo "<td $class id = $day$day_num><button $id  name = $day,$title,$day_num,$year disabled>$day_num</button></td>";  //Print day's number, sets the class for the modal and also sets a name for the button for use in the modal
 
-				echo "<td $class id = $day$day_num><button $id  name = $day,$title,$day_num >$day_num</button></td>";  //Print day's number, sets the class for the modal and also sets a name for the button for use in the modal
+                                } else {
+                        
+				echo "<td $class id = $day$day_num><button $id  name = $day,$title,$day_num,$year >$day_num</button></td>";  //Print day's number, sets the class for the modal and also sets a name for the button for use in the modal
+                                }            
+                                
 
 				$day_num++;
 				$day_count++;
@@ -200,10 +208,10 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_selection.php');
 	<div id="simpleModal" class="modal">
             
 		<div class="modal-content">
-                    <h1 class="title">Hi, <?php echo $_SESSION['user']->getFName(); ?></h1>
+                    
                     <span class="closeBtn">&times;</span>
                     <div id="jsname"></div>
-
+                    <h1 class="title">Hi, <?php echo $_SESSION['user']->getFName(); ?></h1>
                         <form action="index.php" method="post">
                             <select id="test" onchange="showUser(this.value)" autofocus>
                                 <option value="">Select a subject:</option>
@@ -219,7 +227,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_selection.php');
                 </div>
 	</div>
 
-	<script src="<?php $_SERVER['DOCUMENT_ROOT'] ?> /GroupProject/calendar.js"></script>
+	<script src="<?php $_SERVER['DOCUMENT_ROOT'] ?> /groupProject/calendar.js"></script>
 </body>
 
 </html>

@@ -16,6 +16,7 @@ $jsInformation = explode(",",$testDay);
 $dayPulled = $jsInformation[0];//day of week
 $monthPulled = $jsInformation[1];//month clicked
 $datePulled = $jsInformation[2];//date clicked
+$yearPulled = $jsInformation[3];
 
 $con = mysqli_connect('localhost','root','','group_project');//connection to db, copy what is in database.php
 if (!$con) {

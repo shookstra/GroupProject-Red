@@ -6,6 +6,9 @@ require_once('models/appointment.php');
 require_once('models/appointment_db.php');
 require_once('models/tutor.php');
 require_once('models/tutor_db.php');
+require_once('models/subject_db.php');
+require_once('models/subject.php');
+require_once('models/tutor_availability.php');
 
 session_start();
 
@@ -16,7 +19,7 @@ if (!empty($_POST['action'])) {
 } else if (!empty($_GET['action'])) {
     $action = $_GET['action'];
 } else if (empty($_SESSION['user'])) {
-    $action = 'signUp';
+    $action = 'login';
 }
 
 switch ($action) {
@@ -24,8 +27,9 @@ switch ($action) {
         if (empty($_SESSION['user'])) {
             $registrationErrors = [];
             array_push($registrationErrors, "You need to sign in to access scheduling");
-            include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/signUp.php');
+            include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/login.php');
         } else {
+            $tutors = tutor_db::select_all_Tutors();
             $stuApps = appointment_db::get_student_Appointments($_SESSION['user']->getUserID());
             include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/home.php');
         }
@@ -54,6 +58,19 @@ switch ($action) {
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/calendar.php');
         die();
         break;
+    case 'editAppointment':
+        $appointmentID = filter_input(INPUT_POST, "appointmentID");
+        echo 'EDIT APPOINTMENT: ' . $appointmentID;
+        // include '';
+        die();
+        break;
+    case 'viewTutorProfile':
+        $tutor = tutor_db::get_tutor_by_id(filter_input(INPUT_GET, 'tutorID'));
+        $availability = tutor_db::get_tutor_availablity_by_ID($tutor->getTutorID());
+        include 'views/tutorProfile.php';
+        die();
+        break;
+
     case 'profile':
         // tutor app call may not go here ?
         //$tutorApps = appointment_db::get_tutor_Appointments($tutorID);
