@@ -20,7 +20,7 @@
     $date_info_day = $jsInformation2[0];//day of week
     $date_info_month = $jsInformation2[1];//month clicked
     $date_info_date = $jsInformation2[2];//date clicked
-    $date_info_year = $jsInformation[3];//year pulled
+    $date_info_year = $jsInformation2[3];//year pulled
     
     
     echo "<ul>";

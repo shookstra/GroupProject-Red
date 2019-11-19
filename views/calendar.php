@@ -154,11 +154,11 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_selection.php');
                                 
                                 if($day_num <= $today['mday'] && $thismonth == $month && $thisyear == $year) {
                                     
-                                    echo "<td $class id = $day$day_num><button $id  name = $day,$title,$day_num,$year disabled>$day_num</button></td>";  //Print day's number, sets the class for the modal and also sets a name for the button for use in the modal
+                                    echo "<td $class id = $day$day_num><button disabled>$day_num</button></td>";  //Print day's number, sets the class for the modal and also sets a name for the button for use in the modal, also disables the button
 
                                 } else {
                         
-				echo "<td $class id = $day$day_num><button $id  name = $day,$title,$day_num,$year >$day_num</button></td>";  //Print day's number, sets the class for the modal and also sets a name for the button for use in the modal
+				echo "<td $class id = $day$day_num><button $id  name = $day,$month,$day_num,$year >$day_num</button></td>";  //Print day's number, sets the class for the modal and also sets a name for the button for use in the modal
                                 }            
                                 
 
@@ -211,12 +211,12 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_selection.php');
                     
                     <span class="closeBtn">&times;</span>
                     <div id="jsname"></div>
-                    <h1 class="title">Hi, <?php echo $_SESSION['user']->getFName(); ?></h1>
+                    <h1 class="title">Hi, <?php echo $_SESSION['user']->getFName(); ?></h1><!--prints Users name on the top of Modal-->
                         <form action="index.php" method="post">
                             <select id="test" onchange="showUser(this.value)" autofocus>
                                 <option value="">Select a subject:</option>
                             <?php foreach ($subjects as $s) : ?>
-                                <option value="<?php echo htmlspecialchars($s->getSubID()) . "," . $_SESSION['user']->getUserID(); ?>"><?php echo htmlspecialchars($s->getSubName()); ?></option>
+                                <option value="<?php echo htmlspecialchars($s->getSubID()) . "," . $_SESSION['user']->getUserID(); ?>"><?php echo htmlspecialchars($s->getSubName()); ?></option><!--puts subID and userID into the button to carry to the next pages-->
                             <?php endforeach; ?>
                             </select>
                         </form>
