@@ -215,7 +215,7 @@ nav ul {
 }
 
 .nav-active {
-  transform: translateX(0%);
+  transform: translateX(50%);
 }
 
 .toggle .line1 {
@@ -321,6 +321,10 @@ nav ul {
     width: 50%;
     transform: translateX(100%);
     transition: transform 0.5s ease-in;
+  }
+
+  .nav-active {
+    transform: translateX(0%);
   }
 
   .nav-links li {
