@@ -171,6 +171,24 @@ class tutor_db
         $statement->closeCursor();
         return $tutor_available;
     }
+    
+    //Used to pull tutors and their availability for the calendar. DO NOT DELETE
+    public static function get_tutors_by_availability() {
+        $db = Database::getDB();
+        $query = 'select tutor.tutorID, tutor.fName, tutor.lName, tutor_availability.start, tutor_availability.end, tutor_availability.day
+                  from subjects join tutorsubject on subjects.subID = tutorsubject.subID 
+			  join tutor on tutorsubject.tutorID = tutor.tutorID
+			  join tutor_availability on tutor.tutorID = tutor_availability.tutorID';
+        $statement = $db->prepare($query);
+        $statement->execute();
+        $rows = $statement->fetchAll();
+        $tutor_available = [];
+        foreach ($rows as $value) {
+            $tutor_available[$value['tutorID']] = new tutor_availability($value['tutorID'], $value['fName'], $value['lName'], $value['start'], $value['end'], $value['day']);
+        }
+        $statement->closeCursor();
+        return $tutor_available;
+    }
 
     // delete tutor from tutor table
     public static function deleteTutor($tutorID)

@@ -29,8 +29,6 @@ function openModal(e){
     modal.style.display = 'block';
     e.preventDefault();
     
-    
-    
 }
 
 //function to close modal
@@ -51,11 +49,9 @@ function outsideClick(e){
     
 }
 
-
-
 function showUser(str) {
     var testDay = document.getElementById("jsname").innerHTML;
- 
+    
     if (str == "") {
         document.getElementById("tutor_schedule").innerHTML = "";//this is where it prints to
         return;
@@ -82,7 +78,6 @@ function showUser(str) {
 
 function showAppointment(btn){
     var testDay = document.getElementById("jsname").innerHTML;
-    
     if (btn == "") {
         document.getElementById("tutor_schedule").innerHTML = "";//this is where it prints to
         return;
@@ -107,7 +102,60 @@ function showAppointment(btn){
     }
 }
 
-function setday(){
-    var sendDay = e.srcElement.getAttribute('name');
+function getTextArea(send) {
+  var meetType = document.getElementById("meetTypeRadio").value;
+  var details = document.getElementById("details").value;
+  
+  if (send == "") {
+        document.getElementById("tutor_schedule").innerHTML = "";//this is where it prints to
+        return;
+    } else {
+        
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("tutor_schedule").innerHTML = this.responseText;
+                
+            }
+        };
+        xmlhttp.open("GET","models/appointment_information.php?send="+send+"&details="+details+"&meetType="+meetType, true);//url string that is used to set up the query/getuser.php is the name of the php file that the information is printed from/will need to change to a POST instead of a get
+        xmlhttp.send();
+    }
+  
 }
+
+function submit_appointment(appointment){
+    if (appointment == "") {
+        document.getElementById("tutor_schedule").innerHTML = "";//this is where it prints to
+        return;
+    } else {
+        
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("tutor_schedule").innerHTML = this.responseText;
+                
+            }
+        };
+        xmlhttp.open("GET","models/appointment_information.php?appointment="+appointment, true);//url string that is used to set up the query/getuser.php is the name of the php file that the information is printed from/will need to change to a POST instead of a get
+        xmlhttp.send();
+    }
+}
+
+
+
 

@@ -1,7 +1,6 @@
 <?php
-class Database
-{
-    private static $dsn = 'mysql:host=localhost;dbname=groupproject';
+class Database {
+    private static $dsn = 'mysql:host=localhost;dbname=group_project';
     private static $username = 'root';
     private static $password = '';
     private static $db;

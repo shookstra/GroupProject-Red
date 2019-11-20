@@ -70,6 +70,7 @@ switch ($action) {
         include 'views/tutorProfile.php';
         die();
         break;
+
     case 'profile':
         // tutor app call may not go here ?
         //$tutorApps = appointment_db::get_tutor_Appointments($tutorID);
