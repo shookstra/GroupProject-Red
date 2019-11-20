@@ -232,18 +232,25 @@ nav ul {
 
 .availabilityTable {
   border-collapse: collapse;
+  width: 300px;
+  margin-bottom: 15px;
 }
 
 .availabilityTable td {
-  padding: 5px;
-  /* border: 1px solid red; */
+  padding: 10px;
+  text-align: left;
 }
+
 .availabilityTable tr:nth-child(even) {
   background-color: rgba(44, 115, 182, 0.2);
 }
 
+.availabilityTable tr:nth-child(odd) {
+  background-color: rgb(245, 245, 245);
+}
+
 .availabilityTable th {
-  text-align: center;
+  text-align: left;
   background-color: rgb(44, 115, 182);
   color: white;
   padding: 5px;
