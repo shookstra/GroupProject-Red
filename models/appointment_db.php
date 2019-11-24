@@ -106,7 +106,7 @@ class appointment_db
     {
         $db = Database::getDB();
 
-        $query = 'INSERT into appointment (subID, userID, tutorID, appDate, appTime, details, $meetType)
+        $query = 'INSERT into appointment (subID, userID, tutorID, appDate, appTime, details, meetType)
          VALUES
          (:subID, :userID, :tutorID, :appDate, :appTime, :details, :meetType)';
 
@@ -142,22 +142,20 @@ class appointment_db
     {
         $db = Database::getDB();
 
-        $query = 'SELECT appTime
-            from appointment
-            where tutorID = :tutorID && appDate = :appDate
-            group by tutorID';
+        $query = 'SELECT appTime from appointment where tutorID = :tutorID && appDate = :appDate';
 
         $statement = $db->prepare($query);
         $statement->bindValue(':tutorID', $tutorID);
         $statement->bindValue(':appDate', $appDate);
         $statement->execute();
         $row = $statement->fetchAll();
-
+        $appTime = [];
+        
         foreach ($row as $value) {
-            $appointment[$value['tutorID']] = new appointment($value['tutorID'], $value['appTime']);
+            array_push($appTime, $value['appTime']);
         }
 
         $statement->closeCursor();
-        return $appointment;
+        return $appTime;
     }
 }
