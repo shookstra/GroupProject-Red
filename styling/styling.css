@@ -103,6 +103,21 @@ nav ul {
   box-shadow: 0px 0px 5px 0 rgba(0, 0, 0, 0.3);
 }
 
+.sideContent a {
+  color: black;
+  text-decoration: none;
+  transition: color 200ms ease-in;
+}
+
+.sideContent a:hover,
+.sideContent a:focus {
+  color: rgb(44, 115, 182);
+}
+
+.sideContent ul {
+  list-style: none;
+}
+
 .fa-chalkboard-teacher {
   margin-right: 10px;
   transform: scale(1.5, 1.5);
@@ -130,7 +145,7 @@ nav ul {
   justify-content: center;
   height: 75px;
   padding: 5px;
-
+  transition: background-color 300ms ease-out;
   /* border: 1px solid red; */
 }
 
@@ -199,6 +214,48 @@ nav ul {
   margin-bottom: 15px;
 }
 
+.nav-active {
+  transform: translateX(50%);
+}
+
+.toggle .line1 {
+  transform: rotate(-45deg) translate(-5px, 5px);
+}
+
+.toggle .line2 {
+  opacity: 0;
+}
+
+.toggle .line3 {
+  transform: rotate(45deg) translate(-5px, -5px);
+}
+
+.availabilityTable {
+  border-collapse: collapse;
+  width: 300px;
+  margin-bottom: 15px;
+}
+
+.availabilityTable td {
+  padding: 10px;
+  text-align: left;
+}
+
+.availabilityTable tr:nth-child(even) {
+  background-color: rgba(44, 115, 182, 0.2);
+}
+
+.availabilityTable tr:nth-child(odd) {
+  background-color: rgb(245, 245, 245);
+}
+
+.availabilityTable th {
+  text-align: left;
+  background-color: rgb(44, 115, 182);
+  color: white;
+  padding: 5px;
+}
+
 @media screen and (max-width: 1024px) {
   .nav-links {
     width: 50%;
@@ -235,6 +292,11 @@ nav ul {
   nav {
     justify-content: space-between;
     padding: 0 20px;
+    font-size: 12px;
+  }
+
+  nav h3 {
+    font-size: 20px;
   }
 
   .wrapper {
@@ -261,6 +323,10 @@ nav ul {
     transition: transform 0.5s ease-in;
   }
 
+  .nav-active {
+    transform: translateX(0%);
+  }
+
   .nav-links li {
     opacity: 0;
   }
@@ -279,10 +345,6 @@ nav ul {
   }
 }
 
-.nav-active {
-  transform: translateX(0%);
-}
-
 @keyframes navLinkFade {
   from {
     opacity: 0;
@@ -293,16 +355,4 @@ nav ul {
     opacity: 1;
     transform: translateX(0px);
   }
-}
-
-.toggle .line1 {
-  transform: rotate(-45deg) translate(-5px, 5px);
-}
-
-.toggle .line2 {
-  opacity: 0;
-}
-
-.toggle .line3 {
-  transform: rotate(45deg) translate(-5px, -5px);
 }

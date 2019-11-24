@@ -106,7 +106,7 @@ class appointment_db
     {
         $db = Database::getDB();
 
-        $query = 'INSERT into appointment (subID, userID, tutorID, appDate, appTime, details, $meetType)
+        $query = 'INSERT into appointment (subID, userID, tutorID, appDate, appTime, details, meetType)
          VALUES
          (:subID, :userID, :tutorID, :appDate, :appTime, :details, :meetType)';
 
@@ -136,5 +136,26 @@ class appointment_db
         $statement->bindValue(':appID', $appID);
         $statement->execute();
         $statement->closeCursor();
+    }
+    
+    public static function get_tutor_Times($tutorID, $appDate)//use this to check for times to disable button on tutor availability to select time
+    {
+        $db = Database::getDB();
+
+        $query = 'SELECT appTime from appointment where tutorID = :tutorID && appDate = :appDate';
+
+        $statement = $db->prepare($query);
+        $statement->bindValue(':tutorID', $tutorID);
+        $statement->bindValue(':appDate', $appDate);
+        $statement->execute();
+        $row = $statement->fetchAll();
+        $appTime = [];
+        
+        foreach ($row as $value) {
+            array_push($appTime, $value['appTime']);
+        }
+
+        $statement->closeCursor();
+        return $appTime;
     }
 }
