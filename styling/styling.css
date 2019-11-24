@@ -215,7 +215,7 @@ nav ul {
 }
 
 .nav-active {
-  transform: translateX(0%);
+  transform: translateX(50%);
 }
 
 .toggle .line1 {
@@ -232,18 +232,25 @@ nav ul {
 
 .availabilityTable {
   border-collapse: collapse;
+  width: 300px;
+  margin-bottom: 15px;
 }
 
 .availabilityTable td {
-  padding: 5px;
-  /* border: 1px solid red; */
+  padding: 10px;
+  text-align: left;
 }
+
 .availabilityTable tr:nth-child(even) {
   background-color: rgba(44, 115, 182, 0.2);
 }
 
+.availabilityTable tr:nth-child(odd) {
+  background-color: rgb(245, 245, 245);
+}
+
 .availabilityTable th {
-  text-align: center;
+  text-align: left;
   background-color: rgb(44, 115, 182);
   color: white;
   padding: 5px;
@@ -314,6 +321,10 @@ nav ul {
     width: 50%;
     transform: translateX(100%);
     transition: transform 0.5s ease-in;
+  }
+
+  .nav-active {
+    transform: translateX(0%);
   }
 
   .nav-links li {
