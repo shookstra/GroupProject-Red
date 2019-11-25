@@ -21,9 +21,9 @@
                 <?php endforeach ?>
             </table>
             <h2>Subjects Available: </h2>
-            <ul>
-                <?php foreach ($availability as $available) : ?>
-                    <?php echo '<li>' . $available->getStart() . ' - ' . $available->getEnd() . '</li>'; ?>
+            <ul class="tutor-subjects">
+                <?php foreach ($subjects as $subject) : ?>
+                    <?php echo '<li>' . $subject['subName'] . '</li>' ?>
                 <?php endforeach ?>
             </ul>
         </div>

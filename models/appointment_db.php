@@ -137,8 +137,8 @@ class appointment_db
         $statement->execute();
         $statement->closeCursor();
     }
-    
-    public static function get_tutor_Times($tutorID, $appDate)//use this to check for times to disable button on tutor availability to select time
+
+    public static function get_tutor_Times($tutorID, $appDate) //use this to check for times to disable button on tutor availability to select time
     {
         $db = Database::getDB();
 

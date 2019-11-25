@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=PT+Sans&display=swap");
 
+:root {
+  --main-bg-color: rgb(44, 115, 182);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -17,7 +21,7 @@ nav {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: rgb(44, 115, 182);
+  background-color: var(--main-bg-color);
   min-height: 8vh;
 }
 
@@ -91,7 +95,7 @@ nav ul {
   width: 70%;
   margin: 0 10px;
   max-height: 400px;
-  box-shadow: 0px 0px 10px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05), 0 8px 10px rgba(0, 0, 0, 0.2);
 }
 
 .sideContent {
@@ -99,8 +103,8 @@ nav ul {
   flex: 1;
   height: 50vh;
   border-radius: 6px;
-  background-color: #eee;
-  box-shadow: 0px 0px 5px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05), 0 8px 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .sideContent a {
@@ -111,7 +115,7 @@ nav ul {
 
 .sideContent a:hover,
 .sideContent a:focus {
-  color: rgb(44, 115, 182);
+  color: var(--main-bg-color);
 }
 
 .sideContent ul {
@@ -121,6 +125,11 @@ nav ul {
 .fa-chalkboard-teacher {
   margin-right: 10px;
   transform: scale(1.5, 1.5);
+}
+
+.fa-calendar-check,
+.fa-candy-cane {
+  font-size: 24px;
 }
 
 .sidebar {
@@ -150,7 +159,7 @@ nav ul {
 }
 
 .sidebar-item i {
-  color: rgb(44, 115, 182);
+  color: var(--main-bg-color);
   font-size: 36px;
   margin-bottom: 3px;
 }
@@ -196,18 +205,48 @@ nav ul {
 }
 
 .appointments {
-  flex: 3;
+  flex: 2;
   display: flex;
   flex-direction: column;
   margin-right: 20px;
 }
 
 .appointment {
-  background-color: rgb(238, 238, 238);
-  border-radius: 6px;
-  margin-bottom: 10px;
+  border-radius: 0 0 3px 3px;
+  margin-bottom: 20px;
   padding: 10px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05), 0 8px 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.appointment-button {
+  margin-top: 15px;
+  padding: 10px 15px;
+  border: none;
+  background-color: #eee;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 250ms, color 250ms;
+  border-radius: 6px;
+}
+
+.appointment-button:hover {
+  background-color: var(--main-bg-color);
+  color: white;
+}
+
+.appointment-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  margin: 0;
+  padding: 10px 15px;
+  background-color: var(--main-bg-color);
+  color: white;
+  width: 100%;
+  border-radius: 3px 3px 0 0;
+  font-size: 18px;
 }
 
 .title {
@@ -251,9 +290,56 @@ nav ul {
 
 .availabilityTable th {
   text-align: left;
-  background-color: rgb(44, 115, 182);
+  background-color: var(--main-bg-color);
   color: white;
   padding: 5px;
+}
+
+.add-holiday-form {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05), 0 8px 10px rgba(0, 0, 0, 0.2);
+}
+
+.add-holiday-form input[type="date"] {
+  border: none;
+  background-color: #eee;
+  padding: 5px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.add-holiday-form-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 15px;
+  color: white;
+  background-color: var(--main-bg-color);
+  border-radius: 3px 3px 0 0;
+}
+
+.add-holiday-form-content {
+  padding: 10px 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-row-gap: 10px;
+  justify-content: center;
+}
+
+.info {
+  background-color: #eee;
+  padding: 10px;
+  width: 100%;
+  color: rgb(50, 50, 50);
+  text-align: center;
+  grid-column: 1 / -1;
+  border-radius: 6px;
+  font-size: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.tutor-subjects {
+  list-style: none;
 }
 
 @media screen and (max-width: 1024px) {
@@ -314,7 +400,7 @@ nav ul {
     right: 0px;
     height: 92vh;
     top: 8vh;
-    background-color: rgb(44, 115, 182);
+    background-color: var(--main-bg-color);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -342,6 +428,18 @@ nav ul {
   .fa-chalkboard-teacher,
   .fas {
     display: none;
+  }
+
+  .add-holiday-form-content {
+    margin: 0 auto;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 110px 120px;
+    grid-row-gap: 5px;
+  }
+
+  .appointments {
+    margin: 0 0 20px 0;
   }
 }
 
