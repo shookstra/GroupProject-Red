@@ -35,6 +35,7 @@ function openModal(e){
 function closeModal(){
 
     modal.style.display = 'none';
+    document.getElementById("tutor_schedule").innerHTML = "";
 }
 
 
@@ -44,7 +45,7 @@ function outsideClick(e){
     if(e.target == modal){
 
     modal.style.display = 'none';
-    
+    document.getElementById("tutor_schedule").innerHTML = "";
     }
     
 }

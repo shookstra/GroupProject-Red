@@ -158,4 +158,24 @@ class appointment_db
         $statement->closeCursor();
         return $appTime;
     }
+    
+    public static function select_all_holidays()//to pull all dates from holiday table to check when creating the calendar
+    {
+        $db = Database::getDB();
+
+        $query = 'SELECT date from holidays';
+
+        $statement = $db->prepare($query);
+        $statement->execute();
+        $row = $statement->fetchAll();
+        $holidayDates = [];
+        
+        foreach ($row as $value) {
+            array_push($holidayDates, $value['date']);
+        }
+
+        $statement->closeCursor();
+        return $holidayDates;
+    }
+    
 }

@@ -40,11 +40,12 @@
     $rowcount = mysqli_num_rows($result); //number of values in the query
 
 
+
     if ($rowcount == 0) {
         echo "<p> Sorry no tutors available </p>";
     } else {
         echo "<center><p>Each session will be 30 min</p></center>";
-        echo "<center><strong><p>*Make sure to pay attention to the tutors city. You can schedule a zoom meeting for a tutor in another city, but an in person meeting will have to be in your cities tutoring center.</p></strong></center>";
+        echo "<center><strong><p>*Make sure to pay attention to the tutors city. You can schedule a ZOOM meeting for a tutor in another city, but an in person meeting will have to be in your cities tutoring center.</p></strong></center>";
         echo "<table>
 <tr>
 <th>First</th>
@@ -54,6 +55,7 @@
 </tr>";
         
         $appTime = [];
+        $tutor_test = [];
         
         while ($row = mysqli_fetch_array($result)) {
 
@@ -63,13 +65,13 @@
             $tutor_fname = $row['fName'];
             $tutorID = $row['tutorID'];
             //$check_times = appointment_db::get_tutor_times($tutorID, $appDate);
-            
+            //$tutorInfo = appointment_db::get_tutor_Times($tutorID, $appDate);
             $tutorInfo = array('tutorID'=>$tutorID, 'appTime'=>appointment_db::get_tutor_Times($tutorID, $appDate));
             array_push($appTime, $tutorInfo);
             
             $running_tutor = array_column($appTime, 'tutorID');
-            $running_appTime = array_column($appTime, 'appTime');
-			
+            $running_appTime = array_column($appTime, 'appTime', 'tutorID');
+           
 
             echo "<tr>";
             echo "<td>" . $row['fName'] . "</td>";
@@ -77,54 +79,35 @@
             echo "<td>" . $row['city'] . "</td>";
             for ($i = 0; $i <= $num_sessions; $i++) {
                 
+              
                 $print_time_normal = date( "g:i", strtotime($start_time)+((60*30)*$i) );
-                $print_time_military = date( "H:i", strtotime($start_time)+((60*30)*$i) );
-				
+                $print_time_military = date( "H:i:s", strtotime($start_time)+((60*30)*$i) );
                 
-		echo "<td><button type = 'submit' value = " . $subID . "," . $userID . "," . $tutorID . "," . $print_time_military . "," . $tutor_fname . " onclick='showAppointment(this.value)'>" . $print_time_normal . "</button></td>";
-				
-				
+						
 
-                /* if (!empty($appTime)) { //checks if the $testing variable has anything in it
-                    if (strpos($timeStr, ".") !== false) { // checks if $timestr has a "." in it
-                        $timePrint = intval($timeStr) . ":30"; //changes the ".5" to :30
-                        if($running_tutor == $tutorID && in_array($timePrint, $running_appTime, true)) {
-                            echo "<td><button disabled>" . $timePrint . "</button>";
-                           
+                 if (!empty($appTime)) { //checks if the $testing variable has anything in it
+                   
+                       if(in_array($tutorID, $running_tutor)){
+                          
+                          if(!in_array($print_time_military, $running_appTime[$tutorID])) {
+                            
+                            echo "<td><button type = 'submit' value = " . $subID . "," . $userID . "," . $tutorID . "," . $print_time_military . "," . $tutor_fname . " onclick='showAppointment(this.value)'>" . $print_time_normal . "</button></td>";
+                            } else {
+                            echo "<td><button disabled>" . $print_time_normal . "</button>";
+                            }   
                         } else {
-                            echo "<td><button type = 'submit' value = " . $subID . "," . $userID . "," . $tutorID . "," . $timePrint . "," . $tutor_fname . " onclick='showAppointment(this.value)'>" . $timePrint . "</button></td>";
+                            echo "<td><button type = 'submit' value = " . $subID . "," . $userID . "," . $tutorID . "," . $print_time_military . "," . $tutor_fname . " onclick='showAppointment(this.value)'>" . $print_time_normal . "</button></td>";
                         }
-                    } else {
-                        if($running_tutor == $tutorID && in_array($timeStr, $running_appTime, true))  {
-                            echo "<td><button disabled>" . $timeStr . "</button>";
-                    } else {
-                            echo "<td><button type = 'submit' value = " . $subID . "," . $userID . "," . $tutorID . "," . $timeStr . "," . $tutor_fname . " onclick='showAppointment(this.value)'>" . $timeStr . "</button></td>";
-
-                    }
-                    }
                 } else {
-                    if (strpos($timeStr, ".") !== false) {
-			$timePrint = intval($timeStr) . ":30";
-			echo "<td><button type = 'submit' value = " . $subID . "," . $userID . "," . $tutorID . "," . $timePrint . "," . $tutor_fname . " onclick='showAppointment(this.value)'>" . $timePrint . "</button></td>";
-                    } else {
-                        echo "<td><button type = 'submit' value = " . $subID . "," . $userID . "," . $tutorID . "," . $timeStr . "," . $tutor_fname . " onclick='showAppointment(this.value)'>" . $timeStr . "</button></td>";
-                    }
-                }
-                var_dump($running_tutor);
-                var_dump($num_sessions);
-                var_dump($running_appTime); */
+                    echo "<td><button type = 'submit' value = " . $subID . "," . $userID . "," . $tutorID . "," . $print_time_military . "," . $tutor_fname . " onclick='showAppointment(this.value)'>" . $print_time_normal . "</button></td>";
+
                 }
             }
-            $end_time = 0;
-            $start_time = 0;
-            $num_sessions = 0;
-            $timeStr = 0;
-            $timePrint = "";
-
             echo "</tr>";
         }
+    }
         echo "</table>";
-        var_dump($appTime);
+
     
     mysqli_close($con);
     ?>

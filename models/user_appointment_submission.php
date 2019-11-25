@@ -38,6 +38,7 @@ $result = mysqli_query($con, $sql);//query result
     var_dump($userID);
     var_dump($tutorID);
     var_dump($appDate);
+    var_dump($appoint_time);
     var_dump($details);
     var_dump($meetType);
 if($result){
