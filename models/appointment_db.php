@@ -137,27 +137,25 @@ class appointment_db
         $statement->execute();
         $statement->closeCursor();
     }
-    
-    public static function get_tutor_Times($tutorID, $appDate)//use this to check for times to disable button on tutor availability to select time
+
+    public static function get_tutor_Times($tutorID, $appDate) //use this to check for times to disable button on tutor availability to select time
     {
         $db = Database::getDB();
 
-        $query = 'SELECT appTime
-            from appointment
-            where tutorID = :tutorID && appDate = :appDate
-            group by tutorID';
+        $query = 'SELECT appTime from appointment where tutorID = :tutorID && appDate = :appDate';
 
         $statement = $db->prepare($query);
         $statement->bindValue(':tutorID', $tutorID);
         $statement->bindValue(':appDate', $appDate);
         $statement->execute();
         $row = $statement->fetchAll();
+        $appTime = [];
 
         foreach ($row as $value) {
-            $appointment[$value['tutorID']] = new appointment($value['tutorID'], $value['appTime']);
+            array_push($appTime, $value['appTime']);
         }
 
         $statement->closeCursor();
-        return $appointment;
+        return $appTime;
     }
 }
