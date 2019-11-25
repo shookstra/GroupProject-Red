@@ -26,12 +26,12 @@
 
 
     $appDate = "$yearPulled" . '-' . "$monthPulled" . '-' . "$datePulled";
-    $con = mysqli_connect('localhost', 'root', '', 'group_project'); //connection to db, copy what is in database.php
+    $con = mysqli_connect('localhost', 'root', '', 'groupproject'); //connection to db, copy what is in database.php
     if (!$con) {
         die('Could not connect: ' . mysqli_error($con));
     }
 
-    mysqli_select_db($con, "group_project"); //where the db name goes
+    mysqli_select_db($con, "groupproject"); //where the db name goes
     $sql = "select tutor.tutorID, tutor.fName, tutor.lName, tutor.city, tutor_availability.start, tutor_availability.end, tutor_availability.hours, tutor_availability.day
                   from subjects join tutorsubject on subjects.subID = tutorsubject.subID 
 			  join tutor on tutorsubject.tutorID = tutor.tutorID
@@ -53,10 +53,10 @@
 <th>City</th>
 
 </tr>";
-        
+
         $appTime = [];
         $tutor_test = [];
-        
+
         while ($row = mysqli_fetch_array($result)) {
 
             $end_time = $row['end'];
@@ -66,49 +66,48 @@
             $tutorID = $row['tutorID'];
             //$check_times = appointment_db::get_tutor_times($tutorID, $appDate);
             //$tutorInfo = appointment_db::get_tutor_Times($tutorID, $appDate);
-            $tutorInfo = array('tutorID'=>$tutorID, 'appTime'=>appointment_db::get_tutor_Times($tutorID, $appDate));
+            $tutorInfo = array('tutorID' => $tutorID, 'appTime' => appointment_db::get_tutor_Times($tutorID, $appDate));
             array_push($appTime, $tutorInfo);
-            
+
             $running_tutor = array_column($appTime, 'tutorID');
             $running_appTime = array_column($appTime, 'appTime', 'tutorID');
-           
+
 
             echo "<tr>";
             echo "<td>" . $row['fName'] . "</td>";
             echo "<td>" . $row['lName'] . "</td>";
             echo "<td>" . $row['city'] . "</td>";
             for ($i = 0; $i <= $num_sessions; $i++) {
-                
-              
-                $print_time_normal = date( "g:i", strtotime($start_time)+((60*30)*$i) );
-                $print_time_military = date( "H:i:s", strtotime($start_time)+((60*30)*$i) );
-                
-						
 
-                 if (!empty($appTime)) { //checks if the $testing variable has anything in it
-                   
-                       if(in_array($tutorID, $running_tutor)){
-                          
-                          if(!in_array($print_time_military, $running_appTime[$tutorID])) {
-                            
+
+                $print_time_normal = date("g:i", strtotime($start_time) + ((60 * 30) * $i));
+                $print_time_military = date("H:i:s", strtotime($start_time) + ((60 * 30) * $i));
+
+
+
+                if (!empty($appTime)) { //checks if the $testing variable has anything in it
+
+                    if (in_array($tutorID, $running_tutor)) {
+
+                        if (!in_array($print_time_military, $running_appTime[$tutorID])) {
+
                             echo "<td><button type = 'submit' value = " . $subID . "," . $userID . "," . $tutorID . "," . $print_time_military . "," . $tutor_fname . " onclick='showAppointment(this.value)'>" . $print_time_normal . "</button></td>";
-                            } else {
-                            echo "<td><button disabled>" . $print_time_normal . "</button>";
-                            }   
                         } else {
-                            echo "<td><button type = 'submit' value = " . $subID . "," . $userID . "," . $tutorID . "," . $print_time_military . "," . $tutor_fname . " onclick='showAppointment(this.value)'>" . $print_time_normal . "</button></td>";
+                            echo "<td><button disabled>" . $print_time_normal . "</button>";
                         }
+                    } else {
+                        echo "<td><button type = 'submit' value = " . $subID . "," . $userID . "," . $tutorID . "," . $print_time_military . "," . $tutor_fname . " onclick='showAppointment(this.value)'>" . $print_time_normal . "</button></td>";
+                    }
                 } else {
                     echo "<td><button type = 'submit' value = " . $subID . "," . $userID . "," . $tutorID . "," . $print_time_military . "," . $tutor_fname . " onclick='showAppointment(this.value)'>" . $print_time_normal . "</button></td>";
-
                 }
             }
             echo "</tr>";
         }
     }
-        echo "</table>";
+    echo "</table>";
 
-    
+
     mysqli_close($con);
     ?>
 </body>
