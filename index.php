@@ -69,6 +69,7 @@ switch ($action) {
     case 'viewTutorProfile':
         $tutor = tutor_db::get_tutor_by_id(filter_input(INPUT_GET, 'tutorID'));
         $availability = tutor_db::get_tutor_availablity_by_ID($tutor->getTutorID());
+        $subjects = tutor_db::getSubjects($tutor->getTutorID());
         include 'views/tutorProfile.php';
         die();
         break;

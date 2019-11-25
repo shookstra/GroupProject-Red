@@ -299,6 +299,14 @@ nav ul {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05), 0 8px 10px rgba(0, 0, 0, 0.2);
 }
 
+.add-holiday-form input[type="date"] {
+  border: none;
+  background-color: #eee;
+  padding: 5px;
+  border-radius: 6px;
+  text-align: center;
+}
+
 .add-holiday-form-header {
   display: flex;
   align-items: center;
@@ -311,7 +319,7 @@ nav ul {
 }
 
 .add-holiday-form-content {
-  padding: 20px;
+  padding: 10px 20px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-row-gap: 10px;
@@ -327,6 +335,11 @@ nav ul {
   grid-column: 1 / -1;
   border-radius: 6px;
   font-size: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.tutor-subjects {
+  list-style: none;
 }
 
 @media screen and (max-width: 1024px) {

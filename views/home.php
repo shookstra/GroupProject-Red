@@ -35,13 +35,13 @@
                         <i class="fas fa-candy-cane"></i>
                     </div>
                     <div class="add-holiday-form-content">
+                        <p class="info">This is used for adding days where SCC will be closed.</p>
                         <label for="startDate">Start Date</label>
                         <input type="date" name="startDate">
                         <label for="endDate">End Date</label>
                         <input type="date" name="endDate">
                         <label for="endDate">Mulitple Days</label>
                         <input type="checkbox">
-                        <p class="info">This is used for adding days where SCC will be closed.</p>
                         <input type="submit" class="appointment-button" value="Add Holiday">
                     </div>
                 </form>
