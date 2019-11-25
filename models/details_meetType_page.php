@@ -33,7 +33,7 @@
     echo "<center><p>What do you need help in? *Please let the tutor know what you need help in so they can assist you better</p>";
     echo "<input type='textarea' id='details'></input>";
     echo "<p>What kind of meeting would you like to schedule?(*If the tutor is not on your campus you will have to schedule a Zoom Meeting)</p>";
-    echo "<input type='radio' id='meetTypeRadio' name='meeting' value='inPerson' checked='checked'>In Person Meeting</input><br>";
+    echo "<input type='radio' id='meetTypeRadio' name='meeting' value='inPerson'>In Person Meeting</input><br>";
     echo "<input type='radio' id='meetTypeRadio' name='meeting' value='zoom'>Online Zoom Meeting</input>";
     echo "<button type='submit' value=". $tutor_info_subID . "," . $tutor_info_userID . "," . $tutor_info_ID . "," . $date_info_month . ",". $date_info_date . "," . $tutor_info_time . "," . $tutor_info_fName . "," . $date_info_year ." onclick='getTextArea(this.value)' >Send</button></center>";
     

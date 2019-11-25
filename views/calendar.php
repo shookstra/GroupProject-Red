@@ -53,7 +53,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/head.php')
 				$thismonth = date('m', $date);                          //Get current month
 				$thisyear = date('Y', $date);                           //Get current year
 				$days_in_month = cal_days_in_month(0, $month, $year);   //How many days have each month
-
+                                
 
 				$first_day = mktime(0, 0, 0, $month, 1, $year);
 
@@ -152,17 +152,26 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/head.php')
 							$day = 'Sat';
 							break;
 					}
+                                        
+                                        $date_format = "$year" . '-' . "$month" . '-' . "$day_num";
+                                        $holidays = appointment_db::select_all_holidays();
+                                        
+                                        if(in_array($date_format, $holidays)) {
+                                            
+                                            echo "<td $class id = $day$day_num><button disabled>$day_num</button></td>";  //Print day's number, sets the class for the modal and also sets a name for the button for use in the modal, also disables the button
 
-					if ($day_num <= $today['mday'] && $thismonth == $month && $thisyear == $year) {
-
+                                        } else if (($day_num <= $today['mday'] && $thismonth == $month && $thisyear == $year) || 
+                                                ($month < $thismonth && $thisyear == $year) || 
+                                                ($day == 'Sat') || 
+                                                ($day == 'Sun')){
+                                            
 						echo "<td $class id = $day$day_num><button disabled>$day_num</button></td>";  //Print day's number, sets the class for the modal and also sets a name for the button for use in the modal, also disables the button
-
-					} else {
-
+                                              
+                                        } else {
 						echo "<td $class id = $day$day_num><button $id  name = $day,$month,$day_num,$year >$day_num</button></td>";  //Print day's number, sets the class for the modal and also sets a name for the button for use in the modal
 					}
-
-
+                                        
+                                        //var_dump($holidays);
 					$day_num++;
 					$day_count++;
 
@@ -189,7 +198,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/head.php')
 
 
 
-			<form name="nav_form" method="POST" action="/groupproject/views/calendar.php">
+			<form name="nav_form" method="POST" action="/groupproject/index.php?action=calendar">
 				<div id="inps">
 					<input type="Submit" name="prev" value="<- Previous" class="buttons" onClick="window.location.reload()" />
 					<input type="Submit" name="next" value="Next ->" class="buttons" onClick="window.location.reload()" />
@@ -215,7 +224,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/head.php')
 				<h1 class="title">Hi, <?php echo $_SESSION['user']->getFName(); ?></h1>
 				<!--prints Users name on the top of Modal-->
 				<form action="index.php" method="post">
-					<select id="test" onchange="showUser(this.value)" autofocus>
+					<select id="test" onchange="showUser(this.value)" onclick="showUser(this.value)"autofocus>
 						<option value="">Select a subject:</option>
 						<?php foreach ($subjects as $s) : ?>
 							<option value="<?php echo htmlspecialchars($s->getSubID()) . "," . $_SESSION['user']->getUserID(); ?>"><?php echo htmlspecialchars($s->getSubName()); ?></option>
