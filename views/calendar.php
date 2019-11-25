@@ -116,6 +116,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/head.php')
 
 
 				while ($day_num <= $days_in_month) {
+                                    
 					if ($day_num == $today['mday'] && $thismonth == $month && $thisyear == $year) //if day_num is the current day (and month-year)
 					{
 						$class = ' class = "day_num" ';  //Mark this day - we need to fill this box with red color (using CSS)
@@ -153,9 +154,9 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/head.php')
 							break;
 					}
                                         
-                                        $date_format = "$year" . '-' . "$month" . '-' . "$day_num";
+                                        $date_format = date("Y-m-d", strtotime($year . "-". $month . "-" . $day_num));
                                         $holidays = appointment_db::select_all_holidays();
-                                        
+                                       
                                         if(in_array($date_format, $holidays)) {
                                             
                                             echo "<td $class id = $day$day_num><button disabled>$day_num</button></td>";  //Print day's number, sets the class for the modal and also sets a name for the button for use in the modal, also disables the button
@@ -171,7 +172,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/head.php')
 						echo "<td $class id = $day$day_num><button $id  name = $day,$month,$day_num,$year >$day_num</button></td>";  //Print day's number, sets the class for the modal and also sets a name for the button for use in the modal
 					}
                                         
-                                        //var_dump($holidays);
+                                       
 					$day_num++;
 					$day_count++;
 

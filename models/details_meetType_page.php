@@ -31,7 +31,28 @@
     echo "</ul>";
     
     echo "<center><p>What do you need help in? *Please let the tutor know what you need help in so they can assist you better</p>";
-    echo "<input type='textarea' id='details'></input>";
+    if($tutor_info_subID == 1){
+    echo "<form action='index.php' method='get'>";
+					echo "<select id='details'>";
+					echo "	<option value=''>Need Help In:</option>";
+					echo "	<option value='general'>General</option>";
+                                        echo "  <option value='grammar'>Grammar</option>";
+                                        echo "  <option value='citation'>Citation</option>";
+                                        echo "  <option value='thesis'>Thesis</option>";
+                                        echo "  <option value='writing'>Writing>/option>";
+					echo "</select>";
+				echo "</form>";
+    } else {
+        echo "<form action='index.php' method='get'>";
+					echo "<select id='details'>";
+					echo "	<option value=''>Need Help In:</option>";
+					echo "	<option value='general'>General</option>";
+                                        echo "  <option value='assignment'>Assignment</option>";
+                                        echo "  <option value='theory'>Theory</option>";
+                                        echo "  <option value='studying'>Studying</option>";
+					echo "</select>";
+				echo "</form>";
+    }
     echo "<p>What kind of meeting would you like to schedule?(*If the tutor is not on your campus you will have to schedule a Zoom Meeting)</p>";
     echo "<input type='radio' id='meetTypeRadio' name='meeting' value='inPerson'>In Person Meeting</input><br>";
     echo "<input type='radio' id='meetTypeRadio' name='meeting' value='zoom'>Online Zoom Meeting</input>";
