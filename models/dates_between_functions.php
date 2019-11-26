@@ -1,5 +1,9 @@
 <?php 
   
+$start = filter_input(INPUT_POST, 'date');
+$end = filter_input(INPUT_POST, 'date');
+
+$date_range = getDatesFromRange($start, $end);
 // Function to get all the dates in given range 
 function getDatesFromRange($start, $end, $format = 'Y-m-d') { 
       
@@ -25,7 +29,7 @@ function getDatesFromRange($start, $end, $format = 'Y-m-d') {
 } 
   
 // Function call with passing the start date and end date 
-$Date = getDatesFromRange('2010-10-01', '2010-10-05'); 
+//$Date = getDatesFromRange('2010-10-01', '2010-10-05'); 
   
 var_dump($Date); 
   

@@ -152,14 +152,8 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/head.php')
 							$day = 'Sat';
 							break;
 					}
-                                        
-                                        $date_format = date("Y-m-d", strtotime($year . "-". $month . "-" . $day_num));
-                                        $holidays = appointment_db::select_all_holidays();
                                        
-                                        if(in_array($date_format, $holidays)) {
-                                            
-                                            echo "<td $class id = $day$day_num><button disabled>$day_num</button></td>";  //Print day's number, sets the class for the modal and also sets a name for the button for use in the modal, also disables the button
-
+                                        
 					$date_format = "$year" . '-' . "$month" . '-' . "$day_num";
 					$holidays = appointment_db::select_all_holidays();
 

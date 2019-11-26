@@ -37,10 +37,10 @@
                     <div class="add-holiday-form-content">
                         <p class="info">This is used for adding days where SCC will be closed.</p>
                         <label for="startDate">Start Date</label>
-                        <input type="date" name="startDate">
+                        <input type="date" name="startDate" value="<?php echo htmlspecialchars($start_date); ?>">
                         <label for="endDate">End Date</label>
-                        <input type="date" name="endDate">
-                        <label for="endDate">Mulitple Days</label>
+                        <input type="date" name="endDate" value="<?php echo htmlspecialchars($end_date); ?>">
+                        <label for="endDate">Multiple Days</label>
                         <input type="checkbox">
                         <input type="submit" class="appointment-button" value="Add Holiday">
                     </div>
