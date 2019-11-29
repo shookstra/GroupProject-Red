@@ -35,7 +35,7 @@ function openModal(e){
 function closeModal(){
 
     modal.style.display = 'none';
-    document.getElementById("tutor_schedule").innerHTML = "";
+    document.getElementById("tutor_schedule").innerHTML = "choose the time and tutor for your session";
 }
 
 
@@ -45,7 +45,7 @@ function outsideClick(e){
     if(e.target == modal){
 
     modal.style.display = 'none';
-    document.getElementById("tutor_schedule").innerHTML = "";
+    document.getElementById("tutor_schedule").innerHTML = "choose the time and tutor for your session";
     }
     
 }
@@ -79,6 +79,7 @@ function showUser(str) {
 
 function showAppointment(btn){
     var testDay = document.getElementById("jsname").innerHTML;
+    
     if (btn == "") {
         document.getElementById("tutor_schedule").innerHTML = "";//this is where it prints to
         return;
@@ -106,7 +107,8 @@ function showAppointment(btn){
 function getTextArea(send) {
   //var meetType = document.getElementById("meetTypeRadio").value;
   var meetType = document.querySelector("input[name=meeting]:checked").value
-  var details = document.getElementById("details").value;
+  var e = document.querySelector('#details');
+  var details = e.value;
   
   if (send == "") {
         document.getElementById("tutor_schedule").innerHTML = "";//this is where it prints to

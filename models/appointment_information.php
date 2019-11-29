@@ -28,7 +28,7 @@
     echo "<li>Time: " . $appoint_info_time ."</li>";
     echo "<li>Details: " . $details . "</li>";
     echo "<li>Meeting Type: " . $meetType . "</li>";
-    echo "<li>User ID: " . $appoint_info_userID . "</li><br>"; 
+    echo "<li>User ID: " . $appoint_info_userID . "</li><br>";
     echo "</ul>";
     
     echo "<button type='submit' value=" . $appoint_info_subID . "," . $appoint_info_userID . "," . $appoint_info_tutorID . "," .$appoint_info_year . "," . $appoint_info_date_month . "," . $appoint_info_date . "," . $appoint_info_time . "," . $details . "," . $meetType . " onclick='submit_appointment(this.value)' >Accept</button>"
