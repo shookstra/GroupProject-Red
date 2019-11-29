@@ -154,12 +154,16 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/head.php')
 					}
                                        
                                         
-					$date_format = "$year" . '-' . "$month" . '-' . "$day_num";
+					//$date_format = "$year" . '-' . "$month" . '-' . "$day_num";
+                                        $date_format = date("Y-m-d", strtotime($year . "-". $month . "-" . $day_num));
 					$holidays = appointment_db::select_all_holidays();
 
 					if (in_array($date_format, $holidays)) {
 						echo "<td $class id = $day$day_num><button disabled>$day_num</button></td>";  //Print day's number, sets the class for the modal and also sets a name for the button for use in the modal, also disables the button
-					} else if (($day_num <= $today['mday'] && $thismonth == $month && $thisyear == $year) || ($month < $thismonth && $thisyear == $year) || ($day == 'Sat') || ($day == 'Sun')) {
+					} else if (($day_num <= $today['mday'] && $thismonth == $month && $thisyear == $year) 
+                                                || ($month < $thismonth && $thisyear == $year) 
+                                                || ($day == 'Sat') 
+                                                || ($day == 'Sun')) {
 						echo "<td $class id = $day$day_num><button disabled>$day_num</button></td>";  //Print day's number, sets the class for the modal and also sets a name for the button for use in the modal, also disables the button
 					} else {
 						echo "<td $class id = $day$day_num><button $id  name = $day,$month,$day_num,$year >$day_num</button></td>";  //Print day's number, sets the class for the modal and also sets a name for the button for use in the modal
@@ -187,7 +191,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/head.php')
 					echo "<tr> </tr>";
 				}
 				?>
-
+                                
 			</table>
 
 
