@@ -222,7 +222,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/head.php')
 				<h1 class="title">Hi, <?php echo $_SESSION['user']->getFName(); ?></h1>
 				<!--prints Users name on the top of Modal-->
 				<form action="index.php" method="post">
-					<select id="test" onchange="showUser(this.value)" onclick="showUser(this.value)" autofocus>
+					<select id="testing" onchange="showUser(this.value)" onclick="showUser(this.value)" autofocus>
 						<option value="">Select a subject:</option>
 						<?php foreach ($subjects as $s) : ?>
 							<option value="<?php echo htmlspecialchars($s->getSubID()) . "," . $_SESSION['user']->getUserID(); ?>"><?php echo htmlspecialchars($s->getSubName()); ?></option>

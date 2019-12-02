@@ -34,28 +34,34 @@ $start = $_POST['start_date'];
 $end = $_POST['end_date'];
 $holiday_name = 'Tutor Center Closed0001';
 
-
+    if(!empty($start)){
     if(!empty($end)){
         $date_range = getDatesFromRange($start, $end);
-    } else {
-        appointment_db::add_holiday($holiday_name, $start);
-    }
-    
-    
-    if(!empty($date_range)){
+        if(!empty($date_range)){
             foreach($date_range as $value){
                 appointment_db::add_holiday($holiday_name, $value);
                 ++$holiday_name;
         }
-    
-            echo "<script>alert('Dates added!');</script>";
-            include_once 'views/home.php';
+            $_SESSION['date_range_error'] = '';
+            header('Location: index.php?action=home');
 
         } else {
-            
-            echo "<script>alert('Dates not added, please fix errors!);</script>";
-            include_once 'views/home.php';
+            $_SESSION['date_range_error'] = '';
+            header('Location: index.php?action=home');
         }
+    } else {
+        $_SESSION['date_range_error'] = '';
+        appointment_db::add_holiday($holiday_name, $start);
+        header('Location: index.php?action=home');
+    }
+    } else {
+        $_SESSION['date_range_error'] = 'Please select a start date';
+        header('Location: index.php?action=home');
+       
+    }
+    
+    
+    
   
 ?>
 

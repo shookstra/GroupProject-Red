@@ -37,6 +37,9 @@
                     </div>
                     <div class="add-holiday-form-content">
                         <p class="info">This is used for adding days where SCC will be closed.</p>
+                        <?php if(!empty($_SESSION['date_range_error'])) {
+                            echo $_SESSION['date_range_error'];
+                        } ?>
                         <label for="startDate">Start Date</label>
                         <input type="date" name="start_date">
                         <div id="hide_box" style="display: none">
