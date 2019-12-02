@@ -39,8 +39,9 @@
                         <p class="info">This is used for adding days where SCC will be closed.</p>
                         <label for="startDate">Start Date</label>
                         <input type="date" name="start_date">
-                        <label id="hide_box" style="display: none" for="endDate" >End Date</label>
-                        <input id="hide_box" style="display: none" type="date" name="end_date"><br>
+                        <div id="hide_box" style="display: none">
+                        <label for="endDate" >End Date</label>
+                        <input type="date" name="end_date"></div>
                         <label for="endDate">Multiple Days</label>
                         <input type="checkbox" onclick="ShowHideDiv(this)">
                         <input type="submit" class="appointment-button" value="Add Holiday">
