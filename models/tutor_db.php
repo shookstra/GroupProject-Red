@@ -48,15 +48,15 @@ class tutor_db
     {
         $db = Database::getDB();
 
-        $query = 'SELECT tutor.fName, turor.lName, subject.Name, tutor.city'
-            . 'FROM tutor JOIN tutorsubject ON tutor.tutorID = tutorsubject.tutorID'
-            . ' join  subjects on subjects.subID = tutorsubject.subID';
+        $query = 'SELECT subjects.subName from subjects
+                JOIN tutorsubject on subjects.subID = tutorsubject.subID
+                JOIN tutor on tutorsubject.tutorID = tutor.tutorID
+                WHERE tutorsubject.tutorID = :tutorID';
 
         $statement = $db->prepare($query);
         $statement->bindValue(':tutorID', $tutorID);
         $statement->execute();
-        $results = $statement->fetch();
-        // $subjectName = $results['firstName'] . ' ' . $results['lastName'];
+        $results = $statement->fetchAll();
         $statement->closeCursor();
 
         return $results;
@@ -171,9 +171,10 @@ class tutor_db
         $statement->closeCursor();
         return $tutor_available;
     }
-    
+
     //Used to pull tutors and their availability for the calendar. DO NOT DELETE
-    public static function get_tutors_by_availability() {
+    public static function get_tutors_by_availability()
+    {
         $db = Database::getDB();
         $query = 'select tutor.tutorID, tutor.fName, tutor.lName, tutor_availability.start, tutor_availability.end, tutor_availability.day
                   from subjects join tutorsubject on subjects.subID = tutorsubject.subID 

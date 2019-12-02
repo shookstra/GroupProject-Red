@@ -35,6 +35,7 @@ function openModal(e){
 function closeModal(){
 
     modal.style.display = 'none';
+    document.getElementById("tutor_schedule").innerHTML = "choose the time and tutor for your session";
 }
 
 
@@ -44,7 +45,7 @@ function outsideClick(e){
     if(e.target == modal){
 
     modal.style.display = 'none';
-    
+    document.getElementById("tutor_schedule").innerHTML = "choose the time and tutor for your session";
     }
     
 }
@@ -78,6 +79,7 @@ function showUser(str) {
 
 function showAppointment(btn){
     var testDay = document.getElementById("jsname").innerHTML;
+    
     if (btn == "") {
         document.getElementById("tutor_schedule").innerHTML = "";//this is where it prints to
         return;
@@ -97,14 +99,16 @@ function showAppointment(btn){
                 
             }
         };
-        xmlhttp.open("GET","models/accept_appointment.php?btn="+btn+"&test="+testDay, true);//url string that is used to set up the query/getuser.php is the name of the php file that the information is printed from/will need to change to a POST instead of a get
+        xmlhttp.open("GET","models/details_meetType_page.php?btn="+btn+"&test="+testDay, true);//url string that is used to set up the query/getuser.php is the name of the php file that the information is printed from/will need to change to a POST instead of a get
         xmlhttp.send();
     }
 }
 
 function getTextArea(send) {
-  var meetType = document.getElementById("meetTypeRadio").value;
-  var details = document.getElementById("details").value;
+  //var meetType = document.getElementById("meetTypeRadio").value;
+  var meetType = document.querySelector("input[name=meeting]:checked").value
+  var e = document.querySelector('#details');
+  var details = e.value;
   
   if (send == "") {
         document.getElementById("tutor_schedule").innerHTML = "";//this is where it prints to
@@ -151,10 +155,17 @@ function submit_appointment(appointment){
                 
             }
         };
-        xmlhttp.open("GET","models/appointment_information.php?appointment="+appointment, true);//url string that is used to set up the query/getuser.php is the name of the php file that the information is printed from/will need to change to a POST instead of a get
+        xmlhttp.open("GET","models/user_appointment_submission.php?appointment="+appointment, true);//url string that is used to set up the query/getuser.php is the name of the php file that the information is printed from/will need to change to a POST instead of a get
         xmlhttp.send();
     }
+    
+    
 }
+
+function ShowHideDiv(chkEnd_date) {
+        var end_date = document.getElementById("hide_box");
+        end_date.style.display = chkEnd_date.checked ? "block" : "none";
+    }
 
 
 

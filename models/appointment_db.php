@@ -106,7 +106,7 @@ class appointment_db
     {
         $db = Database::getDB();
 
-        $query = 'INSERT into appointment (subID, userID, tutorID, appDate, appTime, details, $meetType)
+        $query = 'INSERT into appointment (subID, userID, tutorID, appDate, appTime, details, meetType)
          VALUES
          (:subID, :userID, :tutorID, :appDate, :appTime, :details, :meetType)';
 
@@ -137,4 +137,63 @@ class appointment_db
         $statement->execute();
         $statement->closeCursor();
     }
+
+    public static function get_tutor_Times($tutorID, $appDate) //use this to check for times to disable button on tutor availability to select time
+    {
+        $db = Database::getDB();
+
+        $query = 'SELECT appTime from appointment where tutorID = :tutorID && appDate = :appDate';
+
+        $statement = $db->prepare($query);
+        $statement->bindValue(':tutorID', $tutorID);
+        $statement->bindValue(':appDate', $appDate);
+        $statement->execute();
+        $row = $statement->fetchAll();
+        $appTime = [];
+        
+        foreach ($row as $value) {
+            array_push($appTime, $value['appTime']);
+        }
+
+        $statement->closeCursor();
+        return $appTime;
+    }
+    
+    public static function select_all_holidays()//to pull all dates from holiday table to check when creating the calendar
+    {
+        $db = Database::getDB();
+
+        $query = 'SELECT date from holidays';
+
+        $statement = $db->prepare($query);
+        $statement->execute();
+        $row = $statement->fetchAll();
+        $holidayDates = [];
+        
+        foreach ($row as $value) {
+            array_push($holidayDates, $value['date']);
+        }
+
+        $statement->closeCursor();
+        return $holidayDates;
+    }
+    
+    public static function add_holiday($holiday, $date)
+    {
+        $db = Database::getDB();
+
+        $query = 'INSERT into holidays 
+            (holiday, date)
+         VALUES
+            (:holiday, :date)';
+
+
+        $statement = $db->prepare($query);
+        //bind the values
+        $statement->bindValue(':holiday', $holiday);
+        $statement->bindValue(':date', $date);
+        $statement->execute();
+        $statement->closeCursor();
+    }
+    
 }

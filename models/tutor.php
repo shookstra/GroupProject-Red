@@ -2,7 +2,6 @@
 
 class tutor
 {
-
     private $tutorID;
     private $lName;
     private $fName;

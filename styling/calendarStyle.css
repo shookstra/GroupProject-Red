@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 table {
   margin: auto;
   border-spacing: 0;
@@ -35,7 +40,7 @@ th {
   font-weight: bold;
 }
 
-button {
+#tbl button {
   padding: 15px;
   width: 100%;
   height: 100%;
@@ -47,8 +52,8 @@ button {
   border-radius: 6px;
 }
 
-button:hover,
-button:focus {
+#tbl button:hover,
+#tbl button:focus {
   cursor: pointer;
   background-color: rgb(44, 115, 182);
   color: white;
