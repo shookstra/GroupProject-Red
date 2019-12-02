@@ -99,12 +99,13 @@ nav ul {
 }
 
 .sideContent {
-  padding: 15px;
+  /* padding: 15px; */
   flex: 1;
   height: 50vh;
   border-radius: 6px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05), 0 8px 10px rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(0, 0, 0, 0.05);
+  list-style: none;
 }
 
 .sideContent a {
@@ -118,11 +119,31 @@ nav ul {
   color: var(--main-bg-color);
 }
 
-.sideContent ul {
+.sideContent ul,
+.sideContent li {
   list-style: none;
 }
 
-.fa-chalkboard-teacher {
+.sideContent-header {
+  background-color: rgb(44, 115, 182);
+  color: white;
+  border-radius: 6px 6px 0 0;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sideContent-header > * {
+  padding: 0 5px;
+}
+
+.sideContent-main {
+  padding: 10px 15px 5px 15px;
+}
+
+.fa-chalkboard-teacher,
+.fa-chalkboard {
   margin-right: 10px;
   transform: scale(1.5, 1.5);
 }
@@ -193,7 +214,7 @@ nav ul {
   position: relative;
   background-color: #fefefe;
   margin: auto;
-  padding: 0;
+  padding: 20px;
   border: 1px solid #888;
   width: 80%;
   height: 500px;
@@ -228,6 +249,7 @@ nav ul {
   cursor: pointer;
   transition: background-color 250ms, color 250ms;
   border-radius: 6px;
+  grid-column: 1 / -1;
 }
 
 .appointment-button:hover {
@@ -295,8 +317,10 @@ nav ul {
   padding: 5px;
 }
 
-.add-holiday-form {
+.add-holiday-form,
+.change-availability {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05), 0 8px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
 }
 
 .add-holiday-form input[type="date"] {
@@ -307,7 +331,8 @@ nav ul {
   text-align: center;
 }
 
-.add-holiday-form-header {
+.add-holiday-form-header,
+.change-availability-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -318,12 +343,21 @@ nav ul {
   border-radius: 3px 3px 0 0;
 }
 
-.add-holiday-form-content {
+.add-holiday-form-content,
+.change-availability-content {
   padding: 10px 20px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 2fr;
   grid-row-gap: 10px;
   justify-content: center;
+}
+
+.change-availability-content {
+  display: inline-block;
+}
+
+.change-availability-content button {
+  padding: 5px;
 }
 
 .info {
@@ -340,6 +374,10 @@ nav ul {
 
 .tutor-subjects {
   list-style: none;
+}
+
+.hide_box {
+  display: none;
 }
 
 @media screen and (max-width: 1024px) {
@@ -453,4 +491,17 @@ nav ul {
     opacity: 1;
     transform: translateX(0px);
   }
+  
+  .error_css {
+  background-color: #eee;
+  padding: 10px;
+  width: 100%;
+  color: rgb(255, 0, 0);
+  text-align: center;
+  grid-column: 1 / -1;
+  border-radius: 6px;
+  font-size: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  
+}
 }

@@ -23,24 +23,18 @@ $meetType = $appoint_info[8];
 
 
 $appDate = "$yearPulled".'-'."$monthPulled".'-'."$datePulled";
-$con = mysqli_connect('localhost','root','','groupproject');//connection to db, copy what is in database.php
+$con = mysqli_connect('localhost','root','','group_project');//connection to db, copy what is in database.php
 if (!$con) {
     die('Could not connect: ' . mysqli_error($con));
 }
 
-mysqli_select_db($con,"groupproject");//where the db name goes
+mysqli_select_db($con,"group_project");//where the db name goes
 $sql="INSERT into appointment (subID, userID, tutorID, appDate, appTime, details, meetType)
          VALUES
          ('$subID', '$userID', '$tutorID', '$appDate', '$appoint_time', '$details', '$meetType')";
 
 $result = mysqli_query($con, $sql);//query result
-    var_dump($subID);
-    var_dump($userID);
-    var_dump($tutorID);
-    var_dump($appDate);
-    var_dump($appoint_time);
-    var_dump($details);
-    var_dump($meetType);
+   
 if($result){
     
     echo"<center><p>Appointment Scheduled!</p></center>";
