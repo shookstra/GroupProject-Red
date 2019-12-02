@@ -29,9 +29,12 @@ function getDatesFromRange($start, $end, $format = 'Y-m-d')
 // Function call with passing the start date and end date 
 //$Date = getDatesFromRange('2010-10-01', '2010-10-05'); 
 
+
+
 $start = $_POST['start_date'];
 $end = $_POST['end_date'];
-$holiday_name = 'Closed0001';
+$holiday_name = 'Tutor Center Closed0001';
+
 
 if (!empty($end)) {
     $date_range = getDatesFromRange($start, $end);
@@ -66,9 +69,21 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/head.php')
         <?php
         if (!empty($date_range)) {
             foreach ($date_range as $value) {
+    if(!empty($end)){
+        $date_range = getDatesFromRange($start, $end);
+    } else {
+        appointment_db::add_holiday($holiday_name, $start);
+    }
+    
+    
+    if(!empty($date_range)){
+            foreach($date_range as $value){
                 appointment_db::add_holiday($holiday_name, $value);
                 ++$holiday_name;
-            }
+        }
+    
+            echo "<script>alert('Dates added!');</script>";
+            include_once 'views/home.php';
 
             echo "<script>alert('Dates added!');</script>";
 
