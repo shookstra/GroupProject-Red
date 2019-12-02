@@ -29,7 +29,8 @@
                 </div>
             <?php endforeach ?>
             <?php if ($_SESSION['user']->getRole() == "Admin") { ?>
-                <form action="index.php" class="add-holiday-form">
+                <form action="index.php" class="add-holiday-form" method="post">
+                    <input type="hidden" name="action" value="add_holiday">
                     <div class="add-holiday-form-header">
                         <h3>Add Holiday</h3>
                         <i class="fas fa-candy-cane"></i>
@@ -37,11 +38,11 @@
                     <div class="add-holiday-form-content">
                         <p class="info">This is used for adding days where SCC will be closed.</p>
                         <label for="startDate">Start Date</label>
-                        <input type="date" name="startDate" value="<?php echo htmlspecialchars($start_date); ?>">
-                        <label for="endDate">End Date</label>
-                        <input type="date" name="endDate" value="<?php echo htmlspecialchars($end_date); ?>">
+                        <input type="date" name="start_date">
+                        <label id="hide_box" style="display: none" for="endDate" >End Date</label>
+                        <input id="hide_box" style="display: none" type="date" name="end_date"><br>
                         <label for="endDate">Multiple Days</label>
-                        <input type="checkbox">
+                        <input type="checkbox" onclick="ShowHideDiv(this)">
                         <input type="submit" class="appointment-button" value="Add Holiday">
                     </div>
                 </form>
@@ -62,6 +63,7 @@
             </ul>
         </div>
     </div>
+    <script src="<?php $_SERVER['DOCUMENT_ROOT'] ?> /groupProject/calendar.js"></script>
 </body>
 
 </html>

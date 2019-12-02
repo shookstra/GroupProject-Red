@@ -73,6 +73,10 @@ switch ($action) {
         include 'views/tutorProfile.php';
         die();
         break;
+    case 'add_holiday':
+        require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/dates_between_functions.php');
+        die();
+        break;
     case 'profile':
         // tutor app call may not go here ?
         //$tutorApps = appointment_db::get_tutor_Appointments($tutorID);

@@ -39,7 +39,7 @@
                                         echo "  <option value='grammar'>Grammar</option>";
                                         echo "  <option value='citation'>Citation</option>";
                                         echo "  <option value='thesis'>Thesis</option>";
-                                        echo "  <option value='writing'>Writing>/option>";
+                                        echo "  <option value='writing'>Writing</option>";
 					echo "</select>";
 				echo "</form>";
     } else {
@@ -55,7 +55,7 @@
     }
     echo "<p>What kind of meeting would you like to schedule?(*If the tutor is not on your campus you will have to schedule a Zoom Meeting)</p>";
     echo "<input type='radio' id='meetTypeRadio' name='meeting' value='inPerson'>In Person Meeting</input><br>";
-    echo "<input type='radio' id='meetTypeRadio' name='meeting' value='zoom'>Online Zoom Meeting</input>";
+    echo "<input type='radio' id='meetTypeRadio' name='meeting' value='zoom'>Online Zoom Meeting</input><br>";
     echo "<button type='submit' value=". $tutor_info_subID . "," . $tutor_info_userID . "," . $tutor_info_ID . "," . $date_info_month . ",". $date_info_date . "," . $tutor_info_time . "," . $tutor_info_fName . "," . $date_info_year ." onclick='getTextArea(this.value)' >Send</button></center>";
     
     

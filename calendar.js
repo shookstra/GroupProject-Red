@@ -158,7 +158,14 @@ function submit_appointment(appointment){
         xmlhttp.open("GET","models/user_appointment_submission.php?appointment="+appointment, true);//url string that is used to set up the query/getuser.php is the name of the php file that the information is printed from/will need to change to a POST instead of a get
         xmlhttp.send();
     }
+    
+    
 }
+
+function ShowHideDiv(chkEnd_date) {
+        var end_date = document.getElementById("hide_box");
+        end_date.style.display = chkEnd_date.checked ? "block" : "none";
+    }
 
 
 

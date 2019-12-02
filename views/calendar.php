@@ -154,7 +154,8 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/head.php')
 					}
                                        
                                         
-					$date_format = "$year" . '-' . "$month" . '-' . "$day_num";
+				
+                                        $date_format = date("Y-m-d", strtotime($year . "-". $month . "-" . $day_num));
 					$holidays = appointment_db::select_all_holidays();
 
 					if (in_array($date_format, $holidays)) {
