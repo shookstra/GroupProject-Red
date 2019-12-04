@@ -124,6 +124,19 @@ class tutor_db
 
         return $tutor;
     }
+    
+    public static function get_tutor_lastname_by_id($tutorID)
+    {
+        $db = Database::getDB();
+
+        $query = 'SELECT lName FROM tutor WHERE tutorID = :tutorID';
+        $statement = $db->prepare($query);
+        $statement->bindValue(':tutorID', $tutorID);
+        $statement->execute();
+        $row = $statement->fetch();
+
+        return $row;
+    }
 
     public static function get_tutor_availablity()
     {

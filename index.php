@@ -29,6 +29,7 @@ switch ($action) {
             array_push($registrationErrors, "You need to sign in to access scheduling");
             include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/login.php');
         } else {
+            $today = date("Y-m-d");
             $subjects = subject_db::select_all();
             $tutor_available = tutor_db::get_tutors_by_availability();
             $tutors = tutor_db::select_all_Tutors();

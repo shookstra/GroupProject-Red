@@ -110,16 +110,15 @@ textarea {
   width: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.5);
+  animation: modalopen 300ms;
 }
 
 .modal-content {
   background-color: #f4f4f4;
   margin: 20% auto;
-  padding: 20px;
+  padding: 30px;
   width: 70%;
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 0px 20px 0 rgba(0, 0, 0, 0.2);
-  animation-name: modalopen;
-  animation-duration: 1s;
   border-radius: 6px;
 }
 
@@ -161,9 +160,9 @@ textarea {
 }
 
 close_for_accept {
-    display: block;
+  display: block;
 }
 
 accept {
-    display: none;
+  display: none;
 }

@@ -104,6 +104,7 @@
             }
             echo "</tr>";
         }
+        
     }
     echo "</table>";
 
