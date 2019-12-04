@@ -178,4 +178,22 @@ class appointment_db
         return $holidayDates;
     }
     
+    public static function add_holiday($holiday, $date)
+    {
+        $db = Database::getDB();
+
+        $query = 'INSERT into holidays 
+            (holiday, date)
+         VALUES
+            (:holiday, :date)';
+
+
+        $statement = $db->prepare($query);
+        //bind the values
+        $statement->bindValue(':holiday', $holiday);
+        $statement->bindValue(':date', $date);
+        $statement->execute();
+        $statement->closeCursor();
+    }
+    
 }

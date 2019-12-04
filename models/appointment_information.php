@@ -21,7 +21,7 @@
    
 
    
-   echo "<ul>";
+    echo "<ul>";
     echo "<li>Appointment Month: ". $appoint_info_date_month ."</li>";
     echo "<li>Appointment Day: " . $appoint_info_date ."</li>";
     echo "<li>Tutor: " . $appoint_info_fName ."</li>";
