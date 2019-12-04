@@ -246,5 +246,21 @@ class user_db {
         $statement->closeCursor();
         return $row;
     }
+    
+        public static function update_User($firstName, $lastName,$phone) {
+        $db = Database::getDB();
+
+        $query = 'UPDATE users  (fName, lName, phone)
+                    Set fName = :fName, lName = :lName, phone = :phone';
+
+        $statement = $db->prepare($query);
+        //bind the values
+        $statement->bindValue(':fName', $firstName);
+        $statement->bindValue(':lName', $lastName);
+        $statement->bindValue(':phone', $phone);
+        $statement->execute();
+        $statement->closeCursor();
+    }
 
 }
+   

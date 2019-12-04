@@ -17,7 +17,7 @@
             <p><?php echo htmlspecialchars('Last Name: ' . $_SESSION['user']->getLName()); ?></p>
             <p><?php echo htmlspecialchars('Email: ' . $_SESSION['user']->getEmail()); ?></p>
             <form>
-                <input type="submit" value="Change My Information">
+                <input type="submit" value="ChangeMyInformation">
             </form>
         </div>
     </div>
