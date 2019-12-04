@@ -21,7 +21,7 @@ class user_db {
 
         return $users;
     }
-    
+
     public static function select_user_lastname_by_id($userID) {
         $db = Database::getDB();
 
@@ -232,7 +232,7 @@ class user_db {
         $statement->execute();
         $statement->closeCursor();
     }
-    
+
     public static function get_user_email_by_id($userID) {
         $db = Database::getDB();
 
@@ -241,26 +241,27 @@ class user_db {
         $statement->bindValue(':userID', $userID);
         $statement->execute();
         $row = $statement->fetch();
-        
+
 
         $statement->closeCursor();
         return $row;
     }
-    
-        public static function update_User($firstName, $lastName,$phone) {
+
+    public static function update_User($firstName, $lastName, $phone, $userID) {
         $db = Database::getDB();
 
         $query = 'UPDATE users  (fName, lName, phone)
-                    Set fName = :fName, lName = :lName, phone = :phone';
+                    Set fName = :firstName, lName = :lastName, phone = :phone
+                    where userID = :userID';
 
         $statement = $db->prepare($query);
         //bind the values
         $statement->bindValue(':fName', $firstName);
         $statement->bindValue(':lName', $lastName);
         $statement->bindValue(':phone', $phone);
+         $statement->bindValue(':userID', $userID);
         $statement->execute();
         $statement->closeCursor();
     }
 
 }
-   

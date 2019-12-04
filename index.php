@@ -84,7 +84,7 @@ switch ($action) {
         die();
         break;
     case 'ChangeMyInformation':
-        $_SESSION['user'] = user_db::get_specificUser($email);
+       // $_SESSION['user'] = user_db::get_specificUser($email);
         include('views/updateProfile.php');
         die();
         break;

@@ -2,40 +2,50 @@
 <html lang="en">
 
 
-<?php include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/head.php') ?>
+    <?php include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/head.php') ?>
 
-<body>
-    <?php include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/header.php');
-    include('views/sideBar.php'); ?>
+    <body>
+        <?php include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/header.php');
+        include('views/sideBar.php');
+        ?>
 
-    <div class="wrapper">
-        <div style="flex: 4">
-            <h3 style="font-weight: bold">Profile Information</h3>
-            <p><?php echo htmlspecialchars('User ID: ' . $_SESSION['user']->getUserID()); ?></p>
-            <label>First Name: </label><input type="text" name="firstName" class="submit-input" value="<?php echo htmlspecialchars($_SESSION['user']->getFName()); ?>">
-            <label>Last Name: </label><input type="text" name="lastName" class="submit-input" value="<?php echo htmlspecialchars($_SESSION['user']->getLName()); ?>">
-            <label>Phone Number: </label><input type="text" name="phone" class="submit-input" value="<?php echo htmlspecialchars($_SESSION['user']->getPhone()); ?>">
+        <div class="wrapper">
+            <div style="flex: 4">
+                <h3 style="font-weight: bold">Profile Information</h3>
+                  <form method="POST">
+                <p><label>User ID: </label><input type="text" name="userID" value="<?php echo htmlspecialchars($_SESSION['user']->getUserID()); ?>" readonly></p>
+                <p><label>First Name: </label><input type="text" name="firstName" value="<?php if (!empty($firstName)) {
+            echo $firstName;
+        } ?>"></p>
+                <p> <label>Last Name: </label><input type="text" name="lastName" value="<?php if (!empty($lastName)) {
+            echo $lastName;
+        } ?>"></p>
+                <p><label>Phone Number: </label><input type="text" name="phone" value="<?php if (!empty($phone)) {
+                        echo $phone;
+                    } ?>"></p>
 
-                  <?php if (empty($error)) { ?>
-                <div class="login-item">
-                    <?php if (!empty($registrationErrors)) {
-                            echo '<div class="error">';
-                            foreach ($registrationErrors as $error) {
-                                echo '<p>' . htmlspecialchars($error) . '</p>';
-                            }
-                            echo '</div>';
-                        } ?>
-                </div>
-            <?php } ?>
-            <div class="login-item">
-                <input type="hidden" name="action" id="action" value="registrationValidation">
-                <input type="submit" value="update Information" name="submit" class="submit-button">
+                    <?php if (empty($error)) { ?>
+                    <div>
+                    <?php
+                    if (!empty($updateErrors)) {
+                        echo '<div class="error">';
+                        foreach ($updateErrors as $error) {
+                            echo '<p>' . htmlspecialchars($error) . '</p>';
+                        }
+                        echo '</div>';
+                    }
+                    ?>
+                    </div>
+<?php } ?>
+              <?php var_dump($expression)?>
+                    <input type="hidden" name="action" id="action" value="updateValidation">
+                    <input type="submit" value="Update Information" name="submit">
+                </form>
             </div>
         </div>
-    </div>
 
 
-    <script src="scripts/profileModal.js"></script>
-</body>
+        <script src="scripts/profileModal.js"></script>
+    </body>
 
 </html>
