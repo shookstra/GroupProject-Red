@@ -124,7 +124,7 @@ class tutor_db
 
         return $tutor;
     }
-    
+
     public static function get_tutor_lastname_by_id($tutorID)
     {
         $db = Database::getDB();
@@ -163,22 +163,22 @@ class tutor_db
     public static function get_tutor_availablity_by_ID($tutorID)
     {
         $db = Database::getDB();
-        $query = 'select tutor.tutorID, tutor.fName, tutor.lName, tutor_availability.start, tutor_availability.end, tutor_availability.day
-                  from subjects join tutorsubject on subjects.subID = tutorsubject.subID 
-			  join tutor on tutorsubject.tutorID = tutor.tutorID
-              join tutor_availability on tutor.tutorID = tutor_availability.tutorID
-              WHERE tutor_availability.tutorID = :tutorID';
+        $query = 'SELECT tutor.tutorID, tutor.fName, tutor.lName, 
+                  tutor_availability.start, tutor_availability.end, 
+                  tutor_availability.day 
+                  FROM tutor JOIN tutor_availability 
+                  on tutor.tutorID = tutor_availability.tutorID 
+                  WHERE tutor_availability.tutorID = :tutorID';
 
         $statement = $db->prepare($query);
         $statement->bindValue(':tutorID', $tutorID);
         $statement->execute();
         $rows = $statement->fetchAll();
         $tutor_available = [];
-        $incrementer = 0;
 
         foreach ($rows as $value) {
-            $tutor_available[$incrementer] = new tutor_availability($value['tutorID'], $value['fName'], $value['lName'], $value['start'], $value['end'], $value['day']);
-            $incrementer++;
+            $tutor = new tutor_availability($value['tutorID'], $value['fName'], $value['lName'], $value['start'], $value['end'], $value['day']);
+            array_push($tutor_available, $tutor);
         }
 
         $statement->closeCursor();
