@@ -501,6 +501,12 @@ nav ul {
   .appointments {
     margin: 0 0 20px 0;
   }
+  .error {
+  background-color: rgba(255, 131, 131, 0.5);
+  color: rgba(70, 70, 70);
+  border-radius: 6px;
+  padding: 10px;
+}
 }
 
 @keyframes navLinkFade {

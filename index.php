@@ -57,6 +57,7 @@ switch ($action) {
         $_SESSION['user'] = user_db::get_specificUser($email);
         die();
         break;
+ 
     case 'calendar':
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_selection.php');
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/calendar.php');
@@ -92,9 +93,17 @@ switch ($action) {
         die();
         break;
     case 'profile':
-        // tutor app call may not go here ?
-        //$tutorApps = appointment_db::get_tutor_Appointments($tutorID);
         include('views/profile.php');
+        die();
+        break;
+    case 'ChangeMyInformation':
+       // $_SESSION['user'] = user_db::get_specificUser($email);
+        include('views/updateProfile.php');
+        die();
+        break;
+   case 'updateValidation':
+        require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/updateValidation.php');
+        $_SESSION['user'] = user_db::get_specificUser($email);
         die();
         break;
     case 'logout':
