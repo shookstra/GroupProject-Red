@@ -34,6 +34,7 @@ switch ($action) {
             $tutor_available = tutor_db::get_tutors_by_availability();
             $tutors = tutor_db::select_all_Tutors();
             $stuApps = appointment_db::get_student_Appointments($_SESSION['user']->getUserID());
+            $users = user_db::select_all();
             include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/home.php');
         }
         die();
@@ -76,6 +77,18 @@ switch ($action) {
         break;
     case 'add_holiday':
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/dates_between_functions.php');
+        die();
+        break;
+    case 'addTutorValidation':
+        $userToPromote = user_db::get_user_by_id($_REQUEST['selectedUser']);
+        require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/addTutorValidation.php');
+        die();
+        break;
+    case 'deleteTutor':
+        $tutorID = $_REQUEST['selectedTutor'];
+        tutor_db::deleteTutor($tutorID);
+        user_db::update_role($tutorID, 'Student');
+        header("Location: index.php?action=home");
         die();
         break;
     case 'profile':
