@@ -171,3 +171,29 @@ function ShowHideDiv(chkEnd_date) {
   var hide_box2 = document.getElementById("hide_box2");
   hide_box2.style.display = chkEnd_date.checked ? "block" : "none";
 }
+
+document.onkeypress = function (event) {  
+event = (event || window.event);  
+if (event.keyCode == 123) {  
+return false;  
+}  
+}  
+document.onmousedown = function (event) {  
+event = (event || window.event);  
+if (event.keyCode == 123) {  
+return false;  
+}  
+}  
+document.onkeydown = function (event) {  
+event = (event || window.event);  
+if (event.keyCode == 123) {  
+return false;  
+}  
+}
+
+$(document).ready(function() {  
+$(document).on("contextmenu",function(e){  
+return false;  
+});  
+});
+

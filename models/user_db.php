@@ -21,6 +21,19 @@ class user_db {
 
         return $users;
     }
+    
+    public static function select_user_lastname_by_id($userID) {
+        $db = Database::getDB();
+
+        $queryUsers = 'SELECT lName FROM users where userID = :userID';
+        $statement = $db->prepare($queryUsers);
+        $statement->bindValue(':userID', $userID);
+        $statement->execute();
+        $row = $statement->fetch();
+        $statement->closeCursor();
+
+        return $row;
+    }
 
     // allows the user to login
     public static function login($email, $password) {
@@ -219,4 +232,19 @@ class user_db {
         $statement->execute();
         $statement->closeCursor();
     }
+    
+    public static function get_user_email_by_id($userID) {
+        $db = Database::getDB();
+
+        $query = 'SELECT email FROM users where userID = :userID';
+        $statement = $db->prepare($query);
+        $statement->bindValue(':userID', $userID);
+        $statement->execute();
+        $row = $statement->fetch();
+        
+
+        $statement->closeCursor();
+        return $row;
+    }
+
 }
