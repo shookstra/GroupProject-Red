@@ -66,20 +66,25 @@ $holiday_name = 'Tutor Center Closed0001';
 
 function Unique_user_information_report(){
     
-                $users = user_db::selectAll();
-                $unique_users = array();
+        $users = user_db::selectAll();
+        $unique_users = array();
 
-                $fields = array('user_email', 'first_name', 'last_name'); 
+        $fields = array('user_email', 'first_name', 'last_name'); 
 
-                $unique_users[] = $fields;
-                                foreach($users as $user){
-                                                $values=array();
+        $unique_users[] = $fields;
+        $old_users = array();
+        
+        if(!in_array($unique_users, $old_users)) {
+                foreach($users as $user){
+                    $values=array();
 
-                                                $values[] = $user->getEmail();
-                                                $values[] = $user->getFName();
-                                                $values[] = $user->getLName();
-                                                $unique_users[] = $values;
-    }
+                    $values[] = $user->getEmail();
+                    $values[] = $user->getFName();
+                    $values[] = $user->getLName();
+                    $unique_users[] = $values;
+                    $old_users[] += $unique_users[];
+            }
+        }
 
                 $content_comma_seperated = '';
                 $sep = ",";
@@ -166,7 +171,7 @@ function daily_appointment_information_report(){
                                                 $values[] = $user->getLName();
 
                                                 $daily_appointments[] = $values;
-    }
+                                }
 
                 $content_comma_seperated = '';
                 $sep = ",";
