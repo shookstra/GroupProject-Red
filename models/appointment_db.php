@@ -23,6 +23,25 @@ class appointment_db
 
         return $appointment;
     }
+    
+    public static function select_all_appointments_today($appDate)
+    {
+        $db = Database::getDB();
+
+        $queryUsers = 'SELECT * FROM appointment WHERE appDate = :appDate ORDER BY appDate DESC, appTime ASC  ';
+        $statement = $db->prepare($queryUsers);
+        $statement->bindValue(':appDate', $appDate);
+        $statement->execute();
+        $rows = $statement->fetchAll();
+        $appointment = [];
+
+        foreach ($rows as $value) {
+            $appointment[$value['appID']] = new appointment($value['appID'], $value['subID'], $value['userID'], $value['tutorID'], $value['appDate'], $value['appTime'], $value['details'], $value['meetType']);
+        }
+        $statement->closeCursor();
+
+        return $appointment;
+    }
 
     //get appointment for specific student
     public static function get_student_Appointments($userID)
