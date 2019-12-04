@@ -191,9 +191,5 @@ return false;
 }  
 }
 
-$(document).ready(function() {  
-$(document).on("contextmenu",function(e){  
-return false;  
-});  
-});
+
 

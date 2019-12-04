@@ -78,6 +78,17 @@ switch ($action) {
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/dates_between_functions.php');
         die();
         break;
+    case 'print_unique_users':
+        Unique_user_information_report();
+        require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/dates_between_functions.php');
+        
+        die();
+        break;
+    case 'print_daily_appointments':
+        daily_appointment_information_report();
+        require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/dates_between_functions.php');
+        die();
+        break;
     case 'profile':
         // tutor app call may not go here ?
         //$tutorApps = appointment_db::get_tutor_Appointments($tutorID);

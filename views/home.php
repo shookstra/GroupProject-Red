@@ -3,7 +3,10 @@
 <body>
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/header.php');
     include('views/sideBar.php'); ?>
-
+    <form action="index.php" method="post">
+                 <input type="hidden" name="action" value="print_unique_users">
+                    <button type="submit" name="unique_users" value="print_unique_users">Unique Users</button>
+             </form>
     <div class="wrapper">
         <div class="appointments">
             <h1 class="title">Hi, <?php echo $_SESSION['user']->getFName() . ' here are your scheduled appointments.'; ?></h1>
@@ -91,6 +94,10 @@
                         ?>
                 <?php endforeach ?>
             </ul>
+             <form action="index.php" method="post">
+                 <input type="hidden" name="action" value="print_unique_users">
+                    <button type="submit" name="unique_users" value="print_unique_users">Unique Users</button>
+             </form>
         </div>
     </div>
     <script src="<?php $_SERVER['DOCUMENT_ROOT'] ?> /groupProject/calendar.js"></script>

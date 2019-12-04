@@ -66,15 +66,16 @@ $holiday_name = 'Tutor Center Closed0001';
 //gives the admin a csv file with all unique users since last time they requested the information
 function Unique_user_information_report(){
     
+        console.log("This far");
         $users = user_db::selectAll();
         $unique_users = array();
 
         $fields = array('user_email', 'first_name', 'last_name'); 
 
         $unique_users[] = $fields;
-        $old_users = array();
+        //$old_users = array();
+
         
-        if(!in_array($unique_users, $old_users)) {
                 foreach($users as $user){
                     $values=array();
 
@@ -82,8 +83,8 @@ function Unique_user_information_report(){
                     $values[] = $user->getFName();
                     $values[] = $user->getLName();
                     $unique_users[] = $values;
-                    $old_users[] += $unique_users[];
-            }
+                    
+            
         }
 
                 $content_comma_seperated = '';
@@ -105,7 +106,6 @@ function Unique_user_information_report(){
                 header('Pragma: public');
                 echo $content_comma_seperated;// writes the contents to the file
                 die();
-
 }
 
                
@@ -191,6 +191,7 @@ function daily_appointment_information_report(){
                 header('Expires: 0');
                 header('Pragma: public');
                 echo $content_comma_seperated;// writes the contents to the file
+                header('Location: index.php?action=home');
 
                 die();
 }
