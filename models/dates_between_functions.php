@@ -61,4 +61,180 @@ $holiday_name = 'Tutor Center Closed0001';
        
     }
     
+
+
+
+function Unique_user_information_report(){
+    
+        $users = user_db::selectAll();
+        $unique_users = array();
+
+        $fields = array('user_email', 'first_name', 'last_name'); 
+
+        $unique_users[] = $fields;
+        $old_users = array();
+        
+        if(!in_array($unique_users, $old_users)) {
+                foreach($users as $user){
+                    $values=array();
+
+                    $values[] = $user->getEmail();
+                    $values[] = $user->getFName();
+                    $values[] = $user->getLName();
+                    $unique_users[] = $values;
+                    $old_users[] += $unique_users[];
+            }
+        }
+
+                $content_comma_seperated = '';
+                $sep = ",";
+
+    foreach ($unique_users as $values) {
+        $content_comma_seperated .= implode($sep, $values);
+        $content_comma_seperated .= "\n"; // add separator between sub-arrays
+
+    }
+                $length = strlen($content_comma_seperated);
+                header('Content-Description: File Transfer');
+                header('Content-Type: text/plain');//<<<<
+                header('Content-Disposition: attachment; filename=unique_users.csv');
+                header('Content-Transfer-Encoding: binary');
+                header('Content-Length: ' . $length);
+                header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+                header('Expires: 0');
+                header('Pragma: public');
+                echo $content_comma_seperated;// writes the contents to the file
+                die();
+
+}
+
+               
+
+function No_show_user_information_report(){
+    
+                //$users = db call;Add a table for tutors to add no shows
+                $noshow_users = array();
+
+                $fields = array('user_email', 'first_name', 'last_name', 'numer_of_noshows');
+                $noshow_users[] = $fields;
+                
+                foreach($users as $user){
+
+                    $values=array();
+                    $values[] = $user->getEmail();
+                    $values[] = $user->getFName();
+                    $values[] = $user->getLName();
+                    $values[] = $user->getNoShow();
+                    $noshow_users[] = $values;
+
+    }
+
+                $content_comma_seperated = '';
+                $sep = ",";
+
+                foreach ($noshow_users as $values) {    
+                    $content_comma_seperated .= implode($sep, $values); 
+                    $content_comma_seperated .= "\n"; // add separator between sub-arrays
+
+    }
+                $length = strlen($content_comma_seperated);
+                
+                header('Content-Description: File Transfer');
+                header('Content-Type: text/plain');//<<<<
+                header('Content-Disposition: attachment; filename=noShow_users.csv');
+                header('Content-Transfer-Encoding: binary');
+                header('Content-Length: ' . $length);
+                header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+                header('Expires: 0');
+                header('Pragma: public');
+
+                echo $content_comma_seperated;// writes the contents to the file
+                die();
+
+}
+
+ 
+
+function daily_appointment_information_report(){
+    
+                $today_appointment_date = date('Y-m-d');
+                $users = appointment_db::select_all_appointments_today($today_appointment_date);
+                
+                $daily_appointments = array();
+                $fields = array('email', 'first_name', 'last_name'); 
+                $daily_appointments[] = $fields;
+                
+                                foreach($users as $user){
+                                                $values=array();
+                                                $values[] = $user->getEmail();
+                                                $values[] = $user->getFName();
+                                                $values[] = $user->getLName();
+
+                                                $daily_appointments[] = $values;
+                                }
+
+                $content_comma_seperated = '';
+                $sep = ",";
+                foreach ($daily_appointments as $values) {
+
+                    $content_comma_seperated .= implode($sep, $values);
+                    $content_comma_seperated .= "\n"; // add separator between sub-arrays
+
+    }
+                $length = strlen($content_comma_seperated);
+                header('Content-Description: File Transfer');
+                header('Content-Type: text/plain');//<<<<
+                header('Content-Disposition: attachment; filename=daily_appointment_users.csv');
+                header('Content-Transfer-Encoding: binary');
+                header('Content-Length: ' . $length);
+                header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+                header('Expires: 0');
+                header('Pragma: public');
+                echo $content_comma_seperated;// writes the contents to the file
+
+                die();
+}
+
+
+function total_appointment_information_report(){
+    
+                $users = appointment_db::select_all_appointments_today($today_appointment_date);
+                
+                $daily_appointments = array();
+                $fields = array('email', 'first_name', 'last_name'); 
+                $daily_appointments[] = $fields;
+                
+                                foreach($users as $user){
+                                                $values=array();
+                                                $values[] = $user->getEmail();
+                                                $values[] = $user->getFName();
+                                                $values[] = $user->getLName();
+
+                                                $daily_appointments[] = $values;
+    }
+
+                $content_comma_seperated = '';
+                $sep = ",";
+                foreach ($daily_appointments as $values) {
+
+                    $content_comma_seperated .= implode($sep, $values);
+                    $content_comma_seperated .= "\n"; // add separator between sub-arrays
+
+    }
+                $length = strlen($content_comma_seperated);
+                header('Content-Description: File Transfer');
+                header('Content-Type: text/plain');//<<<<
+                header('Content-Disposition: attachment; filename=total_appointment_users.csv');
+                header('Content-Transfer-Encoding: binary');
+                header('Content-Length: ' . $length);
+                header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+                header('Expires: 0');
+                header('Pragma: public');
+                echo $content_comma_seperated;// writes the contents to the file
+
+                die();
+}
+               
+
+
     

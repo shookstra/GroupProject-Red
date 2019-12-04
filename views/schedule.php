@@ -104,6 +104,7 @@
             }
             echo "</tr>";
         }
+        var_dump($running_appTime);
     }
     echo "</table>";
 
