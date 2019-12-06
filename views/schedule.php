@@ -26,7 +26,7 @@
 
 
     $appDate = "$yearPulled" . '-' . "$monthPulled" . '-' . "$datePulled";
-    $con = mysqli_connect('localhost', 'root', '', 'group_project'); //connection to db, copy what is in database.php
+    $con = mysqli_connect('localhost', 'root', '', 'groupproject'); //connection to db, copy what is in database.php
     if (!$con) {
         die('Could not connect: ' . mysqli_error($con));
     }
@@ -104,7 +104,6 @@
             }
             echo "</tr>";
         }
-        var_dump($running_appTime);
     }
     echo "</table>";
 

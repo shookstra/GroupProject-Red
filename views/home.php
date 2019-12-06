@@ -6,29 +6,32 @@
 
     <div class="wrapper">
         <div class="appointments">
-            <h1 class="title">Hi, <?php echo $_SESSION['user']->getFName() . ' here are your scheduled appointments.'; ?></h1>
-            
+            <?php if (empty($stuApps)) { ?>
+                <h1 class="title">Hi, <?php echo $_SESSION['user']->getFName() . ' it doesnt look like you have anything scheduled.'; ?></h1>
+            <?php } else { ?>
+                <h1 class="title">Hi, <?php echo $_SESSION['user']->getFName() . ' here are your scheduled appointments.'; ?></h1>
+            <?php } ?>
             <?php foreach ($stuApps as $appointment) : ?>
-             <?php if(($appointment->getAppDate()) >= $today){ ?>
-                <?php $tutor = tutor_db::get_tutor_by_id($appointment->getTutorID()); ?>
-                <?php $subject = subject_db::select_subject_by_ID($appointment->getSubID()); ?>
-                <span class="appointment-header">
-                    <?php echo htmlspecialchars($subject->getSubName()); ?>
-                    <i class="fas fa-calendar-check"></i>
-                </span>
-                <div class="appointment">
-                    <p><?php echo htmlspecialchars('Appointment ID: ' . $appointment->getAppID()); ?></p>
-                    <p><?php echo htmlspecialchars('With: ' . $tutor->getFName() . ' ' . $tutor->getLName()); ?></p>
-                    <p><?php echo htmlspecialchars('on: ' . $appointment->getAppDate()); ?></p>
-                    <p><?php echo htmlspecialchars('at: ' . date("g:i a", strtotime($appointment->getAppTime()))); ?></p>
-                    <p><?php echo htmlspecialchars('Details: ' . $appointment->getDetails()); ?></p>
-                    <p><?php echo htmlspecialchars('Meeting Type: ' . $appointment->getMeetType()); ?></p>
-                    <form action="index.php" method="POST">
-                        <input type="hidden" name="appointmentID" value="<?php echo htmlspecialchars($appointment->getAppID()); ?>">
-                        <input type="hidden" name="action" value="cancelAppointment">
-                        <input type="Submit" value="Cancel Appointment" class="appointment-button">
-                    </form>
-                </div> 
+                <?php if (($appointment->getAppDate()) >= $today) { ?>
+                    <?php $tutor = tutor_db::get_tutor_by_id($appointment->getTutorID()); ?>
+                    <?php $subject = subject_db::select_subject_by_ID($appointment->getSubID()); ?>
+                    <span class="appointment-header">
+                        <?php echo htmlspecialchars($subject->getSubName()); ?>
+                        <i class="fas fa-calendar-check"></i>
+                    </span>
+                    <div class="appointment">
+                        <p><?php echo htmlspecialchars('Appointment ID: ' . $appointment->getAppID()); ?></p>
+                        <p><?php echo htmlspecialchars('With: ' . $tutor->getFName() . ' ' . $tutor->getLName()); ?></p>
+                        <p><?php echo htmlspecialchars('on: ' . $appointment->getAppDate()); ?></p>
+                        <p><?php echo htmlspecialchars('at: ' . date("g:i a", strtotime($appointment->getAppTime()))); ?></p>
+                        <p><?php echo htmlspecialchars('Details: ' . $appointment->getDetails()); ?></p>
+                        <p><?php echo htmlspecialchars('Meeting Type: ' . $appointment->getMeetType()); ?></p>
+                        <form action="index.php" method="POST">
+                            <input type="hidden" name="appointmentID" value="<?php echo htmlspecialchars($appointment->getAppID()); ?>">
+                            <input type="hidden" name="action" value="cancelAppointment">
+                            <input type="Submit" value="Cancel Appointment (WIP)" class="appointment-button">
+                        </form>
+                    </div>
                 <?php } ?>
             <?php endforeach ?>
 
@@ -41,9 +44,11 @@
                     </div>
                     <div class="add-holiday-form-content">
                         <p class="info">This is used for adding days where SCC will be closed.</p>
-                        <p class="info"><?php if(!empty($_SESSION['date_range_error'])) { 
-                            echo $_SESSION['date_range_error'];
-                            } else { echo "Select your dates";} ?></p>
+                        <p class="info"><?php if (!empty($_SESSION['date_range_error'])) {
+                                                echo $_SESSION['date_range_error'];
+                                            } else {
+                                                echo "Select your dates";
+                                            } ?></p>
                         <label for="startDate">Start Date</label>
                         <input type="date" name="start_date">
                         <label for="endDate" class="hide_box" id="hide_box1">End Date</label>
@@ -61,7 +66,8 @@
                         <h3>Change Tutor Availability</h3>
                     </div>
                     <div class="change-availability-content">
-                        <p>Tutors</p>
+                        <p>Work in progress</p>
+                        <!-- <p>Tutors</p>
                         <select>
                             <?php foreach ($tutors as $tutor) : ?>
                                 <option value="<?php echo $tutor->getTutorID(); ?>"><?php echo htmlspecialchars($tutor->getLName()); ?></option>
@@ -71,7 +77,53 @@
                         <button>Tuesday</button>
                         <button>Wednesday</button>
                         <button>Thursday</button>
-                        <button>Friday</button>
+                        <button>Friday</button> -->
+                    </div>
+                </form>
+            <?php } ?>
+            <?php if ($_SESSION['user']->getRole() == "Admin") { ?>
+                <form action="index.php" class="card">
+                    <input type="hidden" name="action" value="addTutorValidation">
+                    <div class="card-header">
+                        <h3>Add Tutor</h3>
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <div class="card-content">
+                        <div class="info">Promote a student to a tutor</div>
+                        <p>Available Users: </p>
+                        <select name="selectedUser">
+                            <?php foreach ($users as $user) : ?>
+                                <?php if ($user->getRole() != 'Tutor' && $user->getRole() != 'Admin') { ?>
+                                    <option value="<?php echo $user->getUserID(); ?>"><?php echo htmlspecialchars($user->getFName() . ' ' . $user->getLName()); ?></option>
+                                <?php } ?>
+                            <?php endforeach; ?>
+                        </select>
+                        <p>Tutor City: </p>
+                        <select name="city">
+                            <option value="Beatrice">Beatrice</option>
+                            <option value="Lincoln">Lincoln</option>
+                            <option value="Milford">Milford</option>
+                        </select>
+                        <input type="submit" value="Add Tutor" class="appointment-button">
+                    </div>
+                </form>
+            <?php } ?>
+            <?php if ($_SESSION['user']->getRole() == "Admin") { ?>
+                <form action="index.php" class="card">
+                    <input type="hidden" name="action" value="deleteTutor">
+                    <div class="card-header">
+                        <h3>Delete Tutor</h3>
+                        <i class="fas fa-user-minus"></i>
+                    </div>
+                    <div class="card-content">
+                        <div class="warning">This action cannot be undone</div>
+                        <p>Delete Tutor</p>
+                        <select name="selectedTutor">
+                            <?php foreach ($tutors as $tutor) : ?>
+                                <option value="<?php echo $tutor->getTutorID(); ?>"><?php echo htmlspecialchars($tutor->getFName() . ' ' . $tutor->getLName()); ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <input type="submit" value="Delete Tutor" class="appointment-button">
                     </div>
                 </form>
             <?php } ?>

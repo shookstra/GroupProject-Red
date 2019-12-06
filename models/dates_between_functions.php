@@ -63,7 +63,7 @@ $holiday_name = 'Tutor Center Closed0001';
     
 
 
-
+//gives the admin a csv file with all unique users since last time they requested the information
 function Unique_user_information_report(){
     
         $users = user_db::selectAll();
@@ -109,7 +109,7 @@ function Unique_user_information_report(){
 }
 
                
-
+//gives admin a list of students who no show
 function No_show_user_information_report(){
     
                 //$users = db call;Add a table for tutors to add no shows
@@ -154,21 +154,21 @@ function No_show_user_information_report(){
 }
 
  
-
+//print out for the appointments for that day
 function daily_appointment_information_report(){
     
                 $today_appointment_date = date('Y-m-d');
                 $users = appointment_db::select_all_appointments_today($today_appointment_date);
                 
                 $daily_appointments = array();
-                $fields = array('email', 'first_name', 'last_name'); 
+                $fields = array('email', 'student_last_name', 'tutor_last_name'); 
                 $daily_appointments[] = $fields;
                 
                                 foreach($users as $user){
                                                 $values=array();
-                                                $values[] = $user->getEmail();
-                                                $values[] = $user->getFName();
-                                                $values[] = $user->getLName();
+                                                $values[] = user_db::get_user_email_by_id($user->getUserID());
+                                                $values[] = user_db::select_user_lastname_by_id($user->getUserID());
+                                                $values[] = tutor_db::get_tutor_lastname_by_id($user-getUserID());
 
                                                 $daily_appointments[] = $values;
                                 }
@@ -195,7 +195,7 @@ function daily_appointment_information_report(){
                 die();
 }
 
-
+//total appointments since last time report was ran
 function total_appointment_information_report(){
     
                 $users = appointment_db::select_all_appointments_today($today_appointment_date);
@@ -234,6 +234,35 @@ function total_appointment_information_report(){
 
                 die();
 }
+
+// reminder email that admin has to click to send out. Set up to be ran daily
+function reminder_email(){
+
+    $current = date("w", $date);
+    $subject = "My subject";
+    
+    $headers = "From: noreply@tutorschedule.com";
+
+    
+    if($current !== 5){
+        $next_days_appointments = date("Y-m-d", strtotime("+1 day"));
+    } else {
+        $next_days_appointments = date("Y-m-d", strtotime("+3 day"));
+    }
+    
+    
+    $users = appointment_db::select_all_appointments_today($next_days_appointments);
+    
+    foreach($users as $user){
+        
+        $to = user_db::get_user_email_by_id($user->getUserID());
+        $txt = "This is a reminder that you have a scheduled tutor appointment on : " . "\n" . $user->getAppDate() . " at: " . $user->getAppTime();
+        
+        mail($to, $subject, $txt, $headers);
+    }
+    
+}
+
                
 
 

@@ -12,7 +12,7 @@
 
 html,
 body {
-  height: 100%;
+  height: 100vh;
   font-family: "PT Sans", sans-serif;
   position: relative;
 }
@@ -143,7 +143,9 @@ nav ul {
 }
 
 .fa-chalkboard-teacher,
-.fa-chalkboard {
+.fa-chalkboard,
+.fa-user-minus,
+.fa-user-plus {
   margin-right: 10px;
   transform: scale(1.5, 1.5);
 }
@@ -318,9 +320,12 @@ nav ul {
 }
 
 .add-holiday-form,
-.change-availability {
+.change-availability,
+.card {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05), 0 8px 10px rgba(0, 0, 0, 0.2);
-  margin-bottom: 20px;
+  margin: 0 0 20px 0;
+  padding: 0;
+  width: 100%;
 }
 
 .add-holiday-form input[type="date"] {
@@ -332,7 +337,8 @@ nav ul {
 }
 
 .add-holiday-form-header,
-.change-availability-header {
+.change-availability-header,
+.card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -344,12 +350,14 @@ nav ul {
 }
 
 .add-holiday-form-content,
-.change-availability-content {
+.change-availability-content,
+.card-content {
   padding: 10px 20px;
   display: grid;
   grid-template-columns: 1fr 2fr;
   grid-row-gap: 10px;
   justify-content: center;
+  background-color: white;
 }
 
 .change-availability-content {
@@ -370,6 +378,20 @@ nav ul {
   border-radius: 6px;
   font-size: 18px;
   border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.warning {
+  background-color: rgba(255, 90, 90, 0.75);
+  padding: 10px;
+  width: 100%;
+  color: rgb(50, 50, 50);
+  text-align: center;
+  grid-column: 1 / -1;
+  border-radius: 6px;
+  font-size: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 .tutor-subjects {
@@ -479,6 +501,12 @@ nav ul {
   .appointments {
     margin: 0 0 20px 0;
   }
+  .error {
+  background-color: rgba(255, 131, 131, 0.5);
+  color: rgba(70, 70, 70);
+  border-radius: 6px;
+  padding: 10px;
+}
 }
 
 @keyframes navLinkFade {
@@ -491,8 +519,9 @@ nav ul {
     opacity: 1;
     transform: translateX(0px);
   }
-  
-  .error_css {
+}
+
+.error_css {
   background-color: #eee;
   padding: 10px;
   width: 100%;
@@ -502,6 +531,4 @@ nav ul {
   border-radius: 6px;
   font-size: 18px;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  
-}
 }
