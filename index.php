@@ -57,7 +57,7 @@ switch ($action) {
         $_SESSION['user'] = user_db::get_specificUser($email);
         die();
         break;
- 
+
     case 'calendar':
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_selection.php');
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/calendar.php');
@@ -65,8 +65,8 @@ switch ($action) {
         break;
     case 'cancelAppointment':
         $appointmentID = filter_input(INPUT_POST, "appointmentID");
-        echo 'CANCEL APPOINTMENT: ' . $appointmentID;
-        // include '';
+        appointment_db::deleteAppointment($appointmentID, $_SESSION['user']->getUserID());
+        header("Location: index.php?action=home");
         die();
         break;
     case 'viewTutorProfile':
@@ -88,6 +88,7 @@ switch ($action) {
     case 'deleteTutor':
         $tutorID = $_REQUEST['selectedTutor'];
         tutor_db::deleteTutor($tutorID);
+        tutor_db::deleteTutor_Availability($tutorID);
         user_db::update_role($tutorID, 'Student');
         header("Location: index.php?action=home");
         die();
@@ -97,11 +98,11 @@ switch ($action) {
         die();
         break;
     case 'ChangeMyInformation':
-       // $_SESSION['user'] = user_db::get_specificUser($email);
+        // $_SESSION['user'] = user_db::get_specificUser($email);
         include('views/updateProfile.php');
         die();
         break;
-   case 'updateValidation':
+    case 'updateValidation':
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/updateValidation.php');
         $_SESSION['user'] = user_db::get_specificUser($email);
         die();
