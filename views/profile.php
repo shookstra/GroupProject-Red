@@ -21,6 +21,7 @@
             <p><?php echo htmlspecialchars('Phone Number: ' . $phoneNumber); ?></p>
             <form>
                 <input type="submit" value="Change My Information">
+                  <input type="hidden" value="ChangeMyInformation" name="action">
             </form>
         </div>
     </div>

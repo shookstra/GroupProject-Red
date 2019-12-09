@@ -2,10 +2,12 @@
 
 require_once 'database.php';
 
-class user_db {
+class user_db
+{
 
     //gets all the users
-    public static function select_all() {
+    public static function select_all()
+    {
         $db = Database::getDB();
 
         $queryUsers = 'SELECT * FROM users ';
@@ -21,7 +23,7 @@ class user_db {
 
         return $users;
     }
-    
+
     public static function select_user_lastname_by_id($userID) {
         $db = Database::getDB();
 
@@ -36,7 +38,8 @@ class user_db {
     }
 
     // allows the user to login
-    public static function login($email, $password) {
+    public static function login($email, $password)
+    {
         $db = Database::getDB();
 
         $query = 'SELECT * FROM users WHERE email= :email';
@@ -63,7 +66,8 @@ class user_db {
     }
 
     //this gets only the tutors from the database
-    public static function select_Tutors() {
+    public static function select_Tutors()
+    {
         $db = Database::getDB();
 
         $queryUsers = 'SELECT * FROM users WHERE role = tutor';
@@ -81,7 +85,8 @@ class user_db {
     }
 
     //this gets only the students accounts 
-    public static function select_Students() {
+    public static function select_Students()
+    {
         $db = Database::getDB();
 
         $queryUsers = 'SELECT * FROM users WHERE role = student';
@@ -99,7 +104,8 @@ class user_db {
     }
 
     //this gets only the admin accounts
-    public static function select_Admins() {
+    public static function select_Admins()
+    {
         $db = Database::getDB();
 
         $queryUsers = 'SELECT * FROM users WHERE role = admin';
@@ -117,7 +123,8 @@ class user_db {
     }
 
     //this returns a specific user detail based on email
-    public static function get_specificUser($email) {
+    public static function get_specificUser($email)
+    {
         $db = Database::getDB();
 
         $query = 'SELECT * from USERS where email = :email';
@@ -134,8 +141,28 @@ class user_db {
         return $users;
     }
 
+    //this returns a specific user detail based on email
+    public static function get_user_by_id($userID)
+    {
+        $db = Database::getDB();
+
+        $query = 'SELECT * from USERS where userID = :userID';
+        $statement = $db->prepare($query);
+        $statement->bindValue(':userID', $userID);
+        $statement->execute();
+        $row = $statement->fetchAll();
+
+        foreach ($row as $value) {
+            $user = new user($value['userID'], $value['lName'], $value['fName'], $value['email'], $value['phone'], $value['role'], $value['password']);
+        }
+
+        $statement->closeCursor();
+        return $user;
+    }
+
     //this gets the users role type which determines the experience of the website
-    public static function get_roleType($email) {
+    public static function get_roleType($email)
+    {
         $db = Database::getDB();
 
         $query = 'SELECT role FROM Users WHERE email = :email';
@@ -149,7 +176,8 @@ class user_db {
     }
 
     //gets user email
-    public static function get_email($email) {
+    public static function get_email($email)
+    {
         $db = Database::getDB();
 
         $query = 'SELECT email FROM users where email = :email';
@@ -167,7 +195,8 @@ class user_db {
     }
 
     //This is to add a new user
-    public static function add_user($firstName, $lastName, $email, $phone, $role, $password) {
+    public static function add_user($firstName, $lastName, $email, $phone, $role, $password)
+    {
         $db = Database::getDB();
 
         $query = 'INSERT into users (fName, lName, email, phone, role,  password)
@@ -189,7 +218,8 @@ class user_db {
     }
 
     //delete user from database
-    public static function deleteUser($email) {
+    public static function deleteUser($email)
+    {
         $db = Database::getDB();
 
         $query = ' DELETE from users where email = :email';
@@ -200,16 +230,16 @@ class user_db {
         $statement->closeCursor();
     }
 
-    public static function promote_To_Tutor($userName, $role) {
+    public static function update_role($userID, $role)
+    {
         $db = Database::getDB();
 
         $query = $query = 'UPDATE users
-              SET role = :role
-                WHERE userName = :username';
-        $role = 'Tutor';
+                           SET role = :role
+                           WHERE userID = :userID';
         $statement = $db->prepare($query);
         //bind the values
-        $statement->bindValue(':username', $userName);
+        $statement->bindValue(':userID', $userID);
         $statement->bindValue(':role', $role);
 
         $statement->execute();
@@ -217,7 +247,8 @@ class user_db {
     }
 
     //tutor
-    public static function demote_Tutor($userName, $role) {
+    public static function demote_Tutor($userName, $role)
+    {
         $db = Database::getDB();
 
         $query = $query = 'UPDATE users
@@ -232,7 +263,7 @@ class user_db {
         $statement->execute();
         $statement->closeCursor();
     }
-    
+
     public static function get_user_email_by_id($userID) {
         $db = Database::getDB();
 
@@ -241,10 +272,27 @@ class user_db {
         $statement->bindValue(':userID', $userID);
         $statement->execute();
         $row = $statement->fetch();
-        
+
 
         $statement->closeCursor();
         return $row;
+    }
+
+    public static function update_User($firstName, $lastName, $phone, $userID) {
+        $db = Database::getDB();
+
+        $query = 'UPDATE users  (fName, lName, phone)
+                    Set fName = :firstName, lName = :lastName, phone = :phone
+                    where userID = :userID';
+
+        $statement = $db->prepare($query);
+        //bind the values
+        $statement->bindValue(':fName', $firstName);
+        $statement->bindValue(':lName', $lastName);
+        $statement->bindValue(':phone', $phone);
+         $statement->bindValue(':userID', $userID);
+        $statement->execute();
+        $statement->closeCursor();
     }
 
 }

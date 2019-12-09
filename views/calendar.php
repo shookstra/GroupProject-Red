@@ -227,7 +227,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/head.php')
 						<?php endforeach; ?>
 					</select>
 				</form>
-				<div id="tutor_schedule"><b>choose the time and tutor for your session</b></div>
+				<div id="tutor_schedule" class="modal-info">Choose the time and tutor for your session</div>
 			</div>
 		</div>
 

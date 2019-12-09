@@ -63,17 +63,18 @@ class tutor_db
     }
 
     //add a tutor
-    public static function add_Tutor($firstName, $lastName, $email, $phone, $city)
+    public static function add_Tutor($tutorID, $firstName, $lastName, $email, $phone, $city)
     {
         $db = Database::getDB();
 
-        $query = 'INSERT into tutor (fName, lName,email, pjone, city)
+        $query = 'INSERT into tutor (tutorID, fName, lName, email, phone, city)
          VALUES
-         (:fName, :lName, :email, :phone :city)';
+         (:tutorID, :fName, :lName, :email, :phone, :city)';
 
 
         $statement = $db->prepare($query);
         //bind the values
+        $statement->bindValue(':tutorID', $tutorID);
         $statement->bindValue(':fName', $firstName);
         $statement->bindValue(':lName', $lastName);
         $statement->bindValue(':email', $email);
