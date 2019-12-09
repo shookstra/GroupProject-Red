@@ -79,14 +79,22 @@ switch ($action) {
         die();
         break;
     case 'print_unique_users':
+        require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/report_functions.php');
         Unique_user_information_report();
-        require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/dates_between_functions.php');
-        
         die();
         break;
-    case 'print_daily_appointments':
+    case 'todays_appointments':
+        require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/report_functions.php');
         daily_appointment_information_report();
-        require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/dates_between_functions.php');
+        die();
+        break;
+    case 'reminder_email':
+        require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/report_functions.php');
+        reminder_email();
+        die();
+        break;
+    case 'changeAvailability':
+        require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_availability_form_validation.php');
         die();
         break;
     case 'profile':
