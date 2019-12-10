@@ -57,7 +57,7 @@ switch ($action) {
         $_SESSION['user'] = user_db::get_specificUser($email);
         die();
         break;
- 
+
     case 'calendar':
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_selection.php');
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/calendar.php');
@@ -65,8 +65,8 @@ switch ($action) {
         break;
     case 'cancelAppointment':
         $appointmentID = filter_input(INPUT_POST, "appointmentID");
-        echo 'CANCEL APPOINTMENT: ' . $appointmentID;
-        // include '';
+        appointment_db::deleteAppointment($appointmentID, $_SESSION['user']->getUserID());
+        header("Location: index.php?action=home");
         die();
         break;
     case 'viewTutorProfile':
@@ -80,6 +80,25 @@ switch ($action) {
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/dates_between_functions.php');
         die();
         break;
+
+    case 'print_unique_users':
+        require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/report_functions.php');
+        Unique_user_information_report();
+        die();
+        break;
+    case 'todays_appointments':
+        require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/report_functions.php');
+        daily_appointment_information_report();
+        die();
+        break;
+    case 'reminder_email':
+        require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/report_functions.php');
+        reminder_email();
+        die();
+        break;
+    case 'changeAvailability':
+        require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_availability_form_validation.php');
+
     case 'addTutorValidation':
         $userToPromote = user_db::get_user_by_id($_REQUEST['selectedUser']);
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/addTutorValidation.php');
@@ -88,6 +107,7 @@ switch ($action) {
     case 'deleteTutor':
         $tutorID = $_REQUEST['selectedTutor'];
         tutor_db::deleteTutor($tutorID);
+        tutor_db::deleteTutor_Availability($tutorID);
         user_db::update_role($tutorID, 'Student');
         header("Location: index.php?action=home");
         die();
@@ -97,11 +117,11 @@ switch ($action) {
         die();
         break;
     case 'ChangeMyInformation':
-       // $_SESSION['user'] = user_db::get_specificUser($email);
+        // $_SESSION['user'] = user_db::get_specificUser($email);
         include('views/updateProfile.php');
         die();
         break;
-   case 'updateValidation':
+    case 'updateValidation':
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/updateValidation.php');
         $_SESSION['user'] = user_db::get_specificUser($email);
         die();

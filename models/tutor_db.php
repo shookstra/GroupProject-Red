@@ -243,4 +243,26 @@ class tutor_db
         $statement->execute();
         $statement->closeCursor();
     }
+    
+    public static function add_tutor_availability($tutorID, $day, $start, $end, $hours)
+    {
+        $db = Database::getDB();
+
+        $query = 'INSERT into tutor_availability (tutorID, day, start, end, hours)
+         VALUES
+         (:tutorID, :day, :start, :end, :hours)';
+
+
+        $statement = $db->prepare($query);
+        //bind the values
+        $statement->bindValue(':tutorID', $tutorID);
+        $statement->bindValue(':day', $day);
+        $statement->bindValue(':start', $start);
+        $statement->bindValue(':end', $end);
+        $statement->bindValue(':hours', $hours);
+
+
+        $statement->execute();
+        $statement->closeCursor();
+    }
 }

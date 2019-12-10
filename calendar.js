@@ -43,6 +43,7 @@ function outsideClick(e) {
     modal.style.display = "none";
     document.getElementById("tutor_schedule").innerHTML =
       "choose the time and tutor for your session";
+    document.getElementById("tutor_schedule").classList.add("modal-info");
   }
 }
 
@@ -51,6 +52,7 @@ function showUser(str) {
 
   if (str == "") {
     document.getElementById("tutor_schedule").innerHTML = ""; //this is where it prints to
+    document.getElementById("tutor_schedule").classList.remove("modal-info");
     return;
   } else {
     if (window.XMLHttpRequest) {
@@ -172,28 +174,29 @@ function ShowHideDiv(chkEnd_date) {
   hide_box2.style.display = chkEnd_date.checked ? "block" : "none";
 }
 
-document.onkeypress = function (event) {  
-event = (event || window.event);  
-if (event.keyCode == 123) {  
-return false;  
-}  
-}  
-document.onmousedown = function (event) {  
-event = (event || window.event);  
-if (event.keyCode == 123) {  
-return false;  
-}  
-}  
-document.onkeydown = function (event) {  
-event = (event || window.event);  
-if (event.keyCode == 123) {  
-return false;  
-}  
-}
+document.onkeypress = function(event) {
+  event = event || window.event;
+  if (event.keyCode == 123) {
+    return false;
+  }
+};
+document.onmousedown = function(event) {
+  event = event || window.event;
+  if (event.keyCode == 123) {
+    return false;
+  }
+};
+document.onkeydown = function(event) {
+  event = event || window.event;
+  if (event.keyCode == 123) {
+    return false;
+  }
+};
 
-$(document).ready(function() {  
-$(document).on("contextmenu",function(e){  
-return false;  
-});  
+
+
+$(document).ready(function() {
+  $(document).on("contextmenu", function(e) {
+    return false;
+  });
 });
-
