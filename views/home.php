@@ -63,6 +63,31 @@
                     </div>
                 </form>
 <?php } ?>
+                
+<?php if ($_SESSION['user']->getRole() == "Admin") { ?>
+                <form action="index.php" class="add-holiday-form" method="post">
+                    <input type="hidden" name="action" value="additional_subject">
+                    <div class="add-holiday-form-header">
+                        <h3>Add Subject</h3>
+                        <i class="fas fa-calculator"></i>
+                        
+                    </div>
+                    <div class="add-holiday-form-content">
+                        <p class="info">Add subjects for the tutors</p>
+                        <p class="info"><?php
+                            if (!empty($_SESSION['subject_add_error'])) {
+                                echo $_SESSION['subject_add_error'];
+                            } else {
+                                echo "Enter the Subject";
+                            }
+                            ?></p>
+                        <label for="subject_addition">Subject</label>
+                        <input type="text" name="subject_to_add">
+                        <input type="submit" class="appointment-button" value="Add Subject">
+                    </div>
+                </form>
+<?php } ?>
+                
 <?php if ($_SESSION['user']->getRole() == "Tutor") { ?>
                 <form action="index.php" class="change-availability" method="post">
                     <input type="hidden" name="action" value="changeAvailability">
@@ -92,6 +117,34 @@
 
                         <input type="submit" class="appointment-button" value="Add Availability">
 
+                    </div>
+                </form>
+<?php } ?>
+                
+<?php if ($_SESSION['user']->getRole() == "Tutor") { ?>
+                
+                <form action="index.php" class="change-availability" method="post">
+                    <input type="hidden" name="action" value="add_subject">
+                    <div class="change-availability-header">
+                        <h3>Submit Your Subjects</h3>
+                    </div>
+                    <div class="change-availability-content">
+                        <p class="info"><?php
+                            if (!empty($_SESSION['time_error'])) {
+                                echo $_SESSION['time_error'];
+                            } else {
+                                echo "Select your subject";
+                            }
+                            ?></p><br>
+                        <select id="subjects" name="subjects" autofocus>
+                            <?php $subjects = subject_db::select_all(); ?>
+				<option value="">Select a subject:</option>
+                                    <?php foreach ($subjects as $s) : ?>
+				<option value="<?php echo htmlspecialchars($s->getSubID()); ?>"><?php echo htmlspecialchars($s->getSubName()); ?></option>
+							<!--puts subID and userID into the button to carry to the next pages-->
+                                    <?php endforeach; ?>
+			</select>
+                        <input type="submit" class="appointment-button" value="Add Subject">
                     </div>
                 </form>
 <?php } ?>
