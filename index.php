@@ -80,7 +80,12 @@ switch ($action) {
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/dates_between_functions.php');
         die();
         break;
-
+    
+    case 'additional_subject':
+        require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/adding_subjects.php');
+        die();
+        break;
+    
     case 'print_unique_users':
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/report_functions.php');
         Unique_user_information_report();
@@ -96,8 +101,16 @@ switch ($action) {
         reminder_email();
         die();
         break;
+    
     case 'changeAvailability':
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_availability_form_validation.php');
+        die();
+        break;
+    
+    case 'add_subject':
+        require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_add_subject.php');
+        die();
+        break;
 
     case 'addTutorValidation':
         $userToPromote = user_db::get_user_by_id($_REQUEST['selectedUser']);

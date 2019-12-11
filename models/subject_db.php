@@ -62,19 +62,37 @@ class subject_db {
     }
 
     // add an subject to the database
-    public static function add_Subject($subID, $subName) {
+    public static function add_Subject($subName) {
         $db = Database::getDB();
 
-        $query = 'INSERT into subjects (subID, subName)
+        $query = 'INSERT into subjects (subName)
          VALUES
-         (:subID, :subName)';
+         (:subName)';
+
+
+        $statement = $db->prepare($query);
+        //bind the values
+        
+        $statement->bindValue(':subName', $subName);
+
+
+        $statement->execute();
+        $statement->closeCursor();
+    }
+    
+    public static function add_tutor_Subject($subID, $tutorID) {
+        $db = Database::getDB();
+
+        $query = 'INSERT into tutorsubject (subID, tutorID)
+         VALUES
+         (:subID, :tutorID)';
 
 
         $statement = $db->prepare($query);
         //bind the values
         $statement->bindValue(':subID', $subID);
-        $statement->bindValue(':subName', $subName);
-
+        $statement->bindValue(':tutorID', $tutorID);
+        
 
         $statement->execute();
         $statement->closeCursor();
