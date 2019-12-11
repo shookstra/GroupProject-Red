@@ -16,9 +16,9 @@
             <?php foreach ($stuApps as $appointment) : ?>
                 <?php if (($appointment->getAppDate()) >= $today) { ?>
                     <?php $tutor = tutor_db::get_tutor_by_id($appointment->getTutorID()); ?>
-                        <?php $subject = subject_db::select_subject_by_ID($appointment->getSubID()); ?>
+                    <?php $subject = subject_db::select_subject_by_ID($appointment->getSubID()); ?>
                     <span class="appointment-header">
-        <?php echo htmlspecialchars($subject->getSubName()); ?>
+                        <?php echo htmlspecialchars($subject->getSubName()); ?>
                         <i class="fas fa-calendar-check"></i>
                     </span>
                     <div class="appointment">
@@ -26,8 +26,8 @@
                         <p><?php echo htmlspecialchars('With: ' . $tutor->getFName() . ' ' . $tutor->getLName()); ?></p>
                         <p><?php echo htmlspecialchars('on: ' . $appointment->getAppDate()); ?></p>
                         <p><?php echo htmlspecialchars('at: ' . date("g:i a", strtotime($appointment->getAppTime()))); ?></p>
-                        <p><?php echo htmlspecialchars('Details: ' . $appointment->getDetails()); ?></p>
-                        <p><?php echo htmlspecialchars('Meeting Type: ' . $appointment->getMeetType()); ?></p>
+                        <p><?php echo htmlspecialchars('Details: ' . ucfirst($appointment->getDetails())); ?></p>
+                        <p><?php echo htmlspecialchars('Meeting Type: ' . ucfirst($appointment->getMeetType())); ?></p>
                         <form action="index.php" method="POST">
                             <input type="hidden" name="appointmentID" value="<?php echo htmlspecialchars($appointment->getAppID()); ?>">
                             <input type="hidden" name="action" value="cancelAppointment">
@@ -37,7 +37,7 @@
                 <?php } ?>
             <?php endforeach ?>
 
-<?php if ($_SESSION['user']->getRole() == "Admin") { ?>
+            <?php if ($_SESSION['user']->getRole() == "Admin") { ?>
                 <form action="index.php" class="add-holiday-form" method="post">
                     <input type="hidden" name="action" value="add_holiday">
                     <div class="add-holiday-form-header">
@@ -62,15 +62,15 @@
                         <input type="submit" class="appointment-button" value="Add Holiday">
                     </div>
                 </form>
-<?php } ?>
-                
-<?php if ($_SESSION['user']->getRole() == "Admin") { ?>
+            <?php } ?>
+
+            <?php if ($_SESSION['user']->getRole() == "Admin") { ?>
                 <form action="index.php" class="add-holiday-form" method="post">
                     <input type="hidden" name="action" value="additional_subject">
                     <div class="add-holiday-form-header">
                         <h3>Add Subject</h3>
                         <i class="fas fa-calculator"></i>
-                        
+
                     </div>
                     <div class="add-holiday-form-content">
                         <p class="info">Add subjects for the tutors</p>
@@ -86,13 +86,14 @@
                         <input type="submit" class="appointment-button" value="Add Subject">
                     </div>
                 </form>
-<?php } ?>
-                
-<?php if ($_SESSION['user']->getRole() == "Tutor") { ?>
+            <?php } ?>
+
+            <?php if ($_SESSION['user']->getRole() == "Tutor") { ?>
                 <form action="index.php" class="change-availability" method="post">
                     <input type="hidden" name="action" value="changeAvailability">
                     <div class="change-availability-header">
-                        <h3>Change Your Availability</h3>
+                        <h3>Add/Remove Availability</h3>
+                        <i class="far fa-clock"></i>
                     </div>
                     <div class="change-availability-content">
                         <p class="info"><?php
@@ -116,17 +117,32 @@
 
 
                         <input type="submit" class="appointment-button" value="Add Availability">
+                    
+                        </form><br>
+                        
+                <p class="info">Select Day to Remove Your Availability</p><br>
+                <form action="index.php" class="change-availabillity" method="post">
+                    <input type="hidden" name="action" value="removeAvailability">
+                    <select name="removal_day">
+                        <option value="mon">Monday</option>
+                        <option value="tue">Tuesday</option>
+                        <option value="wed">Wednesday</option>
+                        <option value="thu">Thursday</option>
+                        <option value="fri">Friday</option>
+                    </select>
+                    <input type="submit" class="appointment-button" value="Remove Availability">
 
-                    </div>
                 </form>
-<?php } ?>
-                
-<?php if ($_SESSION['user']->getRole() == "Tutor") { ?>
-                
+                </div>
+            <?php } ?>
+
+            <?php if ($_SESSION['user']->getRole() == "Tutor") { ?>
+
                 <form action="index.php" class="change-availability" method="post">
                     <input type="hidden" name="action" value="add_subject">
                     <div class="change-availability-header">
                         <h3>Submit Your Subjects</h3>
+                        <i class="fas fa-book-open"></i>
                     </div>
                     <div class="change-availability-content">
                         <p class="info"><?php
@@ -138,17 +154,17 @@
                             ?></p><br>
                         <select id="subjects" name="subjects" autofocus>
                             <?php $subjects = subject_db::select_all(); ?>
-				<option value="">Select a subject:</option>
-                                    <?php foreach ($subjects as $s) : ?>
-				<option value="<?php echo htmlspecialchars($s->getSubID()); ?>"><?php echo htmlspecialchars($s->getSubName()); ?></option>
-							<!--puts subID and userID into the button to carry to the next pages-->
-                                    <?php endforeach; ?>
-			</select>
+                            <option value="">Select a subject:</option>
+                            <?php foreach ($subjects as $s) : ?>
+                                <option value="<?php echo htmlspecialchars($s->getSubID()); ?>"><?php echo htmlspecialchars($s->getSubName()); ?></option>
+                                <!--puts subID and userID into the button to carry to the next pages-->
+                            <?php endforeach; ?>
+                        </select>
                         <input type="submit" class="appointment-button" value="Add Subject">
                     </div>
                 </form>
-<?php } ?>
-<?php if ($_SESSION['user']->getRole() == "Admin") { ?>
+            <?php } ?>
+            <?php if ($_SESSION['user']->getRole() == "Admin") { ?>
                 <form action="index.php" class="card">
                     <input type="hidden" name="action" value="addTutorValidation">
                     <div class="card-header">
@@ -162,8 +178,8 @@
                             <?php foreach ($users as $user) : ?>
                                 <?php if ($user->getRole() != 'Tutor' && $user->getRole() != 'Admin') { ?>
                                     <option value="<?php echo $user->getUserID(); ?>"><?php echo htmlspecialchars($user->getFName() . ' ' . $user->getLName()); ?></option>
-        <?php } ?>
-    <?php endforeach; ?>
+                                <?php } ?>
+                            <?php endforeach; ?>
                         </select>
                         <p>Tutor City: </p>
                         <select name="city">
@@ -174,8 +190,8 @@
                         <input type="submit" value="Add Tutor" class="appointment-button">
                     </div>
                 </form>
-<?php } ?>
-<?php if ($_SESSION['user']->getRole() == "Admin") { ?>
+            <?php } ?>
+            <?php if ($_SESSION['user']->getRole() == "Admin") { ?>
                 <form action="index.php" class="card">
                     <input type="hidden" name="action" value="deleteTutor">
                     <div class="card-header">
@@ -186,14 +202,14 @@
                         <div class="warning">This action cannot be undone</div>
                         <p>Delete Tutor</p>
                         <select name="selectedTutor">
-    <?php foreach ($tutors as $tutor) : ?>
+                            <?php foreach ($tutors as $tutor) : ?>
                                 <option value="<?php echo $tutor->getTutorID(); ?>"><?php echo htmlspecialchars($tutor->getFName() . ' ' . $tutor->getLName()); ?></option>
-    <?php endforeach; ?>
+                            <?php endforeach; ?>
                         </select>
                         <input type="submit" value="Delete Tutor" class="appointment-button">
                     </div>
                 </form>
-<?php } ?>
+            <?php } ?>
         </div>
         <div class="sideContent">
             <div class="sideContent-header">
@@ -209,21 +225,21 @@
                             $tutor->getLname()
                     ) . '</a></li>';
                     ?>
-<?php endforeach ?>
+                <?php endforeach ?>
             </ul>
             <?php if ($_SESSION['user']->getRole() == "Admin") { ?>
-            <form action="" method="post" class="sideContent-main">
-                <input type="hidden" name="action" value="print_unique_users">
-                <button type="submit" name="unique_users" value="print_unique_users">Unique Users</button>
-            </form>
-            <form action="" method="post" class="sideContent-main">
-                <input type="hidden" name="action" value="todays_appointments">
-                <button type="submit" name="todays_appointments" value="todays_appointments">Today's Appointments</button>
-            </form>
-            <form action="" method="post" class="sideContent-main">
-                <input type="hidden" name="action" value="reminder_email" disabled>
-                <button type="submit" name="reminder_email" value="reminder_email" disabled>Reminder Email</button>
-            </form>
+                <form action="" method="post" class="sideContent-main">
+                    <input type="hidden" name="action" value="print_unique_users">
+                    <button type="submit" name="unique_users" value="print_unique_users">Unique Users</button>
+                </form>
+                <form action="" method="post" class="sideContent-main">
+                    <input type="hidden" name="action" value="todays_appointments">
+                    <button type="submit" name="todays_appointments" value="todays_appointments">Today's Appointments</button>
+                </form>
+                <form action="" method="post" class="sideContent-main">
+                    <input type="hidden" name="action" value="reminder_email" disabled>
+                    <button type="submit" name="reminder_email" value="reminder_email" disabled>Reminder Email</button>
+                </form>
             <?php } ?>
         </div>
     </div>

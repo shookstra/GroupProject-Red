@@ -107,6 +107,11 @@ switch ($action) {
         die();
         break;
     
+    case 'removeAvailability':
+        require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/remove_availability.php');
+        die();
+        break;
+    
     case 'add_subject':
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_add_subject.php');
         die();

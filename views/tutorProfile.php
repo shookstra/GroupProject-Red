@@ -15,7 +15,7 @@
                 </tr>
                 <?php foreach ($availability as $available) : ?>
                     <?php echo '<tr>'; ?>
-                    <?php echo '<td>' . $available->getDay() . '</td>'; ?>
+                    <?php echo '<td>' . ucfirst($available->getDay()) . '</td>'; ?>
                     <?php echo '<td>' . $available->getStart() . ' - ' . $available->getEnd() .  '</td>'; ?>
                     <?php echo '</tr>'; ?>
                 <?php endforeach ?>

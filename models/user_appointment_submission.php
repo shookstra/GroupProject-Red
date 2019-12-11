@@ -10,16 +10,28 @@
     $appointment = $_GET['appointment'];
 
     $appoint_info = explode(",", $appointment);
-    $subID = $appoint_info[0];
-    $userID = $appoint_info[1];
-    $tutorID = $appoint_info[2];
-    $yearPulled = $appoint_info[3];
-    $monthPulled = $appoint_info[4];
-    $datePulled = $appoint_info[5];
-    $appoint_time = $appoint_info[6];
-    $details = $appoint_info[7];
-    $meetType = $appoint_info[8];
+//    $subID_p = $appoint_info[0];
+//    $userID_p = $appoint_info[1];
+//    $tutorID_p = $appoint_info[2];
+//    $yearPulled_p = $appoint_info[3];
+//    $monthPulled_p = $appoint_info[4];
+//    $datePulled_p = $appoint_info[5];
+    $appoint_time = $appoint_info[6];//time
+//    $details_p = $appoint_info[7];//string
+//    $meetType_p = $appoint_info[8];//string
+    
+    $subID = filter_var($appoint_info[0], FILTER_SANITIZE_NUMBER_INT);
+    $userID = filter_var($appoint_info[1], FILTER_SANITIZE_NUMBER_INT);
+    $tutorID = filter_var($appoint_info[2], FILTER_SANITIZE_NUMBER_INT);
+    $yearPulled = filter_var($appoint_info[3], FILTER_SANITIZE_NUMBER_INT);
+    $monthPulled = filter_var($appoint_info[4], FILTER_SANITIZE_NUMBER_INT);
+    $datePulled = filter_var($appoint_info[5], FILTER_SANITIZE_NUMBER_INT);
+    $details = filter_var($appoint_info[7], FILTER_SANITIZE_STRING);
+    $meetType = filter_var($appoint_info[8], FILTER_SANITIZE_STRING);
 
+    var_dump($yearPulled);
+    var_dump($monthPulled);
+    var_dump($datePulled);
 
     $appDate = "$yearPulled" . '-' . "$monthPulled" . '-' . "$datePulled";
 
@@ -45,10 +57,6 @@
 
     mysqli_close($con);
     ?>
-</body>
-
-</html>
-
 </body>
 
 </html>
