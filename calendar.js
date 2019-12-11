@@ -174,6 +174,20 @@ function ShowHideDiv(chkEnd_date) {
   hide_box2.style.display = chkEnd_date.checked ? "block" : "none";
 }
 
+function Demote_Admin(demote_admin) {
+  var hide_demote1 = document.getElementById("hide_demote1");
+  hide_demote1.style.display = demote_admin.checked ? "block" : "none";
+
+  var hide_demote2 = document.getElementById("hide_demote2");
+  hide_demote2.style.display = demote_admin.checked ? "block" : "none";
+  
+  var hide_demote3 = document.getElementById("hide_demote3");
+  hide_demote3.style.display = demote_admin.checked ? "block" : "none";
+
+  var hide_demote4 = document.getElementById("hide_demote4");
+  hide_demote4.style.display = demote_admin.checked ? "block" : "none";
+}
+
 document.onkeypress = function(event) {
   event = event || window.event;
   if (event.keyCode == 123) {

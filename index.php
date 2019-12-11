@@ -122,6 +122,19 @@ switch ($action) {
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/addTutorValidation.php');
         die();
         break;
+    
+    case 'addAdminValidation':
+        $userToPromote = user_db::get_user_by_id($_REQUEST['selectedUser']);
+        require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/add_admin_validation.php');
+        die();
+        break;
+    
+     case 'remove_admin':
+        $userToDemote = user_db::get_user_by_id($_REQUEST['selectedAdmin']);
+        require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/remove_admin.php');
+        die();
+        break;
+    
     case 'deleteTutor':
         $tutorID = $_REQUEST['selectedTutor'];
         tutor_db::deleteTutor($tutorID);

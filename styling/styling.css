@@ -417,6 +417,10 @@ nav ul {
   display: none;
 }
 
+.hide_demote {
+    display:none;
+}
+
 #testing {
   font-family: "PT Sans", sans-serif;
   padding: 5px;
