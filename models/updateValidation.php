@@ -1,6 +1,5 @@
 <?php
 
-
 require_once('models/user_db.php');
 
 // get user inputs
@@ -8,7 +7,9 @@ $userID = filter_input(INPUT_POST, 'userID');
 $firstName = filter_input(INPUT_POST, 'firstName');
 $firstName = trim($firstName);
 $lastName = filter_input(INPUT_POST, 'lastName');
+$lastName = trim($lastName);
 $phone = filter_input(INPUT_POST, 'phone');
+$tutorID = $userID;
 
 // array for errors
 $updateErrors = [];
@@ -31,12 +32,24 @@ if ($phone === "" || $phone === null) {
     array_push($updateErrors, "Please enter a valid phone number");
     $phoneError = true;
 }
+if ($_SESSION['user']->getRole() == "Student" || $_SESSION['user']->getRole() == "Admin" ) {
+    if (empty($updateErrors)) {
+        user_db::update_User($firstName, $lastName, $phone, $userID);
+        header("Location: index.php?action=profile");
+        //include('views/profile.php');
+    } else {
+        include('views/updateProfile.php');
+        exit();
+}  
 
-if (empty($registrationErrors)) {
-    user_db::update_User($firstName, $lastName, $phone, $userID);
-    //header("Location: index.php?action=profile");
-    include('views/profile.php');
-} else {
-    include('views/updateProfile.php');
-    exit();
-}
+    } else if ($_SESSION['user']->getRole() == "Tutor") { 
+          if (empty($updateErrors)) {
+        user_db::update_User($firstName, $lastName, $phone, $userID);
+        tutor_db::update_Tutor($firstName, $lastName, $phone, $tutorID);
+        header("Location: index.php?action=profile");
+        //include('views/profile.php');
+    } else {
+        include('views/updateProfile.php');
+        exit();
+}  
+    }

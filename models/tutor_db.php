@@ -278,4 +278,21 @@ class tutor_db
         $statement->execute();
         $statement->closeCursor();
     }
+    
+       public static function update_Tutor($firstName, $lastName, $phone, $tutorID) {
+        $db = Database::getDB();
+
+        $query = 'UPDATE tutor 
+                    Set fName = :firstName, lName = :lastName, phone = :phone
+                    where tutorID = :userID';
+
+        $statement = $db->prepare($query);
+        //bind the values
+        $statement->bindValue(':firstName', $firstName);
+        $statement->bindValue(':lastName', $lastName);
+        $statement->bindValue(':phone', $phone);
+        $statement->bindValue(':userID', $tutorID);
+        $statement->execute();
+        $statement->closeCursor();
+    }
 }
