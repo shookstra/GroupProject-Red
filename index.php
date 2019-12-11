@@ -154,7 +154,7 @@ switch ($action) {
         break;
     case 'updateValidation':
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/updateValidation.php');
-        $_SESSION['user'] = user_db::get_specificUser($email);
+        $_SESSION['user'] = user_db::get_specificUser($_SESSION['user']->getEmail());
         die();
         break;
     case 'logout':

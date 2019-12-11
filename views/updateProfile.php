@@ -37,7 +37,7 @@
                     ?>
                     </div>
 <?php } ?>
-              <?php var_dump($expression)?>
+              
                     <input type="hidden" name="action" id="action" value="updateValidation">
                     <input type="submit" value="Update Information" name="submit">
                 </form>
