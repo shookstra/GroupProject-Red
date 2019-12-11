@@ -158,6 +158,7 @@
                     ?>
 <?php endforeach ?>
             </ul>
+            <?php if ($_SESSION['user']->getRole() == "Admin") { ?>
             <form action="" method="post" class="sideContent-main">
                 <input type="hidden" name="action" value="print_unique_users">
                 <button type="submit" name="unique_users" value="print_unique_users">Unique Users</button>
@@ -170,6 +171,7 @@
                 <input type="hidden" name="action" value="reminder_email" disabled>
                 <button type="submit" name="reminder_email" value="reminder_email" disabled>Reminder Email</button>
             </form>
+            <?php } ?>
         </div>
     </div>
     <script src="<?php $_SERVER['DOCUMENT_ROOT'] ?> /groupProject/calendar.js"></script>
