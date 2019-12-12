@@ -330,6 +330,23 @@ nav ul {
   width: 100%;
 }
 
+.select-input {
+  padding: 5px;
+}
+
+.text-input {
+  border: 1px solid #eee;
+  background-color: #eee;
+  padding: 10px;
+  border-radius: 6px;
+  transition: background-color 250ms;
+}
+
+.text-input:focus {
+  border: 1px solid #ccc;
+  background-color: white;
+}
+
 .add-holiday-form input[type="date"] {
   border: none;
   background-color: #eee;
