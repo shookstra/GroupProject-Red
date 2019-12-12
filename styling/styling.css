@@ -136,7 +136,7 @@ nav ul {
   justify-content: space-between;
 }
 
-.sideContent-header > * {
+.sideContent-header>* {
   padding: 0 5px;
 }
 
@@ -336,6 +336,11 @@ nav ul {
   padding: 5px;
   border-radius: 6px;
   text-align: center;
+  cursor: pointer;
+}
+
+input[type=checkbox] {
+  cursor: pointer;
 }
 
 .add-holiday-form-header,
@@ -418,7 +423,7 @@ nav ul {
 }
 
 .hide_demote {
-    display:none;
+  display: none;
 }
 
 #testing {
@@ -430,6 +435,80 @@ nav ul {
 
 #testing option {
   font-weight: normal;
+}
+
+.update-info-form {
+  flex: 3;
+  margin: 10px 0;
+  max-width: 400px;
+  border-radius: 6px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05),
+    0 8px 10px rgba(0, 0, 0, 0.2);
+}
+
+.update-info-form-content {
+  display: grid;
+  padding: 10px;
+  gap: 5px;
+  border: 1px solid #ccc;
+  border-radius: 0 0 6px 6px;
+}
+
+.update-info-form-title {
+  font-weight: bold;
+  background-color: var(--main-bg-color);
+  padding: 10px;
+  color: white;
+  border-radius: 6px 6px 0 0;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.update-info-form label {
+  color: rgb(100, 100, 100);
+  text-transform: uppercase;
+}
+
+.static-info-input {
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  background-color: #eee;
+}
+
+.update-info-input {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: background-color 250ms;
+}
+
+.update-info-input:focus {
+  background-color: #eee;
+}
+
+.update-info-button {
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background-color: #eee;
+  font-size: 16px;
+  transition: color 250ms,
+    background-color 250ms;
+  margin-top: 10px;
+}
+
+.update-info-button:hover {
+  background-color: var(--main-bg-color);
+  color: white;
+}
+
+.error {
+  background-color: rgba(255, 131, 131, 0.5);
+  color: rgba(70, 70, 70);
+  border-radius: 6px;
+  padding: 10px;
 }
 
 @media screen and (max-width: 1024px) {
@@ -531,6 +610,7 @@ nav ul {
   .appointments {
     margin: 0 0 20px 0;
   }
+
   .error {
     background-color: rgba(255, 131, 131, 0.5);
     color: rgba(70, 70, 70);
