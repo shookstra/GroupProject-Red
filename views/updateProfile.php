@@ -13,16 +13,10 @@
             <div style="flex: 4">
                 <h3 style="font-weight: bold">Profile Information</h3>
                   <form method="POST">
-                <p><label>User ID: </label><input type="text" name="userID" value="<?php echo htmlspecialchars($_SESSION['user']->getUserID()); ?>" readonly></p>
-                <p><label>First Name: </label><input type="text" name="firstName" value="<?php if (!empty($firstName)) {
-            echo $firstName;
-        } ?>"></p>
-                <p> <label>Last Name: </label><input type="text" name="lastName" value="<?php if (!empty($lastName)) {
-            echo $lastName;
-        } ?>"></p>
-                <p><label>Phone Number: </label><input type="text" name="phone" value="<?php if (!empty($phone)) {
-                        echo $phone;
-                    } ?>"></p>
+                      <p><label>User ID: </label><input type="text" name="firstName" value="<?php echo htmlspecialchars($_SESSION['user']->getUserID()); ?>" disabled></input></p>
+                <p><label>First Name: </label><input type="text" name="firstName" value="<?php echo htmlspecialchars($firstName); ?>"></p>
+                <p> <label>Last Name: </label><input type="text" name="lastName" value="<?php echo htmlspecialchars($lastName); ?>"></p>
+                <p><label>Phone Number: </label><input type="text" name="phone" value="<?php echo htmlspecialchars($phone); ?>"></p>
 
                     <?php if (empty($error)) { ?>
                     <div>

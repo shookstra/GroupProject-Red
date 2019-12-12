@@ -148,6 +148,9 @@ switch ($action) {
         die();
         break;
     case 'ChangeMyInformation':
+        $firstName = $_SESSION['user']->getFName();
+        $lastName = $_SESSION['user']->getLName();
+        $phone = $_SESSION['user']->getPhone();
         // $_SESSION['user'] = user_db::get_specificUser($email);
         include('views/updateProfile.php');
         die();
