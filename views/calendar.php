@@ -19,6 +19,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/head.php')
 	<?php include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/header.php');
 	include('views/sideBar.php'); ?>
 
+	<h2 class="banner">Calendar</h2>
 	<div class="wrapper">
 		<div id="tbl">
 			<table>
@@ -196,19 +197,19 @@ include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/head.php')
 			</table>
 
 
-
-			<form name="nav_form" method="POST" action="/groupproject/index.php?action=calendar">
-				<div id="inps">
-					<input type="Submit" name="prev" value="<- Previous" class="buttons" onClick="window.location.reload()" />
-					<input type="Submit" name="next" value="Next ->" class="buttons" onClick="window.location.reload()" />
+			<div class="calendar-next-buttons">
+				<form name="nav_form" method="POST" action="/groupproject/index.php?action=calendar">
+					<div id="inps">
+						<input type="Submit" name="prev" value="<- Previous" class="buttons" onClick="window.location.reload()" />
+						<input type="Submit" name="next" value="Next ->" class="buttons" onClick="window.location.reload()" />
+					</div>
+					<input type="hidden" name="month" value="<?php echo $month ?>" />
+					<input type="hidden" name="year" value="<?php echo $year ?>" />
+				</form>
+				<div class="showDate">
+					<div class="todayDate"></div>
+					<p>- Today's date</p>
 				</div>
-
-				<input type="hidden" name="month" value="<?php echo $month ?>" />
-				<input type="hidden" name="year" value="<?php echo $year ?>" />
-			</form>
-			<div class="showDate">
-				<div class="todayDate"></div>
-				<p>- Today's date</p>
 			</div>
 		</div>
 

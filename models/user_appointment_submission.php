@@ -10,16 +10,16 @@
     $appointment = $_GET['appointment'];
 
     $appoint_info = explode(",", $appointment);
-//    $subID_p = $appoint_info[0];
-//    $userID_p = $appoint_info[1];
-//    $tutorID_p = $appoint_info[2];
-//    $yearPulled_p = $appoint_info[3];
-//    $monthPulled_p = $appoint_info[4];
-//    $datePulled_p = $appoint_info[5];
-    $appoint_time = $appoint_info[6];//time
-//    $details_p = $appoint_info[7];//string
-//    $meetType_p = $appoint_info[8];//string
-    
+    //    $subID_p = $appoint_info[0];
+    //    $userID_p = $appoint_info[1];
+    //    $tutorID_p = $appoint_info[2];
+    //    $yearPulled_p = $appoint_info[3];
+    //    $monthPulled_p = $appoint_info[4];
+    //    $datePulled_p = $appoint_info[5];
+    $appoint_time = $appoint_info[6]; //time
+    //    $details_p = $appoint_info[7];//string
+    //    $meetType_p = $appoint_info[8];//string
+
     $subID = filter_var($appoint_info[0], FILTER_SANITIZE_NUMBER_INT);
     $userID = filter_var($appoint_info[1], FILTER_SANITIZE_NUMBER_INT);
     $tutorID = filter_var($appoint_info[2], FILTER_SANITIZE_NUMBER_INT);
@@ -36,7 +36,7 @@
     $appDate = "$yearPulled" . '-' . "$monthPulled" . '-' . "$datePulled";
 
 
-    $con = mysqli_connect('localhost', 'root', '', 'group_project'); //connection to db, copy what is in database.php
+    $con = mysqli_connect('localhost', 'root', '', 'groupproject'); //connection to db, copy what is in database.php
     if (!$con) {
         die('Could not connect: ' . mysqli_error($con));
     }

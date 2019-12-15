@@ -12,11 +12,9 @@ body {
 table {
   margin: auto;
   border-spacing: 0;
-  background-color: rgb(245, 245, 245);
+  background-color: rgb(250, 250, 250);
   border-radius: 6px;
   padding: 10px;
-  /* border-style: solid;
-  border-color: black; */
 }
 
 td,
@@ -24,20 +22,6 @@ th {
   padding: 2px;
   text-align: center;
   /* border: 1px solid rgb(211, 211, 211); */
-}
-
-.day_num button {
-  background-color: rgba(44, 115, 182, 0.5);
-  font-weight: bold;
-  transition: none;
-  border-radius: 6px;
-}
-
-.day_num button:hover {
-  background-color: #ccc;
-  color: black;
-  border: 2px solid rgba(44, 115, 182, 0.5);
-  font-weight: bold;
 }
 
 #tbl button {
@@ -73,6 +57,20 @@ th {
   cursor: pointer;
   background-color: rgb(44, 115, 182);
   color: white;
+}
+
+.day_num {
+  background-color: rgba(44, 115, 182, 0.5);
+  font-weight: bold;
+  transition: none;
+  border-radius: 8px;
+}
+
+.day_num button:hover {
+  /* background-color: #ccc; */
+  color: black;
+  border: 2px solid rgba(44, 115, 182, 0.5);
+  font-weight: bold;
 }
 
 #inps {
@@ -140,6 +138,7 @@ textarea {
   flex-direction: row;
   align-items: center;
   padding: 5px;
+  justify-content: center;
 }
 
 .todayDate {
@@ -150,10 +149,23 @@ textarea {
   border-radius: 6px;
 }
 
+.calendar-next-buttons {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background-color: rgb(250, 250, 250);
+  margin-top: 5px;
+  padding: 10px 15px;
+  border-radius: 6px;
+
+  /* border: 1px solid red; */
+}
+
 @keyframes modalopen {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
