@@ -33,15 +33,17 @@ function Unique_user_information_report(){
                     
             
         }
-
+               
                 $content_comma_seperated = '';
                 $sep = ",";
 
     foreach ($unique_users as $values) {
+        
         $content_comma_seperated .= implode($sep, $values);
         $content_comma_seperated .= "\n"; // add separator between sub-arrays
 
     }
+    var_dump($unique_users);
                 $length = strlen($content_comma_seperated);
                 header('Content-Description: File Transfer');
                 header('Content-Type: text/plain');//<<<<
@@ -84,6 +86,7 @@ function No_show_user_information_report(){
                     $content_comma_seperated .= "\n"; // add separator between sub-arrays
 
     }
+    
                 $length = strlen($content_comma_seperated);
                 
                 header('Content-Description: File Transfer');
@@ -108,27 +111,36 @@ function daily_appointment_information_report(){
                 $users = appointment_db::select_all_appointments_today($today_appointment_date);
                 
                 $daily_appointments = array();
-                $fields = array('email', 'student_last_name', 'tutor_last_name'); 
+                $fields = array('student_email', 'student_last_name', 'tutor_last_name'); 
                 $daily_appointments[] = $fields;
                 
                                 foreach($users as $user){
-                                                $values=array();
-                                                $values[] = user_db::get_user_email_by_id($user->getUserID());
-                                                $values[] = user_db::select_user_lastname_by_id($user->getUserID());
-                                                $values[] = tutor_db::get_tutor_lastname_by_id($user->getUserID());
+                                                $values = array();
+                                                
+                                                $email = user_db::get_user_email_by_id($user->getUserID());
+                                                $values[] = $email['email'];
+                                                
+                                                $student_lname = user_db::select_user_lastname_by_id($user->getUserID());
+                                                $values[] = $student_lname['lName'];
+                                                
+                                                $tutor_lname = tutor_db::get_tutor_lastname_by_id($user->getUserID());
+                                                $values[] = $tutor_lname['lName'];
 
                                                 $daily_appointments[] = $values;
                                 }
-
+                               
                 $content_comma_seperated = '';
                 $sep = ",";
+                
                 foreach ($daily_appointments as $values) {
 
                     $content_comma_seperated .= implode($sep, $values);
                     $content_comma_seperated .= "\n"; // add separator between sub-arrays
 
-    }
+                }
+                
                 $length = strlen($content_comma_seperated);
+                
                 header('Content-Description: File Transfer');
                 header('Content-Type: text/plain');//<<<<
                 header('Content-Disposition: attachment; filename=daily_appointment_users.csv');

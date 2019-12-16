@@ -26,8 +26,8 @@
     echo "<li>Appointment Day: " . $appoint_info_date ."</li>";
     echo "<li>Tutor: " . $appoint_info_fName ."</li>";
     echo "<li>Time: " . $appoint_info_time ."</li>";
-    echo "<li>Details: " . $details . "</li>";
-    echo "<li>Meeting Type: " . $meetType . "</li>";
+    echo "<li>Details: " . ucfirst($details) . "</li>";
+    echo "<li>Meeting Type: " . ucfirst($meetType) . "</li>";
     echo "<li>User ID: " . $appoint_info_userID . "</li><br>";
     echo "</ul>";
     

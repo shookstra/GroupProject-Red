@@ -80,8 +80,8 @@ class appointment_db
             JOIN users on appointment.userID = users.userID
             JOIN tutor ON tutor.tutorID = appointment.tutorID
             JOIN subjects ON subjects.subID = appointment.subID
-            where tutorID = :tutorID
-            ORDER BY appDate DESC, appTime ASC';
+            where tutor.tutorID = :tutorID
+            ORDER BY appointment.appDate DESC, appointment.appTime ASC';
 
         $statement = $db->prepare($query);
         $statement->bindValue(':tutorID', $tutorID);
