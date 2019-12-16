@@ -174,6 +174,12 @@ function ShowHideDiv(chkEnd_date) {
   hide_box2.style.display = chkEnd_date.checked ? "block" : "none";
 }
 
+function ShowHideAvailability(hide_availability) {
+  var hide_div1 = document.getElementById("hide_availability");
+  hide_div1.style.display = hide_availability.checked ? "block" : "none";
+
+}
+
 document.onkeypress = function(event) {
   event = event || window.event;
   if (event.keyCode == 123) {

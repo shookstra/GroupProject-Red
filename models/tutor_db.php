@@ -230,6 +230,20 @@ class tutor_db
         $statement->execute();
         $statement->closeCursor();
     }
+    
+    // delete tutor from tutor_availability table
+    public static function deleteTutor_Availability_with_day($tutorID, $day)
+    {
+        $db = Database::getDB();
+
+        $query = ' DELETE from tutor_availability where tutorID = :tutorID && day = :day';
+
+        $statement = $db->prepare($query);
+        $statement->bindValue(':tutorID', $tutorID);
+        $statement->bindValue(':day', $day);
+        $statement->execute();
+        $statement->closeCursor();
+    }
 
     // delete tutor from tutorsubject table
     public static function delete_Tutor_Subject($tutorID)

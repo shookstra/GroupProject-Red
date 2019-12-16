@@ -102,6 +102,7 @@
                                 echo "Select your time";
                             }
                             ?></p><br>
+                        
                         <select name="day">
                             <option value="mon">Monday</option>
                             <option value="tue">Tuesday</option>
@@ -109,13 +110,14 @@
                             <option value="thur">Thursday</option>
                             <option value="fri">Friday</option>
                         </select>
-                        <label for="start">Start Time:</label>
+                        <label for="start" >Start Time:</label>
                         <input type="time" id="start" name="start_time" min="10:00" max="18:30" step="1800.00" >
-                        <label for="end">End Time:</label>
+                        <label for="end" >End Time:</label>
                         <input type="time" id="end" name="end_time" min="10:30" max="19:00" step="1800.00" >
 
-
                         <input type="submit" class="appointment-button" value="Add Availability">
+                        
+                        <div
 
                     </div>
                 </form>
