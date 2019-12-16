@@ -5,7 +5,10 @@
     include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/header.php');
     include('views/sideBar.php');
     ?>
-
+    <h2 class="banner">Home</h2>
+    <!-- <div class="info-section">
+        <p>Test</p>
+    </div> -->
     <div class="wrapper">
         <div class="appointments">
             <?php if (empty($stuApps)) { ?>
@@ -251,31 +254,32 @@
         <h2>Available Tutors</h2>
         <i class="fas fa-chalkboard"></i>
     </div>
-    <ul class="sideContent-main">
-        <?php foreach ($tutors as $tutor) : ?>
-            <?php
-                echo '<li><a href="index.php?action=viewTutorProfile&tutorID=' . $tutor->getTutorID() . '">' .
-                    htmlspecialchars(
-                        $tutor->getFname() . ' ' .
-                            $tutor->getLname()
-                    ) . '</a></li>';
-                ?>
-        <?php endforeach ?>
-    </ul>
-    <?php if ($_SESSION['user']->getRole() == "Admin") { ?>
-        <form action="" method="post" class="sideContent-main">
-            <input type="hidden" name="action" value="print_unique_users">
-            <button type="submit" name="unique_users" value="print_unique_users" class="appointment-button">Unique Users</button>
-        </form>
-        <form action="" method="post" class="sideContent-main">
-            <input type="hidden" name="action" value="todays_appointments">
-            <button type="submit" name="todays_appointments" value="todays_appointments" class="appointment-button">Today's Appointments</button>
-        </form>
-        <!--                            <form action="" method="post" class="sideContent-main">
-                                <input type="hidden" name="action" value="reminder_email" disabled>
-                                <button type="submit" name="reminder_email" value="reminder_email" disabled class="appointment-button">Reminder Email</button>
-                            </form>-->
-    <?php } ?>
+    <div class="sideContent-main">
+        <ul class="available-users">
+            <?php foreach ($tutors as $tutor) : ?>
+                <?php
+                    echo '<li><a href="index.php?action=viewTutorProfile&tutorID=' . $tutor->getTutorID() . '">' .
+                        htmlspecialchars(
+                            $tutor->getFname() . ' ' .
+                                $tutor->getLname()
+                        ) . '</a></li>';
+                    ?>
+            <?php endforeach ?>
+        </ul>
+        <?php if ($_SESSION['user']->getRole() == "Admin") { ?>
+            <div class="print-users-section">
+                <h3>Print Users</h3>
+                <form action="" method="post" class="">
+                    <input type="hidden" name="action" value="print_unique_users">
+                    <button type="submit" name="unique_users" value="print_unique_users" class="print-user-section-button">Unique Users</button>
+                </form>
+                <form action="" method="post" class="">
+                    <input type="hidden" name="action" value="todays_appointments">
+                    <button type="submit" name="todays_appointments" value="todays_appointments" class="print-user-section-button">Today's Appointments</button>
+                </form>
+            <?php } ?>
+            </div>
+    </div>
 </div>
 </div>
 <script src="<?php $_SERVER['DOCUMENT_ROOT'] ?> /groupProject/calendar.js"></script>
