@@ -45,7 +45,7 @@
         echo "<p> Sorry no tutors available </p>";
     } else {
         echo "<center><p>Each session will be 30 min</p></center>";
-        echo "<center><strong><p>*Make sure to pay attention to the tutors city. You can schedule a ZOOM meeting for a tutor in another city, but an in person meeting will have to be in your cities tutoring center.</p></strong></center>";
+        echo "<center><strong><p>*Make sure to pay attention to the tutors city. You can schedule a ZOOM meeting for a tutor in another city, but an in person meeting will have to be in the tutors cities tutoring center.</p></strong></center>";
         echo "<table>
 <tr>
 <th>First</th>
@@ -68,7 +68,7 @@
             //$tutorInfo = appointment_db::get_tutor_Times($tutorID, $appDate);
             $tutorInfo = array('tutorID' => $tutorID, 'appTime' => appointment_db::get_tutor_Times($tutorID, $appDate));
             array_push($appTime, $tutorInfo);
-
+            
             $running_tutor = array_column($appTime, 'tutorID');
             $running_appTime = array_column($appTime, 'appTime', 'tutorID');
 

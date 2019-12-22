@@ -12,11 +12,12 @@
 
 html,
 body {
-  height: 100%;
+  /* height: 100%; */
   display: block;
   overflow: auto;
   font-family: "PT Sans", sans-serif;
   position: relative;
+  background-color: #eee;
 }
 
 nav {
@@ -78,9 +79,9 @@ nav ul {
   padding: 10px;
   width: 70%;
   margin: 10px auto;
+  margin-bottom: 50px;
   display: flex;
   justify-content: space-between;
-
   /* border: 2px solid orange; */
 }
 
@@ -103,11 +104,11 @@ nav ul {
 .sideContent {
   /* padding: 15px; */
   flex: 1;
-  height: 50vh;
+  min-height: 35vh;
   border-radius: 6px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05), 0 8px 10px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(0, 0, 0, 0.05);
   list-style: none;
+  background-color: rgb(250, 250, 250);
 }
 
 .sideContent a {
@@ -136,12 +137,35 @@ nav ul {
   justify-content: space-between;
 }
 
-.sideContent-header > * {
+.sideContent-header>* {
   padding: 0 5px;
 }
 
 .sideContent-main {
   padding: 10px 15px 5px 15px;
+}
+
+.print-users-section {
+  margin-top: 30px;
+  /* border: 1px solid red; */
+}
+
+.print-user-section-button {
+  margin-top: 5px;
+  padding: 10px 15px;
+  border: none;
+  background-color: #eee;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 250ms,
+    color 250ms;
+  border-radius: 6px;
+  width: 100%;
+}
+
+.print-user-section-button:hover {
+  background-color: var(--main-bg-color);
+  color: white;
 }
 
 .fa-chalkboard-teacher,
@@ -150,6 +174,7 @@ nav ul {
 .fa-user-plus {
   margin-right: 10px;
   transform: scale(1.5, 1.5);
+  z-index: 0;
 }
 
 .fa-calendar-check,
@@ -160,9 +185,9 @@ nav ul {
 .sidebar {
   display: flex;
   flex-direction: column;
-  background-color: #eee;
+  background-color: rgb(50, 50, 60);
   width: 75px;
-  height: calc(100vh + 8vh);
+  height: 92vh;
   float: left;
   clear: both;
 }
@@ -179,19 +204,25 @@ nav ul {
   justify-content: center;
   height: 75px;
   padding: 5px;
+  background-color: rgb(50, 50, 60);
   transition: background-color 300ms ease-out;
+  color: white;
   /* border: 1px solid red; */
 }
 
+.sidebar-item fa {
+  color: white;
+}
+
 .sidebar-item i {
-  color: var(--main-bg-color);
+  color: rgb(240, 240, 240);
   font-size: 36px;
   margin-bottom: 3px;
 }
 
 .sidebar-item:hover,
 .sidebar-item:focus {
-  background-color: #ccc;
+  background-color: var(--main-bg-color);
   cursor: pointer;
 }
 
@@ -234,6 +265,10 @@ nav ul {
   display: flex;
   flex-direction: column;
   margin-right: 20px;
+  max-height: 735px;
+  overflow: scroll;
+  padding: 0 20px;
+  padding-bottom: 50px;
 }
 
 .appointment {
@@ -242,6 +277,7 @@ nav ul {
   padding: 10px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05), 0 8px 10px rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(0, 0, 0, 0.05);
+  background-color: rgb(250, 250, 250);
 }
 
 .appointment-button {
@@ -330,12 +366,49 @@ nav ul {
   width: 100%;
 }
 
+.select-input {
+  padding: 5px;
+}
+
+.text-input {
+  border: 1px solid #eee;
+  background-color: #eee;
+  padding: 10px;
+  border-radius: 6px;
+  transition: background-color 250ms;
+}
+
+.text-input:focus {
+  border: 1px solid #ccc;
+  background-color: white;
+}
+
 .add-holiday-form input[type="date"] {
   border: none;
   background-color: #eee;
   padding: 5px;
   border-radius: 6px;
   text-align: center;
+  cursor: pointer;
+}
+
+input[type=checkbox] {
+  cursor: pointer;
+}
+
+.profile-information {
+  background-color: rgb(250, 250, 250);
+  flex: 4;
+  padding: 10px;
+  max-width: 400px;
+  border-radius: 6px;
+}
+
+.info-section {
+  background-color: #ccc;
+  padding: 10px;
+  max-width: 500px;
+  margin: 10px auto;
 }
 
 .add-holiday-form-header,
@@ -417,6 +490,10 @@ nav ul {
   display: none;
 }
 
+.hide_demote {
+  display: none;
+}
+
 #testing {
   font-family: "PT Sans", sans-serif;
   padding: 5px;
@@ -426,6 +503,89 @@ nav ul {
 
 #testing option {
   font-weight: normal;
+}
+
+.update-info-form {
+  flex: 3;
+  margin: 10px 0;
+  max-width: 400px;
+  border-radius: 6px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05),
+    0 8px 10px rgba(0, 0, 0, 0.2);
+}
+
+.update-info-form-content {
+  display: grid;
+  padding: 10px;
+  gap: 5px;
+  border: 1px solid #ccc;
+  border-radius: 0 0 6px 6px;
+  background-color: rgb(250, 250, 250);
+}
+
+.update-info-form-title {
+  font-weight: bold;
+  background-color: var(--main-bg-color);
+  padding: 10px;
+  color: white;
+  border-radius: 6px 6px 0 0;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.update-info-form label {
+  color: rgb(100, 100, 100);
+  text-transform: uppercase;
+}
+
+.static-info-input {
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  background-color: #eee;
+}
+
+.update-info-input {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: background-color 250ms;
+}
+
+.update-info-input:focus {
+  background-color: #eee;
+}
+
+.update-info-button {
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background-color: #eee;
+  font-size: 16px;
+  transition: color 250ms,
+    background-color 250ms;
+  margin-top: 10px;
+}
+
+.update-info-button:hover {
+  background-color: var(--main-bg-color);
+  color: white;
+}
+
+.error {
+  background-color: rgba(255, 131, 131, 0.5);
+  color: rgba(70, 70, 70);
+  border-radius: 6px;
+  padding: 10px;
+}
+
+.banner {
+  background-color: white;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ccc;
+  font-weight: normal;
+  margin-left: 70px;
 }
 
 @media screen and (max-width: 1024px) {
@@ -443,16 +603,20 @@ nav ul {
     position: fixed;
     bottom: 0;
     width: 100vw;
-    background-color: red;
+    background-color: rgb(50, 50, 60);
   }
 
   .sidebar-item {
     width: calc(100vw / 3);
-    background-color: transparent;
+    background-color: rgb(50, 50, 60);
   }
 
   .sidebar-item i {
     font-size: 32px;
+  }
+
+  .banner {
+    margin-left: 0px;
   }
 }
 
@@ -473,6 +637,7 @@ nav ul {
 
   .wrapper {
     flex-direction: column;
+    margin-bottom: 80px;
   }
 
   .card {
@@ -527,6 +692,7 @@ nav ul {
   .appointments {
     margin: 0 0 20px 0;
   }
+
   .error {
     background-color: rgba(255, 131, 131, 0.5);
     color: rgba(70, 70, 70);

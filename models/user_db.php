@@ -281,16 +281,16 @@ class user_db
     public static function update_User($firstName, $lastName, $phone, $userID) {
         $db = Database::getDB();
 
-        $query = 'UPDATE users  (fName, lName, phone)
+        $query = 'UPDATE users 
                     Set fName = :firstName, lName = :lastName, phone = :phone
                     where userID = :userID';
 
         $statement = $db->prepare($query);
         //bind the values
-        $statement->bindValue(':fName', $firstName);
-        $statement->bindValue(':lName', $lastName);
+        $statement->bindValue(':firstName', $firstName);
+        $statement->bindValue(':lastName', $lastName);
         $statement->bindValue(':phone', $phone);
-         $statement->bindValue(':userID', $userID);
+        $statement->bindValue(':userID', $userID);
         $statement->execute();
         $statement->closeCursor();
     }

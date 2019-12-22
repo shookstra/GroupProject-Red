@@ -34,7 +34,7 @@
     if($tutor_info_subID == 1){
     echo "<form action='index.php' method='get'>";
 					echo "<select id='details'>";
-					echo "	<option value=''>Need Help In:</option>";
+					echo "	<option value='general'>Need Help In:</option>";
 					echo "	<option value='general'>General</option>";
                                         echo "  <option value='grammar'>Grammar</option>";
                                         echo "  <option value='citation'>Citation</option>";
@@ -45,7 +45,7 @@
     } else {
         echo "<form action='index.php' method='get'>";
 					echo "<select id='details'>";
-					echo "	<option value=''>Need Help In:</option>";
+					echo "	<option value='general'>Need Help In:</option>";
 					echo "	<option value='general'>General</option>";
                                         echo "  <option value='assignment'>Assignment</option>";
                                         echo "  <option value='theory'>Theory</option>";
@@ -54,8 +54,8 @@
 				echo "</form>";
     }
     echo "<p>What kind of meeting would you like to schedule?(*If the tutor is not on your campus you will have to schedule a Zoom Meeting)</p>";
-    echo "<input type='radio' id='meetTypeRadio' name='meeting' value='inPerson'>In Person Meeting</input><br>";
-    echo "<input type='radio' id='meetTypeRadio' name='meeting' value='zoom'>Online Zoom Meeting</input><br>";
+    echo "<input type='radio' id='meetTypeRadio' name='meeting' value='In_Person'>In Person Meeting</input><br>";
+    echo "<input type='radio' id='meetTypeRadio' name='meeting' value='ZOOM'>Online Zoom Meeting</input><br>";
     echo "<button type='submit' value=". $tutor_info_subID . "," . $tutor_info_userID . "," . $tutor_info_ID . "," . $date_info_month . ",". $date_info_date . "," . $tutor_info_time . "," . $tutor_info_fName . "," . $date_info_year ." onclick='getTextArea(this.value)' >Send</button></center>";
     
     

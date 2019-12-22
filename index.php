@@ -28,12 +28,22 @@ switch ($action) {
             $registrationErrors = [];
             array_push($registrationErrors, "You need to sign in to access scheduling");
             include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/login.php');
+//        } else if ($_SESSION['user']->getRole() == "Tutor"){
+//            $today = date("Y-m-d");
+//            $subjects = subject_db::select_all();
+//            $tutor_available = tutor_db::get_tutors_by_availability();
+//            $tutors = tutor_db::select_all_Tutors();
+//            //$stuApps = appointment_db::get_student_Appointments($_SESSION['user']->getUserID());
+//            $tutor_apps = appointment_db::get_tutor_Appointments($_SESSION['user']->getUserID());
+//            $users = user_db::select_all();
+//            include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/home.php');
         } else {
             $today = date("Y-m-d");
             $subjects = subject_db::select_all();
             $tutor_available = tutor_db::get_tutors_by_availability();
             $tutors = tutor_db::select_all_Tutors();
             $stuApps = appointment_db::get_student_Appointments($_SESSION['user']->getUserID());
+            //$tutor_apps = appointment_db::get_tutor_Appointments($_SESSION['user']->getUserID());
             $users = user_db::select_all();
             include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/home.php');
         }
@@ -59,6 +69,7 @@ switch ($action) {
         break;
 
     case 'calendar':
+        $days_for_sub = tutor_db::select_distinct_subject_days();
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_selection.php');
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/calendar.php');
         die();
@@ -107,6 +118,11 @@ switch ($action) {
         die();
         break;
     
+    case 'removeAvailability':
+        require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/remove_availability.php');
+        die();
+        break;
+    
     case 'add_subject':
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/tutor_add_subject.php');
         die();
@@ -117,6 +133,19 @@ switch ($action) {
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/addTutorValidation.php');
         die();
         break;
+    
+    case 'addAdminValidation':
+        $userToPromote = user_db::get_user_by_id($_REQUEST['selectedUser']);
+        require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/add_admin_validation.php');
+        die();
+        break;
+    
+     case 'remove_admin':
+        $userToDemote = user_db::get_user_by_id($_REQUEST['selectedAdmin']);
+        require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/remove_admin.php');
+        die();
+        break;
+    
     case 'deleteTutor':
         $tutorID = $_REQUEST['selectedTutor'];
         tutor_db::deleteTutor($tutorID);
@@ -130,13 +159,16 @@ switch ($action) {
         die();
         break;
     case 'ChangeMyInformation':
+        $firstName = $_SESSION['user']->getFName();
+        $lastName = $_SESSION['user']->getLName();
+        $phone = $_SESSION['user']->getPhone();
         // $_SESSION['user'] = user_db::get_specificUser($email);
         include('views/updateProfile.php');
         die();
         break;
     case 'updateValidation':
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/updateValidation.php');
-        $_SESSION['user'] = user_db::get_specificUser($email);
+        $_SESSION['user'] = user_db::get_specificUser($_SESSION['user']->getEmail());
         die();
         break;
     case 'logout':

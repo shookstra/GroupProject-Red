@@ -23,6 +23,29 @@ class tutor_db
 
         return $tutors;
     }
+    
+    public static function select_distinct_subject_days()
+    {
+        $db = Database::getDB();
+
+        $queryUsers = 'SELECT distinct(day) FROM tutor_availability ';
+        $statement = $db->prepare($queryUsers);
+        $statement->execute();
+        //$results = $statement->fetchAll();
+        
+//        $statement->closeCursor();
+//        return $results;
+        
+        $rows = $statement->fetchAll();
+        $days_for_sub = [];
+
+        foreach ($rows as $value) {
+            array_push($days_for_sub, $value['day']);
+        }
+        $statement->closeCursor();
+
+        return $days_for_sub;
+    }
 
     //this selects all tutors and groups them by city ascending
     public static function select_all_GroupByCity()
@@ -278,5 +301,39 @@ class tutor_db
 
         $statement->execute();
         $statement->closeCursor();
+    }
+    
+       public static function update_Tutor($firstName, $lastName, $phone, $tutorID) {
+        $db = Database::getDB();
+
+        $query = 'UPDATE tutor 
+                    Set fName = :firstName, lName = :lastName, phone = :phone
+                    where tutorID = :userID';
+
+        $statement = $db->prepare($query);
+        //bind the values
+        $statement->bindValue(':firstName', $firstName);
+        $statement->bindValue(':lastName', $lastName);
+        $statement->bindValue(':phone', $phone);
+        $statement->bindValue(':userID', $tutorID);
+        $statement->execute();
+        $statement->closeCursor();
+    }
+    
+    public static function getSubjects_on_days()
+    {
+        $db = Database::getDB();
+
+        $query = 'select subjects.subName, tutor_availability.day 
+                    from subjects join tutorsubject on subjects.subID = tutorsubject.subID 
+                                  join tutor on tutorsubject.tutorID = tutor.tutorID
+                                  join tutor_availability on tutor_availability.tutorID = tutor.tutorID';
+
+        $statement = $db->prepare($query);
+        $statement->execute();
+        $results = $statement->fetchAll();
+        
+        $statement->closeCursor();
+        return $results;
     }
 }
