@@ -43,7 +43,6 @@ function Unique_user_information_report(){
         $content_comma_seperated .= "\n"; // add separator between sub-arrays
 
     }
-    var_dump($unique_users);
                 $length = strlen($content_comma_seperated);
                 header('Content-Description: File Transfer');
                 header('Content-Type: text/plain');//<<<<
