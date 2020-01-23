@@ -16,7 +16,8 @@
     ?>
 
     <body>
-        <?php include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/header.php');
+        <?php
+        include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/header.php');
         include('views/sideBar.php');
         ?>
 
@@ -156,8 +157,7 @@
 
                         if (in_array($date_format, $holidays)) {
                             echo "<td $class id = $day$day_num><button disabled>$day_num</button></td>";  //Print day's number, sets the class for the modal and also sets a name for the button for use in the modal, also disables the button
-                        } else if (($day_num <= $today['mday'] && $thismonth == $month && $thisyear == $year) || ($month < $thismonth && $thisyear == $year) || ($day == 'Sat') || ($day == 'Sun')
-                        ) {
+                        } else if (($day_num <= $today['mday'] && $thismonth == $month && $thisyear == $year) || ($month < $thismonth && $thisyear == $year) || ($day == 'Sat') || ($day == 'Sun')) {
                             echo "<td $class id = $day$day_num><button disabled>$day_num</button></td>";  //Print day's number, sets the class for the modal and also sets a name for the button for use in the modal, also disables the button
                         } else {
                             echo "<td $class id = $day$day_num><button $id  name = $day,$month,$day_num,$year >$day_num</button></td>";  //Print day's number, sets the class for the modal and also sets a name for the button for use in the modal
@@ -213,10 +213,10 @@
                     <form action="index.php" method="post">
                         <select id="testing" onchange="showUser(this.value)" onclick="showUser(this.value)" autofocus>
                             <option value="">Select a subject:</option>
-<?php foreach ($subjects as $s) : ?>
+                            <?php foreach ($subjects as $s) : ?>
                                 <option value="<?php echo htmlspecialchars($s->getSubID()) . "," . $_SESSION['user']->getUserID(); ?>"><?php echo htmlspecialchars($s->getSubName()); ?></option>
                                 <!--puts subID and userID into the button to carry to the next pages-->
-<?php endforeach; ?>
+                            <?php endforeach; ?>
                         </select>
                     </form>
                     <div id="tutor_schedule" class="modal-info">Choose the time and tutor for your session</div>
@@ -229,18 +229,18 @@
                 </div>
                 <div class="sideContent-main">
                     <ul class="available-users">
-                <?php
-                echo '<h3>*** Check here for Days Subjects are Aailable ***</h3>';
-                for ($i = 0; $i < sizeof($days_for_sub); $i++) {
-                    echo '<br />';
-                    echo '<li><strong>' . ucfirst($days_for_sub[$i]) . '</strong></li>';
-                    echo '<hr />';
-                    $subject_names = subject_db::select_subName_by_day($days_for_sub[$i]);
-                        for ($j = 0; $j < sizeof($subject_names); $j++) {
-                            echo '<li>' . ucfirst($subject_names[$j]) . '<li>';
+                        <?php
+                        echo '<h3>*** Check here for Days Subjects are Aailable ***</h3>';
+                        for ($i = 0; $i < sizeof($days_for_sub); $i++) {//for loop to go through each day in the array
+                            echo '<br />';
+                            echo '<li><strong>' . ucfirst($days_for_sub[$i]) . '</strong></li>';
+                            echo '<hr />';
+                            $subject_names = subject_db::select_subName_by_day($days_for_sub[$i]);
+                            for ($j = 0; $j < sizeof($subject_names); $j++) {//for loop to print each subject under the day name
+                                echo '<li>' . ucfirst($subject_names[$j]) . '<li>';
+                            }
                         }
-                    }
-                ?>
+                        ?>
                     </ul>
 
                 </div>

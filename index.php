@@ -28,22 +28,13 @@ switch ($action) {
             $registrationErrors = [];
             array_push($registrationErrors, "You need to sign in to access scheduling");
             include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/login.php');
-//        } else if ($_SESSION['user']->getRole() == "Tutor"){
-//            $today = date("Y-m-d");
-//            $subjects = subject_db::select_all();
-//            $tutor_available = tutor_db::get_tutors_by_availability();
-//            $tutors = tutor_db::select_all_Tutors();
-//            //$stuApps = appointment_db::get_student_Appointments($_SESSION['user']->getUserID());
-//            $tutor_apps = appointment_db::get_tutor_Appointments($_SESSION['user']->getUserID());
-//            $users = user_db::select_all();
-//            include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/home.php');
         } else {
             $today = date("Y-m-d");
             $subjects = subject_db::select_all();
             $tutor_available = tutor_db::get_tutors_by_availability();
             $tutors = tutor_db::select_all_Tutors();
             $stuApps = appointment_db::get_student_Appointments($_SESSION['user']->getUserID());
-            //$tutor_apps = appointment_db::get_tutor_Appointments($_SESSION['user']->getUserID());
+            $tutor_apps = appointment_db::get_tutor_Appointments($_SESSION['user']->getUserID());
             $users = user_db::select_all();
             include($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/views/home.php');
         }
@@ -107,6 +98,11 @@ switch ($action) {
         daily_appointment_information_report();
         die();
         break;
+    case 'weeks_appointments':
+        require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/report_functions.php');
+        week_appointment_information_report();
+        die();
+        break;
     case 'reminder_email':
         require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/report_functions.php');
         reminder_email();
@@ -147,11 +143,7 @@ switch ($action) {
         break;
     
     case 'deleteTutor':
-        $tutorID = $_REQUEST['selectedTutor'];
-        tutor_db::deleteTutor($tutorID);
-        tutor_db::deleteTutor_Availability($tutorID);
-        user_db::update_role($tutorID, 'Student');
-        header("Location: index.php?action=home");
+        require($_SERVER['DOCUMENT_ROOT'] . '/GroupProject/models/deleteTutor.php');
         die();
         break;
     case 'profile':

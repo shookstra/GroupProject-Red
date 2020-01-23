@@ -6,7 +6,7 @@ $day = filter_input(INPUT_POST, 'day');
 $start = $_POST['start_time'];
 $end = $_POST['end_time'];
 
-$hours = date("H:i:s", strtotime($end)) - date("H:i:s", strtotime($start));
+$hours = (strtotime($end) - strtotime($start))/3600;
 
 if (!empty($start)) {
     if (!empty($end) && (strtotime($end) > strtotime($start))) {

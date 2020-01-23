@@ -10,14 +10,33 @@ class tutor_db
     {
         $db = Database::getDB();
 
-        $queryUsers = 'SELECT * FROM tutor ';
+        $queryUsers = 'SELECT * FROM tutor where active = true';
         $statement = $db->prepare($queryUsers);
         $statement->execute();
         $rows = $statement->fetchAll();
         $tutors = [];
 
         foreach ($rows as $value) {
-            $tutors[$value['tutorID']] = new tutor($value['tutorID'], $value['lName'], $value['fName'], $value['email'], $value['phone'], $value['city']);
+            $tutors[$value['tutorID']] = new tutor($value['tutorID'], $value['lName'], $value['fName'], $value['email'], $value['phone'], $value['city'], $value['active']);
+        }
+        $statement->closeCursor();
+
+        return $tutors;
+    }
+    
+    public static function select_all()
+    {
+        $db = Database::getDB();
+
+        $queryUsers = 'SELECT tutorID FROM tutor';
+        $statement = $db->prepare($queryUsers);
+        $statement->execute();
+        $rows = $statement->fetchAll();
+        $tutors = [];
+
+        foreach ($rows as $value) {
+            array_push($tutors, $value['tutorID']);
+            
         }
         $statement->closeCursor();
 
@@ -59,7 +78,7 @@ class tutor_db
         $tutors = [];
 
         foreach ($rows as $value) {
-            $tutors[$value['tutorID']] = new tutor($value['tutorID'], $value['lName'], $value['fName'], $value['email'], $value['phone'], $value['city']);
+            $tutors[$value['tutorID']] = new tutor($value['tutorID'], $value['lName'], $value['fName'], $value['email'], $value['phone'], $value['city'], $value['active']);
         }
         $statement->closeCursor();
 
@@ -86,13 +105,13 @@ class tutor_db
     }
 
     //add a tutor
-    public static function add_Tutor($tutorID, $firstName, $lastName, $email, $phone, $city)
+    public static function add_Tutor($tutorID, $firstName, $lastName, $email, $phone, $city, $active)
     {
         $db = Database::getDB();
 
-        $query = 'INSERT into tutor (tutorID, fName, lName, email, phone, city)
+        $query = 'INSERT into tutor (tutorID, fName, lName, email, phone, city, active)
          VALUES
-         (:tutorID, :fName, :lName, :email, :phone, :city)';
+         (:tutorID, :fName, :lName, :email, :phone, :city, :active)';
 
 
         $statement = $db->prepare($query);
@@ -103,6 +122,7 @@ class tutor_db
         $statement->bindValue(':email', $email);
         $statement->bindValue(':phone', $phone);
         $statement->bindValue(':city', $city);
+        $statement->bindValue(':active', $active);
 
 
         $statement->execute();
@@ -116,7 +136,7 @@ class tutor_db
                   from subjects join tutorsubject on subjects.subID = tutorsubject.subID 
 			  join tutor on tutorsubject.tutorID = tutor.tutorID
 			  join tutor_availabilty on tutor.tutorID = tutor_availabilty.tutorID
-                  where tutor_availabilty.day = :day';
+                  where tutor_availabilty.day = :day AND tutor.active = 1';
 
         $statement = $db->prepare($query);
         $statement->bindValue(':day', $day);
@@ -143,7 +163,7 @@ class tutor_db
         $rows = $statement->fetchAll();
 
         foreach ($rows as $value) {
-            $tutor = new tutor($value['tutorID'], $value['lName'], $value['fName'], $value['email'], $value['phone'], $value['city']);
+            $tutor = new tutor($value['tutorID'], $value['lName'], $value['fName'], $value['email'], $value['phone'], $value['city'], $value['active']);
         }
 
         return $tutor;
@@ -168,7 +188,8 @@ class tutor_db
         $query = 'select tutor.tutorID, tutor.fName, tutor.lName, tutor_availability.start, tutor_availability.end, tutor_availability.day
                   from subjects join tutorsubject on subjects.subID = tutorsubject.subID 
 			  join tutor on tutorsubject.tutorID = tutor.tutorID
-			  join tutor_availability on tutor.tutorID = tutor_availability.tutorID';
+			  join tutor_availability on tutor.tutorID = tutor_availability.tutorID
+                          where tutor.active = 1';
 
         $statement = $db->prepare($query);
 
@@ -216,7 +237,8 @@ class tutor_db
         $query = 'select tutor.tutorID, tutor.fName, tutor.lName, tutor_availability.start, tutor_availability.end, tutor_availability.day
                   from subjects join tutorsubject on subjects.subID = tutorsubject.subID 
 			  join tutor on tutorsubject.tutorID = tutor.tutorID
-			  join tutor_availability on tutor.tutorID = tutor_availability.tutorID';
+			  join tutor_availability on tutor.tutorID = tutor_availability.tutorID
+                          WHERE tutor.active = 1';
         $statement = $db->prepare($query);
         $statement->execute();
         $rows = $statement->fetchAll();
@@ -315,6 +337,21 @@ class tutor_db
         $statement->bindValue(':firstName', $firstName);
         $statement->bindValue(':lastName', $lastName);
         $statement->bindValue(':phone', $phone);
+        $statement->bindValue(':userID', $tutorID);
+        $statement->execute();
+        $statement->closeCursor();
+    }
+    
+    public static function set_Tutor_activity($tutorID, $active) {
+        $db = Database::getDB();
+
+        $query = 'UPDATE tutor 
+                    Set active = :active
+                    where tutorID = :userID';
+
+        $statement = $db->prepare($query);
+        //bind the values
+        $statement->bindValue(':active', $active);
         $statement->bindValue(':userID', $tutorID);
         $statement->execute();
         $statement->closeCursor();
