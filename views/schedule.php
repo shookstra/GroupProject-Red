@@ -49,9 +49,7 @@
         echo "<table>
 <tr>
 <th>First</th>
-<th>Last</th>
 <th>City</th>
-
 </tr>";
 
         $appTime = [];
@@ -75,7 +73,7 @@
 
             echo "<tr>";
             echo "<td>" . $row['fName'] . "</td>";
-            echo "<td>" . $row['lName'] . "</td>";
+            //echo "<td>" . $row['lName'] . "</td>";
             echo "<td>" . $row['city'] . "</td>";
             for ($i = 0; $i <= $num_sessions; $i++) {
 

@@ -6,7 +6,7 @@
     </button>
     <button>
         <a href="index.php?action=calendar">
-            <div class="sidebar-item"><i class="far fa-calendar-times"></i>Calendar</div>
+            <div class="sidebar-item"><i class="far fa-calendar-times"></i>Schedule</div>
         </a>
     </button>
     <button>

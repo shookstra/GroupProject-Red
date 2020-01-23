@@ -6,7 +6,7 @@
 
     <div class="wrapper">
         <div>
-            <?php echo '<h1>' . htmlspecialchars($tutor->getFName() . ' ' . $tutor->getLName() . "'s Page") . '</h1>'; ?>
+            <?php echo '<h1>' . htmlspecialchars($tutor->getFName() . "'s Page") . '</h1>'; ?>
             <h2>Times Available:</h2>
             <table class="availabilityTable">
                 <tr>

@@ -17,7 +17,7 @@ function Unique_user_information_report(){
         $users = user_db::select_all();
         $unique_users = array();
 
-        $fields = array('user_email', 'first_name', 'last_name'); 
+        $fields = array('User_Email', 'First_Name', 'Last_Name'); 
 
         $unique_users[] = $fields;
         //$old_users = array();
@@ -153,6 +153,62 @@ function daily_appointment_information_report(){
                 die();
 }
 
+function week_appointment_information_report(){
+    
+                $today_appointment_date = date('Y-m-d');
+                $end_report_date = date('Y-m-d', strtotime($today_appointment_date . " + 7 day"));
+                $users = appointment_db::select_all_appointments_week($today_appointment_date, $end_report_date);
+                
+                $daily_appointments = array();
+                $fields = array('Student_Email', 'Student_Last_Name', 'Tutor_Last_Name', 'Appointment_Date', 'Details', 'Meet_Type'); 
+                $daily_appointments[] = $fields;
+                
+                                foreach($users as $user){
+                                                $values = array();
+                                                
+                                                $email = user_db::get_user_email_by_id($user->getUserID());
+                                                $values[] = $email['email'];
+                                                
+                                                $student_lname = user_db::select_user_lastname_by_id($user->getUserID());
+                                                $values[] = $student_lname['lName'];
+                                                
+                                                $tutor_lname = tutor_db::get_tutor_lastname_by_id($user->getTutorID());
+                                                $values[] = $tutor_lname['lName'];
+                                                
+                                                $values[] = $user->getAppDate();
+                                                
+                                                $values[] = $user->getDetails();
+                                                
+                                                $values[] = $user->getMeetType();
+
+                                                $daily_appointments[] = $values;
+                                }
+                               
+                $content_comma_seperated = '';
+                $sep = ",";
+                
+                foreach ($daily_appointments as $values) {
+
+                    $content_comma_seperated .= implode($sep, $values);
+                    $content_comma_seperated .= "\n"; // add separator between sub-arrays
+
+                }
+                
+                $length = strlen($content_comma_seperated);
+                
+                header('Content-Description: File Transfer');
+                header('Content-Type: text/plain');//<<<<
+                header('Content-Disposition: attachment; filename=week_appointment_users.csv');
+                header('Content-Transfer-Encoding: binary');
+                header('Content-Length: ' . $length);
+                header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+                header('Expires: 0');
+                header('Pragma: public');
+                echo $content_comma_seperated;// writes the contents to the file
+
+                die();
+}
+
 //total appointments since last time report was ran
 function total_appointment_information_report(){
     
@@ -198,15 +254,15 @@ function reminder_email(){
 
     $date = date('Y-m-d');
     $current = date('w', strtotime($date));
-    $subject = "My subject";
+    $subject = "Tutor Appointment Reminder";
     
     $headers = "From: noreply@tutorschedule.com";
 
     
     if($current !== 5){
-        $next_days_appointments = date("Y-m-d", strtotime("+1 day"));
+        $next_days_appointments = date("Y-m-d", strtotime($current . " + 1 day"));
     } else {
-        $next_days_appointments = date("Y-m-d", strtotime("+3 day"));
+        $next_days_appointments = date("Y-m-d", strtotime($current . " + 3 day"));
     }
     
     
@@ -219,6 +275,8 @@ function reminder_email(){
         
         mail($to, $subject, $txt, $headers);
     }
+    
+    header("Location: index.php?action=home");
     
 }
 

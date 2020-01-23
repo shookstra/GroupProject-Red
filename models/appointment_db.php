@@ -42,6 +42,26 @@ class appointment_db
 
         return $appointment;
     }
+    
+    public static function select_all_appointments_week($today_date, $end_date)
+    {
+        $db = Database::getDB();
+
+        $queryUsers = 'SELECT * FROM appointment WHERE appDate between :today_date AND :end_date ORDER BY appDate DESC, appTime ASC  ';
+        $statement = $db->prepare($queryUsers);
+        $statement->bindValue(':today_date', $today_date);
+        $statement->bindValue(':end_date', $end_date);
+        $statement->execute();
+        $rows = $statement->fetchAll();
+        $appointments = [];
+
+        foreach ($rows as $value) {
+            $appointments[$value['appID']] = new appointment($value['appID'], $value['subID'], $value['userID'], $value['tutorID'], $value['appDate'], $value['appTime'], $value['details'], $value['meetType']);
+        }
+        $statement->closeCursor();
+
+        return $appointments;
+    }
 
     //get appointment for specific student
     public static function get_student_Appointments($userID)
@@ -87,13 +107,14 @@ class appointment_db
         $statement->bindValue(':tutorID', $tutorID);
         $statement->execute();
         $row = $statement->fetchAll();
-
+        $appointments = [];
+        
         foreach ($row as $value) {
-            $appointment[$value['appID']] = new appointment($value['appID'], $value['subID'], $value['userID'], $value['tutorID'], $value['appDate'], $value['appTime'], $value['details'], $value['meetType']);
+            $appointments[$value['appID']] = new appointment($value['appID'], $value['subID'], $value['userID'], $value['tutorID'], $value['appDate'], $value['appTime'], $value['details'], $value['meetType']);
         }
 
         $statement->closeCursor();
-        return $appointment;
+        return $appointments;
     }
 
     public static function get_Appointment_Detail($appID)
@@ -216,6 +237,34 @@ class appointment_db
         //bind the values
         $statement->bindValue(':holiday', $holiday);
         $statement->bindValue(':date', $date);
+        $statement->execute();
+        $statement->closeCursor();
+    }
+    
+    public static function delete_tutor_appointments($tutorID)
+    {
+        $db = Database::getDB();
+
+        $query = 'DELETE from appointment 
+                  where tutorID = :tutorID';
+
+        $statement = $db->prepare($query);
+        $statement->bindValue(':tutorID', $tutorID);
+        $statement->execute();
+        $statement->closeCursor();
+    }
+    
+    public static function select_tutor_appointments($tutorID, $delete_start)
+    {
+        $db = Database::getDB();
+
+        $query = 'SELECT * from appointment 
+                  where (tutorID = :tutorID
+                  AND appDate >= :delete_start)';
+
+        $statement = $db->prepare($query);
+        $statement->bindValue(':tutorID', $tutorID);
+        $statement->bindValue(':delete_start', $delete_start);
         $statement->execute();
         $statement->closeCursor();
     }

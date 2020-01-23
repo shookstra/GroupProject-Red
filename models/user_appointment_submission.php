@@ -35,6 +35,10 @@
     }
 
     mysqli_select_db($con, "groupproject"); //where the db name goes
+    //$sql_check = "SELECT count(appID) FROM appointment WHERE userID = '$userID' AND appDate = '$appDate'";
+    
+    
+    
     $sql = "INSERT into appointment (subID, userID, tutorID, appDate, appTime, details, meetType)
          VALUES
          ('$subID', '$userID', '$tutorID', '$appDate', '$appoint_time', '$details', '$meetType')";

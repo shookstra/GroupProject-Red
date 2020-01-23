@@ -20,6 +20,33 @@ class subject_db {
 
         return $subjects;
     }
+    
+    public static function select_subName_by_day($day) {
+        $db = Database::getDB();
+
+        $queryUsers = 'select distinct(subjects.subName)
+                       from subjects join tutorsubject on subjects.subID = tutorsubject.subID 
+			  join tutor on tutorsubject.tutorID = tutor.tutorID
+                          join tutor_availability on tutor_availability.tutorID = tutor.tutorID
+                          where tutor_availability.day = :day';
+        $statement = $db->prepare($queryUsers);
+        $statement->bindValue(':day', $day);
+        $statement->execute();
+//        $results = $statement->fetchAll();
+//        
+//        $statement->closeCursor();
+//        return $results;
+        
+        $rows = $statement->fetchAll();
+        $sub_names = [];
+
+        foreach ($rows as $value) {
+            array_push($sub_names, $value['subName']);
+        }
+        $statement->closeCursor();
+
+        return $sub_names;
+    }
 
     public static function select_subject_by_ID($subjectID) {
         $db = Database::getDB();

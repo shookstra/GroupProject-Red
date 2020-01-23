@@ -12,6 +12,7 @@ $firstName = trim($firstName);
 $lastName = filter_input(INPUT_POST, 'lastName');
 $phone = filter_input(INPUT_POST, 'phone');
 $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+$city = filter_input(INPUT_POST, 'city');
 $password = filter_input(INPUT_POST, 'password');
 $confirmPassword = filter_input(INPUT_POST, 'confirmPassword');
 // array for errors
@@ -54,6 +55,9 @@ if ($email === "" || $email === null) {
     }
 }
 
+if ($city === "" || $city === null) {
+    array_push($registrationErrors, "Campus cannot be empty");
+}
 // password validation
 if ($password === "" || $password === null) {
     array_push($registrationErrors, "Password cannot be empty");

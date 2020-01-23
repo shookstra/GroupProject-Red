@@ -153,7 +153,7 @@ class user_db
         $row = $statement->fetchAll();
 
         foreach ($row as $value) {
-            $user = new user($value['userID'], $value['lName'], $value['fName'], $value['email'], $value['phone'], $value['role'], $value['password']);
+            $user = new user($value['userID'], $value['lName'], $value['fName'], $value['email'], $value['phone'], $value['city'], $value['role'], $value['password']);
         }
 
         $statement->closeCursor();
@@ -195,13 +195,13 @@ class user_db
     }
 
     //This is to add a new user
-    public static function add_user($firstName, $lastName, $email, $phone, $role, $password)
+    public static function add_user($firstName, $lastName, $email, $phone, $city, $role, $password)
     {
         $db = Database::getDB();
 
-        $query = 'INSERT into users (fName, lName, email, phone, role,  password)
+        $query = 'INSERT into users (fName, lName, email, phone, city, role,  password)
          VALUES
-         (:fName, :lName, :email, :phone, :role, :password)';
+         (:fName, :lName, :email, :phone, :city, :role, :password)';
 
         $role = 'Student';
         $statement = $db->prepare($query);
@@ -210,6 +210,7 @@ class user_db
         $statement->bindValue(':lName', $lastName);
         $statement->bindValue(':email', $email);
         $statement->bindValue(':phone', $phone);
+        $statement->bindValue(':city', $city);
         $statement->bindValue(':role', $role);
         $statement->bindValue(':password', $password);
 

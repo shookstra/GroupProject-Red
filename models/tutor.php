@@ -8,8 +8,9 @@ class tutor
     private $email;
     private $phone;
     private $city;
+    private $active;
 
-    function __construct($tutorID, $lName, $fName, $email, $phone, $city)
+    function __construct($tutorID, $lName, $fName, $email, $phone, $city, $active)
     {
         $this->tutorID = $tutorID;
         $this->lName = $lName;
@@ -17,6 +18,7 @@ class tutor
         $this->email = $email;
         $this->phone = $phone;
         $this->city = $city;
+        $this->active = $active;
     }
 
     function getTutorID()
@@ -48,6 +50,11 @@ class tutor
     {
         return $this->city;
     }
+    
+    function getActive()
+    {
+        return $this->active;
+    }
 
     function setTutorID($tutorID)
     {
@@ -77,5 +84,10 @@ class tutor
     function setCity($city)
     {
         $this->city = $city;
+    }
+    
+    function setActive($active)
+    {
+        $this->active = $active;
     }
 }

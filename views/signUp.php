@@ -33,6 +33,16 @@
                                                                                                                     echo $email;
                                                                                                                 } ?>">
             </div>
+<!--            <div class="Login-item">
+                <label for="TLC-city">Campus</label>
+                <select name="TLC-city" class="submit-input">
+                    <option value="Lincoln">Select Campus Location:</option>
+                    <option value="Beatrice">Beatrice</option>
+                    <option value="Lincoln">Lincoln 84th St</option>
+                    <option value="Esquire">Esquire Plaza</option>
+                    <option value="Milford">Milford</option>
+                </select>
+            </div>-->
             <div class="login-item">
                 <label for="password">Password</label><input type="password" name="password" class="submit-input">
             </div>
@@ -56,7 +66,7 @@
             </div>
             <div class="login-item">
                 <a href="index.php?action=login" class="center">Already Have an Account?</a>
-                <a href="index.php?action=home" class="center">‚Üê Go Back</a>
+                <a href="index.php?action=home" class="center">‚Ü? Go Back</a>
             </div>
         </form>
     </div>
